@@ -1,0 +1,189 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
+[ext_resource path="res://app icons/Save.png" type="Texture" id=2]
+[ext_resource path="res://app icons/Shuffle.png" type="Texture" id=3]
+[ext_resource path="res://scripts/mainmenubar.gd" type="Script" id=5]
+[ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://app icons/Cards.png" type="Texture" id=7]
+[ext_resource path="res://app icons/Journal.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.623529, 0.721569, 0.662745, 1 )
+
+[sub_resource type="ImageTexture" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 61
+font_data = ExtResource( 6 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1080, 1920 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 1920 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckCoreMenu" type="VBoxContainer" parent="."]
+margin_left = 2168.0
+margin_right = 3248.0
+margin_bottom = 1908.0
+rect_min_size = Vector2( 1080, 1920 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenteringCont" type="CenterContainer" parent="DeckCoreMenu"]
+margin_right = 1080.0
+margin_bottom = 1908.0
+rect_min_size = Vector2( 1080, 1908 )
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoreButtonBkrnd" type="TextureRect" parent="DeckCoreMenu/CenteringCont"]
+margin_left = 290.0
+margin_top = 704.0
+margin_right = 790.0
+margin_bottom = 1204.0
+rect_min_size = Vector2( 500, 500 )
+rect_clip_content = true
+texture = SubResource( 2 )
+
+[node name="deckcorebutton" type="Button" parent="DeckCoreMenu/CenteringCont"]
+margin_left = 290.0
+margin_top = 704.0
+margin_right = 790.0
+margin_bottom = 1204.0
+rect_min_size = Vector2( 500, 500 )
+focus_mode = 0
+custom_fonts/font = SubResource( 3 )
+text = "Deck Core"
+flat = true
+
+[node name="InstanceViewer" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1080, 1920 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HideMenu" type="Button" parent="."]
+margin_left = 960.0
+margin_top = 1620.0
+margin_right = 1060.0
+margin_bottom = 1720.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuUI" type="Container" parent="."]
+margin_top = 1720.0
+margin_right = 1080.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 200 )
+mouse_filter = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuUI"]
+margin_right = 1080.0
+margin_bottom = 200.0
+
+[node name="MenuRack" type="HBoxContainer" parent="MenuUI/CenterContainer"]
+margin_left = 77.0
+margin_right = 1003.0
+margin_bottom = 200.0
+size_flags_horizontal = 5
+custom_constants/separation = 42
+
+[node name="DrawContainer" type="CenterContainer" parent="MenuUI/CenterContainer/MenuRack"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+
+[node name="Draw" type="TextureButton" parent="MenuUI/CenterContainer/MenuRack/DrawContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 13
+size_flags_vertical = 13
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="HistoryContainer" type="CenterContainer" parent="MenuUI/CenterContainer/MenuRack"]
+margin_left = 242.0
+margin_right = 442.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+
+[node name="History" type="TextureButton" parent="MenuUI/CenterContainer/MenuRack/HistoryContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 13
+size_flags_vertical = 13
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="DeckContainer" type="CenterContainer" parent="MenuUI/CenterContainer/MenuRack"]
+margin_left = 484.0
+margin_right = 684.0
+margin_bottom = 200.0
+
+[node name="Deck" type="TextureButton" parent="MenuUI/CenterContainer/MenuRack/DeckContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="GuidebookContainer" type="CenterContainer" parent="MenuUI/CenterContainer/MenuRack"]
+margin_left = 726.0
+margin_right = 926.0
+margin_bottom = 200.0
+
+[node name="Guidebook" type="TextureButton" parent="MenuUI/CenterContainer/MenuRack/GuidebookContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="deckcorepopup" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="DeckCoreMenu/CenteringCont/deckcorebutton" to="." method="_on_deckcorebutton_button_up"]
+[connection signal="button_up" from="HideMenu" to="." method="_on_Button_button_up"]
+[connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/DrawContainer/Draw" to="." method="_on_Draw_pressed"]
+[connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/HistoryContainer/History" to="." method="_on_History_pressed"]
+[connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/DeckContainer/Deck" to="." method="_on_Deck_pressed"]
+[connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/GuidebookContainer/Guidebook" to="." method="_on_Guidebook_pressed"]

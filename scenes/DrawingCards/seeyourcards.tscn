@@ -1,0 +1,283 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/DrawingCards/seeyourcards.gd" type="Script" id=1]
+[ext_resource path="res://app icons/Save.png" type="Texture" id=3]
+[ext_resource path="res://app icons/ChevronLeftCircle.png" type="Texture" id=4]
+[ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://app icons/RightChevronCircle.png" type="Texture" id=8]
+[ext_resource path="res://app icons/Cancel.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 34
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 29
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 39
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 46
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 41
+font_data = ExtResource( 5 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 750, 1334 )
+mouse_filter = 1
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="ColorRect" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
+mouse_filter = 1
+color = Color( 0.870588, 0.858824, 0.956863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="backtomainmenu" type="Button" parent="."]
+margin_left = 930.0
+margin_top = 50.0
+margin_right = 1030.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 100, 100 )
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+flat = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="savethisreading" type="Button" parent="."]
+margin_left = 880.0
+margin_top = 1720.0
+margin_right = 980.0
+margin_bottom = 1820.0
+rect_min_size = Vector2( 100, 100 )
+custom_fonts/font = SubResource( 2 )
+icon = ExtResource( 3 )
+flat = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cardleft" type="Control" parent="."]
+margin_left = -250.0
+margin_top = 250.0
+margin_right = 250.0
+margin_bottom = 1050.0
+rect_min_size = Vector2( 500, 800 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cardcenter" type="Control" parent="."]
+margin_left = 290.0
+margin_top = 250.0
+margin_right = 790.0
+margin_bottom = 1050.0
+rect_min_size = Vector2( 500, 800 )
+
+[node name="cardright" type="Control" parent="."]
+margin_left = 830.0
+margin_top = 250.0
+margin_right = 1330.0
+margin_bottom = 1050.0
+rect_min_size = Vector2( 500, 800 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_top = 1080.0
+margin_right = 1080.0
+margin_bottom = 1530.0
+rect_min_size = Vector2( 1080, 450 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 1080.0
+mouse_filter = 1
+
+[node name="left" type="TextureButton" parent="."]
+margin_left = 10.0
+margin_top = 575.0
+margin_right = 160.0
+margin_bottom = 725.0
+rect_min_size = Vector2( 150, 150 )
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="TextureButton" parent="."]
+margin_left = 900.0
+margin_top = 575.0
+margin_right = 1050.0
+margin_bottom = 725.0
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selectcentercard" type="Button" parent="."]
+margin_left = 290.0
+margin_top = 251.95
+margin_right = 590.0
+margin_bottom = 731.95
+rect_min_size = Vector2( 500, 800 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+margin_right = 1080.0
+margin_bottom = 1920.0
+rect_min_size = Vector2( 1080, 1920 )
+mouse_filter = 1
+size_flags_horizontal = 5
+size_flags_vertical = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 980.0
+margin_bottom = 1820.0
+rect_min_size = Vector2( 880, 1720 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer"]
+margin_right = 880.0
+margin_bottom = 1725.0
+rect_min_size = Vector2( 880, 1400 )
+custom_constants/separation = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="Control" parent="CenterContainer/ScrollContainer/VBoxContainer"]
+margin_right = 880.0
+margin_bottom = 1400.0
+rect_min_size = Vector2( 600, 1400 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/ScrollContainer/VBoxContainer"]
+margin_top = 1425.0
+margin_right = 880.0
+margin_bottom = 1725.0
+rect_min_size = Vector2( 880, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="closepopup" type="Button" parent="."]
+margin_left = 440.0
+margin_top = 1760.0
+margin_right = 611.0
+margin_bottom = 1860.0
+rect_min_size = Vector2( 100, 100 )
+custom_fonts/font = SubResource( 4 )
+text = "back to spread"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="savereadingpopup" type="Control" parent="."]
+visible = false
+margin_left = 200.0
+margin_top = 400.0
+margin_right = 700.0
+margin_bottom = 1000.0
+rect_min_size = Vector2( 680, 1100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="ColorRect" parent="savereadingpopup"]
+margin_right = 680.0
+margin_bottom = 1100.0
+rect_min_size = Vector2( 680, 1100 )
+color = Color( 0.623529, 0.721569, 0.662745, 1 )
+
+[node name="enterreadingname" type="LineEdit" parent="savereadingpopup"]
+margin_left = 90.0
+margin_top = 500.0
+margin_right = 590.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 500, 100 )
+custom_fonts/font = SubResource( 5 )
+max_length = 26
+placeholder_text = "tap here to write"
+placeholder_alpha = 0.689
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="submittext" type="Button" parent="savereadingpopup"]
+margin_left = 240.0
+margin_top = 700.0
+margin_right = 440.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 200, 100 )
+custom_fonts/font = SubResource( 6 )
+text = "submit"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="savereadingpopup"]
+margin_left = 90.0
+margin_top = 150.0
+margin_right = 590.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 500, 250 )
+custom_fonts/normal_font = SubResource( 7 )
+text = "I'll save this whole reading for you to look at later. Give the entry a name?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="backtomainmenu" to="." method="_on_backtomainmenu_pressed"]
+[connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]
+[connection signal="pressed" from="left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="selectcentercard" to="." method="_on_selectcentercard_pressed"]
+[connection signal="pressed" from="closepopup" to="." method="_on_closepopup_pressed"]
+[connection signal="pressed" from="savereadingpopup/submittext" to="." method="_on_submittext_pressed"]

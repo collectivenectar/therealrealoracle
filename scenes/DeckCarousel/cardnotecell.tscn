@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/DeckCarousel/cardnotecell.gd" type="Script" id=1]
+[ext_resource path="res://app icons/Add.png" type="Texture" id=2]
+[ext_resource path="res://app icons/Edit.png" type="Texture" id=3]
+[ext_resource path="res://styleboxes/cardnotecell.tres" type="StyleBox" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -20.0
+margin_bottom = -1720.0
+rect_min_size = Vector2( 1080, 200 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 400.0
+margin_right = 680.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 280, 200 )
+mouse_filter = 1
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 1055.0
+margin_bottom = 179.0
+rect_min_size = Vector2( 1030, 154 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 1030.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 1030, 100 )
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 1030.0
+margin_bottom = 104.0
+alignment = 2
+
+[node name="EditNote" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 980.0
+margin_right = 1030.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddNote" type="TextureButton" parent="."]
+margin_left = 440.0
+margin_right = 640.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="AddNote" to="." method="_on_AddNote_pressed"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

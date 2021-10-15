@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/DrawingCards/choosewhichspreadcontainer.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.945098, 0.929412, 0.894118, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.870588, 0.858824, 0.956863, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Control" type="Control"]
+anchor_top = 0.000544675
+anchor_bottom = 0.0927322
+margin_right = 980.0
+margin_bottom = 243.0
+rect_min_size = Vector2( 980, 243 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vboxcontainer" type="VBoxContainer" parent="."]
+margin_right = 980.0
+margin_bottom = 504.0
+rect_min_size = Vector2( 980, 499 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spreadname" type="Button" parent="vboxcontainer"]
+margin_right = 980.0
+margin_bottom = 243.0
+rect_min_size = Vector2( 0, 243 )
+focus_mode = 0
+mouse_filter = 1
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.870588, 0.858824, 0.956863, 1 )
+custom_colors/font_color = Color( 0.870588, 0.858824, 0.956863, 1 )
+custom_colors/font_color_hover = Color( 0.870588, 0.858824, 0.956863, 1 )
+enabled_focus_mode = 0
+text = "celtic cross"
+flat = true
+
+[node name="Stats" type="RichTextLabel" parent="vboxcontainer"]
+margin_top = 247.0
+margin_right = 980.0
+margin_bottom = 487.0
+rect_min_size = Vector2( 0, 240 )
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.870588, 0.858824, 0.956863, 1 )
+text = "This is information about the spread. It goes on and on, and on, and on, and on."
+
+[node name="clickTimer" type="Timer" parent="vboxcontainer"]
+
+[node name="CenterContainer" type="CenterContainer" parent="vboxcontainer"]
+margin_top = 491.0
+margin_right = 980.0
+margin_bottom = 504.0
+
+[node name="Panel" type="Panel" parent="vboxcontainer/CenterContainer"]
+margin_left = 90.0
+margin_right = 890.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 800, 13 )
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="Panel" parent="."]
+margin_right = 980.0
+margin_bottom = 473.0
+rect_min_size = Vector2( 980, 486 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="vboxcontainer/spreadname" to="." method="_on_spreadname_gui_input"]
