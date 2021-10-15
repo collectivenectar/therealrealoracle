@@ -1,7 +1,7 @@
 # therealrealoracle
 Digital Oracle Deck App for iOS, designed using Godot Engine
 
-theRealReal Oracle Deck is an idea designed and collaboratively created by my partner @rainbow__harmony (instagram)/Rainbow Harmony on Youtube and I. I helped write and edit many of the cards to include a more balanced perspective on relationships, and I am designing a custom program to suit the Rainbow Harmony brand. This 'digitized' version will provide several features currently not seen used in digital oracle deck apps, including REAL random number generation (not pseudo) for shuffling and drawing, as well as the ability to add personal notes to both the card descriptions, spread guides, and the deck guide itself.
+theRealReal Oracle Deck is an idea designed and collaboratively created by my partner @rainbow__harmony (on instagram, Rainbow Harmony on Youtube) and I. I helped write and edit many of the cards to include a more balanced perspective on relationships, and I am designing a custom program to suit the Rainbow Harmony brand. This 'digitized' version will provide several features currently not seen used in digital oracle deck apps, including REAL random number generation (not pseudo) for shuffling and drawing, as well as the ability to add personal notes to both the card descriptions, spread guides, and the deck guide itself.
 
 There are many more planned features once mvp is launched that are intended to increase ease of use for personalization, sharing readings with clients or friends, and just plain awesome things that physical oracle decks can't do but help make this digital deck feel more intuitive to use and more responsive.
 
