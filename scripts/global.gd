@@ -93,6 +93,8 @@ var livedeck : Array = [
 	},
 ]
 
+var testing_git : int = 1255136
+
 #temp holder for randomization
 var deck_copy : Array = []
 #temp holder for copy when it is converted to references instead of actual dictionarys

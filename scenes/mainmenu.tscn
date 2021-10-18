@@ -181,6 +181,7 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="button_up" from="DeckCoreMenu/CenteringCont/deckcorebutton" to="." method="_on_deckcorebutton_button_up"]
 [connection signal="button_up" from="HideMenu" to="." method="_on_Button_button_up"]
 [connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/DrawContainer/Draw" to="." method="_on_Draw_pressed"]
