@@ -46,10 +46,8 @@ func _process(delta):
 	if animation_state == "inertia":
 		window_position = lerp(window_position, window_end_position, 4.0*delta)
 		_carousel_dragged_pos(window_position)
-		print(animation_state)
 		if window_position == window_end_position:
 			animation_state = "inactive"
-			print(animation_state)
 
 func _gui_input(event):
 #	if event is InputEventScreenDrag:
@@ -66,7 +64,6 @@ func _gui_input(event):
 #			carousel_inertia_initial = 0
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			print(animation_state)
 			pressed = true
 			click_down_position = event.global_position
 			animation_state = "inactive"

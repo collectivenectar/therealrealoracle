@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/UserHistory/UserHistory.gd" type="Script" id=2]
+[ext_resource path="res://resources/Complimentary.tres" type="Theme" id=3]
+[ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -29,14 +31,11 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="TextureRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="Panel" parent="."]
 margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
-color = Color( 0.870588, 0.858824, 0.956863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = 20.0
@@ -48,16 +47,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Journal" type="ColorRect" parent="Control"]
+[node name="Journal" type="Panel" parent="Control"]
 margin_left = 100.0
 margin_top = 30.0
 margin_right = 400.0
 margin_bottom = 330.0
 rect_min_size = Vector2( 840, 300 )
-color = Color( 0.623529, 0.721569, 0.662745, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource( 3 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control"]
 margin_left = 150.0
@@ -94,7 +90,6 @@ __meta__ = {
 }
 
 [node name="areyousure" type="Control" parent="."]
-visible = false
 margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
@@ -102,11 +97,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="ColorRect" parent="areyousure"]
+[node name="TextureRect" type="Panel" parent="areyousure"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 1080, 1920 )
-color = Color( 0.623529, 0.721569, 0.662745, 1 )
+theme = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="areyousure"]
 margin_left = 100.0
@@ -118,11 +113,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="ColorRect" parent="areyousure/Control"]
+[node name="TextureRect" type="Panel" parent="areyousure/Control"]
 margin_right = 880.0
 margin_bottom = 734.0
 rect_min_size = Vector2( 880, 1320 )
-color = Color( 0.945098, 0.929412, 0.894118, 1 )
+theme = ExtResource( 3 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="areyousure/Control"]
 margin_left = 215.0
@@ -147,10 +142,10 @@ __meta__ = {
 }
 
 [node name="HSplitContainer" type="HSplitContainer" parent="areyousure/Control/CenterContainer"]
-margin_left = 440.0
-margin_top = 660.0
-margin_right = 440.0
-margin_bottom = 660.0
+margin_left = 245.0
+margin_top = 632.0
+margin_right = 634.0
+margin_bottom = 688.0
 custom_constants/separation = 36
 
 [node name="yes" type="Button" parent="areyousure/Control/CenterContainer/HSplitContainer"]

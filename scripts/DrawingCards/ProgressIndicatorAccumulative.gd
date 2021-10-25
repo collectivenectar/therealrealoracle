@@ -1,7 +1,7 @@
 extends Control
 
-onready var greenborder: StyleBoxFlat = load("res://styleboxes/progress_indicator_green.tres")
-onready var redborder: StyleBoxFlat = load ("res://styleboxes/progress_indicator_red.tres")
+onready var accentborder: StyleBoxFlat = load("res://resources/styleboxes/Color10-det8-bordw6-cornrad5.tres")
+onready var complimentaryborder: StyleBoxFlat = load ("res://resources/styleboxes/Color30-det8-bordw0-cornrad5.tres")
 
 var spread_state_set_to = int()
 var cards_info_storage
@@ -34,7 +34,7 @@ func prepare_indicators():
 	for i in global.total_cards_in_scene:
 		var copy : Panel = $cards/Panel.duplicate()
 		$cards.add_child(copy)
-		copy.set('custom_styles/panel', greenborder)
+		copy.set('custom_styles/panel', accentborder)
 	for i in $cards.get_child_count():
 		var center_offset = (i - (($cards.get_child_count() - 0.5)/2))
 		$cards.get_child(i).rect_position.x = screen_center + (center_offset * (card_size_x + card_spacing))
@@ -73,9 +73,9 @@ func _update_panels():
 	if indicator_spots.size() == $cards.get_child_count():
 		for i in indicator_spots.size():
 			if indicator_spots[i] == 0:
-				$cards.get_child(i).set('custom_styles/panel', greenborder)
+				$cards.get_child(i).set('custom_styles/panel', accentborder)
 			elif indicator_spots[i] == 1:
-				$cards.get_child(i).set('custom_styles/panel', redborder)
+				$cards.get_child(i).set('custom_styles/panel', complimentaryborder)
 	else:
 		print("array and panels count not equal")
 

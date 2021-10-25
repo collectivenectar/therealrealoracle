@@ -1,6 +1,5 @@
 extends Control
 
-#var deck_data
 onready var deckcorepopup = preload("res://scenes/DeckIntentions/deckcorepopup.tscn")
 onready var userhistory : PackedScene = preload("res://scenes/UserHistory/UserHistory.tscn")
 onready var guidebook : PackedScene = preload("res://scenes/Guidebook/Guidebook.tscn")
@@ -13,8 +12,10 @@ onready var menu_hidden = false
 onready var chevronsup = preload("res://app icons/ChevronUp.png")
 onready var chevronsdown = preload("res://app icons/ChevronDown.png") 
 
+var card_color1 = global.color_compliment
+
 func _ready():
-	pass
+	$MenuUI/CenterContainer/MenuRack/DrawContainer/Draw.material.set_shader_param("card_color1", card_color1)
 
 func _on_draw_pressed() -> void :
 	get_tree().change_scene("res://scenes/DrawingCards/choosewhichspread.tscn")

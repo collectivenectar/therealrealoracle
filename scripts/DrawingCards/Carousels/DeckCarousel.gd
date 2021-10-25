@@ -17,7 +17,8 @@ func _cell_added():
 	var additional : Node = cardnotecell.instance()
 	$ScrollContainer/CardDeckVBox/CardDescriptionBox.get_child_count()
 	$ScrollContainer/CardDeckVBox/CardDescriptionBox.add_child(additional)
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.move_child(additional, -1)
+	var end_position : int = $ScrollContainer/CardDeckVBox/CardDescriptionBox.get_child_count() - 1
+	$ScrollContainer/CardDeckVBox/CardDescriptionBox.move_child(additional, end_position)
 	additional.connect("celladded", self, "_cell_added")
 
 

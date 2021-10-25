@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/DeckCarousel/cardnotecell.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Add.png" type="Texture" id=2]
 [ext_resource path="res://app icons/Edit.png" type="Texture" id=3]
-[ext_resource path="res://styleboxes/cardnotecell.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/Complimentary.tres" type="Theme" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -25,7 +25,7 @@ margin_right = 680.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 280, 200 )
 mouse_filter = 1
-custom_styles/panel = ExtResource( 4 )
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

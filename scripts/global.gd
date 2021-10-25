@@ -93,7 +93,12 @@ var livedeck : Array = [
 	},
 ]
 
-var testing_git : int = 1255136
+#UI COLOR MANAGEMENT SECTION
+onready var color_dominant : Color = Color(0.372549, 0.513725, 0.431372, 1.0)
+onready var color_compliment : Color = Color (0.772549, 0.780392, 0.839215)
+onready var color_accent : Color = Color(0.772549, 0.772549, 0.662745)
+
+#DECK ARRAYS SECTION
 
 #temp holder for randomization
 var deck_copy : Array = []
@@ -108,6 +113,7 @@ var carousel_converted : Array = []
 #var to hold current spread state information(state is more like spread ID?)
 var spread_state_set_to : int
 
+#PROGRESS INDICATOR SECTION
 
 #for cardlayoutprogress, to know which configuration to use for cards, stock or custom
 #NOTE THIS NEEDS SETUP : Currently there will not be any custom spreads, so it will
@@ -127,6 +133,8 @@ var total_cards_in_scene : int = 0
 var current_cardid_in_center_card : String = ""
 #used to store rng seeds
 var seeds : Array = ["evoke", "announce", "veteran", "fiscal", "author", "artist", "gown", "fiber", "connect", "miss", "text", "timber"]
+
+#PERSISTENT DATA SECTION 
 
 #access user data file
 onready var save_file : String = "user://user.data"
@@ -206,4 +214,3 @@ func draw():
 	else:
 		clear_decks()
 		_shuffle_deck()
-
