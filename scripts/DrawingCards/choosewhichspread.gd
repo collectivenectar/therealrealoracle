@@ -20,7 +20,7 @@ func _ready():
 	#for each spread type that comes stock, instance an hboxcontainer to hold that info
 	for i in global._layout_states:
 		var cont_inst : Control = load_a_spread_container.instance()
-		$MarginContainer/VBoxContainer.add_child(cont_inst)
+		$MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.add_child(cont_inst)
 		#set the text of this hboxcont to the name of the spread found in global._layout_states
 		cont_inst.get_child(1).get_child(0).text = i
 		#infuse the hboxcont with spread info
@@ -38,7 +38,7 @@ func _ready():
 		for keys in global.runtime_user_data.custom_spreads.keys():
 			var cont_inst : Control = load_a_spread_container.instance()
 			#add spread title cont
-			$MarginContainer/VBoxContainer.add_child(cont_inst)
+			$MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.add_child(cont_inst)
 			#set spread name equal to key
 			cont_inst.get_child(1).get_child(0).text = keys
 			#set cards_info_storage variable(a var is in each script attached to layout instance)

@@ -80,8 +80,9 @@ text = "Deck Core"
 flat = true
 
 [node name="InstanceViewer" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 1.48236
+margin_right = 1081.48
+margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 __meta__ = {
 "_edit_use_anchors_": false
