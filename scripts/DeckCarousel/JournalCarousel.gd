@@ -107,9 +107,12 @@ func _carousel_dragged_pos(window_position):
 	for i in 5:
 		var card_array_position : float = fposmod(int(window_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 		var largetext : String = "[center]" + global.livedeck[card_array_position]['description1'] + "[/center]"
-		get_child(i).get_child(0).get_child(0).get_child(4).get_child(0).bbcode_text = largetext
+		#get_child(i).get_child(0).get_child(0).get_child(4).get_child(0).bbcode_text = largetext
 		var smalltext : String = "[center]" + global.livedeck[card_array_position]['description2'] + "[/center]"
-		get_child(i).get_child(0).get_child(0).get_child(4).get_child(1).bbcode_text = smalltext
+		#get_child(i).get_child(0).get_child(0).get_child(4).get_child(1).bbcode_text = smalltext
+		var cardnumber : String = global.livedeck[card_array_position]['name']
+		#get_child(i).get_child(0).get_child(0).get_child(2).text = cardnumber
+		get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
 		
 func _on_Button_pressed():
 	for i in 5:

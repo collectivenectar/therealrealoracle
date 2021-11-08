@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=2]
+
+[ext_resource path="res://resources/styleboxes/Color30-det8-bordw0-cornrad5.tres" type="StyleBox" id=1]
+
+[resource]
+Panel/styles/panel = ExtResource( 1 )

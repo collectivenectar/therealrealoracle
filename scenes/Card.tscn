@@ -113,9 +113,9 @@ __meta__ = {
 
 [node name="CardNumber" type="RichTextLabel" parent="Front"]
 margin_left = 100.0
-margin_top = 50.0
+margin_top = 45.0
 margin_right = 135.0
-margin_bottom = 80.0
+margin_bottom = 75.0
 mouse_filter = 1
 custom_fonts/normal_font = SubResource( 3 )
 text = "00"
@@ -141,10 +141,10 @@ __meta__ = {
 margin_left = 50.0
 margin_top = 100.0
 margin_right = 450.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 400, 450 )
+margin_bottom = 253.0
+rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -152,24 +152,28 @@ __meta__ = {
 
 [node name="LargeDescription" type="RichTextLabel" parent="Front/DescriptionContainer"]
 margin_right = 400.0
-margin_bottom = 222.0
+margin_bottom = 104.0
+rect_clip_content = false
 mouse_filter = 1
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center] I want a bean feast.[/center]"
 text = " I want a bean feast."
+fit_content_height = true
 scroll_active = false
 
 [node name="SmallDescription" type="RichTextLabel" parent="Front/DescriptionContainer"]
-margin_top = 227.0
+margin_top = 109.0
 margin_right = 400.0
-margin_bottom = 450.0
+margin_bottom = 153.0
+rect_clip_content = false
 mouse_filter = 1
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 text = "cream buns and donuts and fruitcake with no nuts so good you could go nuts."
+fit_content_height = true
 scroll_active = false
 
 [node name="Top" type="TextureRect" parent="Front"]
@@ -180,6 +184,7 @@ __meta__ = {
 }
 
 [node name="Back" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 500, 800 )
