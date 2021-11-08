@@ -38,7 +38,7 @@ func _ready():
 		var card_instance : Node = card.instance()
 		get_child(i).add_child(card_instance)
 		card_instance.set_meta("card_number", (i - 1))
-		connect("front_or_back", card_instance, "front_or_back_visible")
+		connect("front_or_back", card_instance, "_front_or_back_visible")
 		emit_signal("front_or_back", "back")
 	_carousel_dragged_pos(window_position)
 

@@ -77,5 +77,6 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/EditNote" to="." method="_on_EditNote_button_up"]
 [connection signal="pressed" from="AddNote" to="." method="_on_AddNote_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

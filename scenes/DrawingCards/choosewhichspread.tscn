@@ -36,25 +36,26 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SpreadChoicesIntro" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 500.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/SpreadChoicesIntro"]
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 1080, 500 )
+rect_clip_content = true
 
 [node name="TarotSpreadText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/SpreadChoicesIntro/CenterContainer"]
-margin_left = 106.0
+margin_left = 100.0
 margin_top = 150.0
-margin_right = 986.0
+margin_right = 980.0
 margin_bottom = 350.0
 rect_min_size = Vector2( 880, 200 )
 rect_clip_content = false
@@ -70,13 +71,14 @@ __meta__ = {
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 504.0
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 504.0
 rect_min_size = Vector2( 1080, 0 )
+size_flags_horizontal = 3
 
 [node name="SpreadTypes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
-margin_left = 546.0
-margin_right = 546.0
+margin_left = 540.0
+margin_right = 540.0
 size_flags_horizontal = 3
 
 [node name="ClickTimer" type="Timer" parent="."]

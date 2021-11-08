@@ -8,7 +8,6 @@ onready var layout : Node = layout_scene.instance()
 signal layout_update(progress)
 signal layout_spread_state(state)
 
-
 func _ready():
 	$popupcontainer.visible = false
 	$VBoxContainer.add_child(carousel)
@@ -19,7 +18,7 @@ func _ready():
 	connect("layout_spread_state", layout, "_set_card_layout")
 	connect("layout_update", layout, "_card_progress")
 	layout.connect("is_spread_full", self, "_if_spread_full")
-	emit_signal("layout_spread_state", global.spread_state_set_to)
+	#emit_signal("layout_spread_state", global.spread_state_set_to)
 	
 	
 func _update_layout(progress):

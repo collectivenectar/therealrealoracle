@@ -1,6 +1,6 @@
 extends Node
 
-#to delete save files, see the final comment in the _ready() function
+#to delete any saved files, see the final comment in the _ready() function
 
 #Global autoload manages a few things:
 #the deck information(texture paths, descriptions, name/ID) 
@@ -98,7 +98,7 @@ onready var color_dominant : Color = Color(0.372549, 0.513725, 0.431372, 1.0)
 onready var color_compliment : Color = Color (0.772549, 0.780392, 0.839215)
 onready var color_accent : Color = Color(0.772549, 0.772549, 0.662745)
 
-#DECK ARRAYS SECTION
+#DECK ARRAY MANAGEMENT SECTION
 
 #temp holder for randomization
 var deck_copy : Array = []
@@ -119,15 +119,34 @@ var spread_state_set_to : int
 #NOTE THIS NEEDS SETUP : Currently there will not be any custom spreads, so it will
 #only be a few basic spreads and one open style with a high limit of cards. I might
 #be considering allowing users to pull 'clarifiers' but that's maybe once it's all ready.
-var _layout_states : Array = ["Love for 2", "Love for just you", "Soul Mate", "Choosing Between", "self love"]
+var _layout_states : Array = ["Love for 2", "Love for just you",]
 #same as above
-var _layout_states_cards_in_each : Array = [1, 2, 3, 4, 5]
+var _layout_states_cards_in_each : Array = [3, 5,]
 #I believe this stores the name of the spread chosen?
-var choose_which_spread_key : String
+var tarot_spread_info : Array = [
+	{
+		'spread name': 'Love for 2',
+		'spread description': 'Consider your relationship compatibility with another person',
+		'number of cards': 3,
+		'position titles': ["Your Compatibility", "Your Blockages", "Their Blockages"],
+		'position interpretations': ["Your compatibility is about you and them, Do you have any friendship? Is it just a romantic love?", "Your blockages may or may not prevent you from having a strong relationship with this person", "Their blockages may or may not prevent them from having a strong relationship with you"],
+		'user card notes': [["", ], ["", ], ["", ]],
+		'user general notes': ["", "", ],
+	},
+	{
+		'spread name': 'Love for just you',
+		'spread description': 'Just you, and the love you have for yourself',
+		'number of cards': 5,
+		'position titles': ["Your blockages to love", "Your current situation", "What you're leaving behind", "What's coming in for you", "How you can get ready for love"],
+		'position interpretations': ["Anything that's preventing you from loving yourself fully", "How are you feeling about love lately?", "Is there anything you've made progress with?", "What is around the corner?", "Practical action steps or things to focus on in the meantime"],
+		'user card notes': [["", ], ["", ], ["", ], ["", ], ["", ]],
+		'user general notes': ["", "", ],
+	}
+]
 #global storage to indicate which card is the focus. Used in both hidden carousel and see
 #your cards
 var current_card_in_spread : int = 0
-#used for counting current position as well as indicator lights in cardlayoutprogress
+#used for comparing with current position as well as indicator lights in cardlayoutprogress
 var total_cards_in_scene : int = 0
 #used to store the card in focus name? or position...needs work
 var current_cardid_in_center_card : String = ""
@@ -136,9 +155,9 @@ var seeds : Array = ["evoke", "announce", "veteran", "fiscal", "author", "artist
 
 #PERSISTENT DATA SECTION 
 
-#access user data file
+# user data file path storage
 onready var save_file : String = "user://user.data"
-#stores current user data
+#stores up-to-date user data during runtime
 onready var user_data : Dictionary = {}
 #stores current (and hopefully recently saved) runtime data
 onready var runtime_user_data : Dictionary = {
@@ -162,8 +181,7 @@ func _ready():
 	#if it's not empty, add user_data to runtime_user_data so it can be accessed during runtime
 	elif not user_data.empty():
 		runtime_user_data = user_data
-		#uncomment the line below, and recomment the line above to delete current save
-		#file
+		#uncomment the line below this one, and then comment the line above this one to delete current save file
 		#user_data = runtime_user_data
 
 func save_user_data():
@@ -175,7 +193,7 @@ func save_user_data():
 	file.close()
 
 func clear_decks():
-	#empty all temp vars for a clean start
+	#clear all deck storage related variables for a clean start
 	deck_copy.clear()
 	deck_copy_converted.clear()
 	deck_copy_chosen_states.clear()

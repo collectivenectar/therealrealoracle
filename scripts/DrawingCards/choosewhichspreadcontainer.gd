@@ -2,16 +2,18 @@ extends Control
 
 
 
-signal spread_chosen(custom_or_stock_spread, position_in_storage, total_cards, spread_name)
+signal spread_chosen(position_in_storage, total_cards, spread_name)
 var parent_node
 onready var click_down_position : Vector2
 onready var click_up_position : Vector2
 onready var dragging : bool
 
 func _ready():
+	#This code is incomplete, remove .font_data() and rethink the logic. 
+	#How do I call a property of "normal_font". Do I call the dynamic_font
+	#property? Or am I already at that level to call a font property like 
+	#get_string_size() or get_wordwrap_string_size()?
 	pass
-				#emit_signal("spread_chosen", get_meta("custom or stock"), get_meta("layout_state"), get_meta("total_cards"), get_meta("spread_name"))
-
 
 func store_parent_node(node):
 	parent_node = node
@@ -25,7 +27,7 @@ func _on_spreadname_gui_input(event):
 			if abs(click_up_position.x - click_down_position.x) < 50:
 				if abs(click_up_position.y - click_down_position.y) < 50:
 					dragging = false
-					emit_signal("spread_chosen", get_meta("custom or stock"), get_meta("layout_state"), get_meta("total_cards"), get_meta("spread_name"))
+					emit_signal("spread_chosen", get_meta("layout_state"), get_meta("total_cards"), get_meta("spread_name"))
 				elif abs(click_up_position.y - click_down_position.y) > 50:
 					dragging = true
 			elif abs(click_up_position.x - click_down_position.x) > 50:

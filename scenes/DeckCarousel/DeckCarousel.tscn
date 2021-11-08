@@ -25,6 +25,9 @@ margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 theme = ExtResource( 4 )
 custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterContainer" type="Control" parent="."]
 margin_right = 1080.0
@@ -64,7 +67,7 @@ __meta__ = {
 
 [node name="CardDeckVBox" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1080.0
-margin_bottom = 1905.0
+margin_bottom = 1720.0
 rect_min_size = Vector2( 1080, 1720 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -75,24 +78,22 @@ __meta__ = {
 
 [node name="CarouselCBox" type="CenterContainer" parent="ScrollContainer/CardDeckVBox"]
 margin_right = 1080.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 1080, 1080 )
+margin_bottom = 1180.0
+rect_min_size = Vector2( 1080, 1180 )
 
 [node name="CarouselContainer" type="Control" parent="ScrollContainer/CardDeckVBox/CarouselCBox"]
 margin_left = 20.0
-margin_top = 50.0
+margin_top = 100.0
 margin_right = 1060.0
-margin_bottom = 1030.0
+margin_bottom = 1080.0
 rect_min_size = Vector2( 1040, 980 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CardDescriptionBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
-margin_top = 1105.0
+margin_top = 1205.0
 margin_right = 1080.0
-margin_bottom = 1905.0
-rect_min_size = Vector2( 0, 800 )
+margin_bottom = 1205.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_constants/separation = 25
