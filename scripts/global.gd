@@ -119,14 +119,14 @@ var spread_state_set_to : int
 #NOTE THIS NEEDS SETUP : Currently there will not be any custom spreads, so it will
 #only be a few basic spreads and one open style with a high limit of cards. I might
 #be considering allowing users to pull 'clarifiers' but that's maybe once it's all ready.
-var _layout_states : Array = ["Love for 2", "Love for just you",]
+var _layout_states : Array = ["Love for Two", "Love for just you",]
 #same as above
 var _layout_states_cards_in_each : Array = [3, 5,]
 #I believe this stores the name of the spread chosen?
 var tarot_spread_info : Array = [
 	{
-		'spread name': 'Love for 2',
-		'spread description': 'Consider your relationship compatibility with another person',
+		'spread name': 'Love for Two',
+		'spread description': 'Compatibility between you and another',
 		'number of cards': 3,
 		'position titles': ["Your Compatibility", "Your Blockages", "Their Blockages"],
 		'position interpretations': ["Your compatibility is about you and them, Do you have any friendship? Is it just a romantic love?", "Your blockages may or may not prevent you from having a strong relationship with this person", "Their blockages may or may not prevent them from having a strong relationship with you"],

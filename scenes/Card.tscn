@@ -142,9 +142,8 @@ margin_left = 50.0
 margin_top = 100.0
 margin_right = 450.0
 margin_bottom = 253.0
-rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 3
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,7 +160,6 @@ bbcode_enabled = true
 bbcode_text = "[center] I want a bean feast.[/center]"
 text = " I want a bean feast."
 fit_content_height = true
-scroll_active = false
 
 [node name="SmallDescription" type="RichTextLabel" parent="Front/DescriptionContainer"]
 margin_top = 109.0
@@ -174,7 +172,13 @@ custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 text = "cream buns and donuts and fruitcake with no nuts so good you could go nuts."
 fit_content_height = true
-scroll_active = false
+
+[node name="Control" type="Control" parent="Front/DescriptionContainer"]
+margin_top = 158.0
+margin_right = 400.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Top" type="TextureRect" parent="Front"]
 margin_right = 40.0

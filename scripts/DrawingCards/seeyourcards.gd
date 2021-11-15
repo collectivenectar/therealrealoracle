@@ -103,10 +103,10 @@ func _virtual_carousel(direction):
 		$cardleft.visible = true
 		$left.visible = true
 	var center_texture_number : float = fposmod(window_position, global.carousel_choice.size())
-	$cardleft.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number - 1]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number - 1]]]['description2'])
-	$cardcenter.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number]]]['description2'])
+	$cardleft.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number - 1]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number - 1]]]['description2'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number - 1]]]['name'])
+	$cardcenter.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number]]]['description2'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number]]]['name'])
 	if window_position < global.carousel_choice.size() - 1:
-		$cardright.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number + 1]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number + 1]]]['description2'])
+		$cardright.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number + 1]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number + 1]]]['description2'], global.livedeck[global.deck_copy_converted[global.carousel_choice[center_texture_number + 1]]]['name'])
 
 func _tween_completed(_object, _key):
 	#when toggling alpha on the popup, check for if animation is done before toggling visibility.
@@ -118,7 +118,7 @@ func _tween_completed(_object, _key):
 func _on_selectcentercard_pressed():
 	#if a card is touched in this scene, display a close up view of the card, as well as text descriptions and
 	#other functions related to exploring the card/deck/making notes on the deck etc
-	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['description2'])
+	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['description2'], global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['name'])
 	$CenterContainer/ScrollContainer/VBoxContainer/RichTextLabel.text = global.livedeck[global.deck_copy_converted[global.carousel_choice[window_position]]]['description1']
 	#unfortunately due to layering, I need to move the children around to get proper visibility
 	#then move it back when the window is closed

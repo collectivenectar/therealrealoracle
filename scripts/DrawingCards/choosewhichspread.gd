@@ -18,7 +18,7 @@ onready var load_a_spread_container : PackedScene = preload("res://scenes/Drawin
 func _ready():
 	#for each spread type that comes stock, instance an hboxcontainer to hold that info
 	for i in global._layout_states:
-		var cont_inst : Control = load_a_spread_container.instance()
+		var cont_inst = load_a_spread_container.instance()
 		$MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.add_child(cont_inst)
 		#set the text of this hboxcont to the name of the spread found in global._layout_states
 		cont_inst.get_child(1).get_child(0).text = i
@@ -28,6 +28,7 @@ func _ready():
 		cont_inst.set_meta("spread_name", global._layout_states[global._layout_states.find(i)])
 		cont_inst.get_child(1).get_child(1).bbcode_text = "[center]" + global.tarot_spread_info[global._layout_states.find(i)]['spread description'] + "[/center]"
 		cont_inst.connect("spread_chosen", self, "on_spread_chosen")
+	$MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.get_child($MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.get_child_count() - 1)._toggle_tail()
 	$MarginContainer.get_v_scrollbar().add_stylebox_override('grabber', StyleBoxEmpty.new())
 	$MarginContainer.get_v_scrollbar().add_stylebox_override('scroll', StyleBoxEmpty.new())
 

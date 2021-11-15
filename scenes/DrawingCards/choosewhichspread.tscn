@@ -8,18 +8,15 @@
 size = 129
 font_data = ExtResource( 3 )
 
-[node name="Control" type="Control"]
+[node name="Control" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Panel" parent="."]
-margin_right = 750.0
-margin_bottom = 1334.0
+margin_right = 1080.0
+margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 theme = ExtResource( 2 )
 __meta__ = {
@@ -29,7 +26,9 @@ __meta__ = {
 [node name="MarginContainer" type="ScrollContainer" parent="."]
 margin_right = 1080.0
 margin_bottom = 1920.0
+grow_vertical = 0
 rect_min_size = Vector2( 980, 1820 )
+rect_clip_content = false
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,8 +38,6 @@ __meta__ = {
 margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="SpreadChoicesIntro" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 1080.0
@@ -50,7 +47,6 @@ margin_bottom = 500.0
 margin_right = 1080.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 1080, 500 )
-rect_clip_content = true
 
 [node name="TarotSpreadText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/SpreadChoicesIntro/CenterContainer"]
 margin_left = 100.0
@@ -74,11 +70,9 @@ margin_top = 504.0
 margin_right = 1080.0
 margin_bottom = 504.0
 rect_min_size = Vector2( 1080, 0 )
-size_flags_horizontal = 3
 
 [node name="SpreadTypes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
 margin_left = 540.0
 margin_right = 540.0
-size_flags_horizontal = 3
 
 [node name="ClickTimer" type="Timer" parent="."]

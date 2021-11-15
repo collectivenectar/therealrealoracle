@@ -34,3 +34,7 @@ func _on_spreadname_gui_input(event):
 					dragging = true
 			else:
 				print("choose spread container input test failed")
+				
+func _toggle_tail():
+	#for the last container, I just need to get rid of the $panel to clean it up visually
+	$vboxcontainer/CenterContainer/Panel.visible = false

@@ -25,7 +25,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[node name="Control" type="Control"]
+[node name="Control" type="Container"]
 anchor_top = 0.000544675
 anchor_bottom = 0.0927322
 margin_top = -1.04578
@@ -38,10 +38,8 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="Panel" parent="."]
-margin_left = 135.0
-margin_right = 845.0
-margin_bottom = 486.0
-rect_min_size = Vector2( 680, 486 )
+margin_right = 980.0
+margin_bottom = 470.0
 mouse_filter = 1
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -52,6 +50,7 @@ __meta__ = {
 margin_right = 980.0
 margin_bottom = 504.0
 rect_min_size = Vector2( 980, 499 )
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,23 +71,24 @@ text = "celtic cross"
 flat = true
 
 [node name="Stats" type="RichTextLabel" parent="vboxcontainer"]
-margin_top = 247.0
+margin_top = 243.0
 margin_right = 980.0
-margin_bottom = 487.0
+margin_bottom = 483.0
 rect_min_size = Vector2( 0, 240 )
-size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 0.945098, 0.929412, 0.894118, 1 )
 custom_colors/selection_color = Color( 0.945098, 0.929412, 0.894118, 1 )
 custom_colors/font_color_selected = Color( 0.945098, 0.929412, 0.894118, 1 )
 custom_colors/font_color_shadow = Color( 0.945098, 0.929412, 0.894118, 1 )
+bbcode_enabled = true
+fit_content_height = true
 
 [node name="clickTimer" type="Timer" parent="vboxcontainer"]
 
 [node name="CenterContainer" type="CenterContainer" parent="vboxcontainer"]
-margin_top = 491.0
+margin_top = 483.0
 margin_right = 980.0
-margin_bottom = 504.0
+margin_bottom = 496.0
 rect_min_size = Vector2( 0, 13 )
 
 [node name="Panel" type="Panel" parent="vboxcontainer/CenterContainer"]
