@@ -38,3 +38,7 @@ func _on_spreadname_gui_input(event):
 func _toggle_tail():
 	#for the last container, I just need to get rid of the $panel to clean it up visually
 	$vboxcontainer/CenterContainer/Panel.visible = false
+
+func _set_card_number(card_number):
+	var card_number_string : String = str(card_number)
+	$MarginContainer/numberofcards.text = ":" + card_number_string

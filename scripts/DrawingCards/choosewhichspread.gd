@@ -28,6 +28,7 @@ func _ready():
 		cont_inst.set_meta("spread_name", global._layout_states[global._layout_states.find(i)])
 		cont_inst.get_child(1).get_child(1).bbcode_text = "[center]" + global.tarot_spread_info[global._layout_states.find(i)]['spread description'] + "[/center]"
 		cont_inst.connect("spread_chosen", self, "on_spread_chosen")
+		cont_inst._set_card_number(global._layout_states_cards_in_each[global._layout_states.find(i)])
 	$MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.get_child($MarginContainer/VBoxContainer/CenterContainer/SpreadTypes.get_child_count() - 1)._toggle_tail()
 	$MarginContainer.get_v_scrollbar().add_stylebox_override('grabber', StyleBoxEmpty.new())
 	$MarginContainer.get_v_scrollbar().add_stylebox_override('scroll', StyleBoxEmpty.new())
