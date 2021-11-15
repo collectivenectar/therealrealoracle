@@ -1,22 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/DrawingCards/choose your cards.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Heart.png" type="Texture" id=2]
 [ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=4]
 [ext_resource path="res://resources/Complimentary.tres" type="Theme" id=5]
+[ext_resource path="res://fonts/Kollektif-Bold.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
 font_data = ExtResource( 3 )
 
-[node name="Control" type="Control"]
+[node name="Control" type="Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackgroundPanel" type="Panel" parent="."]
 margin_right = 1080.0
@@ -25,6 +31,8 @@ rect_min_size = Vector2( 1080, 1920 )
 theme = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 9.82108e-05
+anchor_right = 9.82214e-05
 margin_top = 20.0
 margin_right = 1080.0
 margin_bottom = 1154.0
@@ -37,6 +45,40 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_right = 1080.0
 rect_min_size = Vector2( 1080, 0 )
+
+[node name="currentchoiceUI" type="CenterContainer" parent="."]
+margin_top = 1400.0
+margin_right = 1080.0
+margin_bottom = 1800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="currentchoicevbox" type="VBoxContainer" parent="currentchoiceUI"]
+margin_left = 140.0
+margin_top = 98.0
+margin_right = 940.0
+margin_bottom = 302.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="youarechoosinglabel" type="RichTextLabel" parent="currentchoiceUI/currentchoicevbox"]
+margin_right = 800.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 800, 100 )
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.945098, 0.929412, 0.894118, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]You are choosing a card for the: [/center]"
+text = "You are choosing a card for the: "
+scroll_active = false
+
+[node name="spreadpositionlabel" type="RichTextLabel" parent="currentchoiceUI/currentchoicevbox"]
+margin_top = 104.0
+margin_right = 800.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 800, 100 )
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
 
 [node name="popupcontainer" type="Control" parent="."]
 visible = false
