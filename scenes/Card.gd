@@ -50,10 +50,9 @@ func _card_available(available, card_number):
 		print(self.get_meta("card_number"))
 		
 func _set_text(text1, text2, cardnumber):
-	$Front/DescriptionContainer/LargeDescription.text = ""
-	$Front/DescriptionContainer/SmallDescription.text = ""
-	$Front/DescriptionContainer/LargeDescription.bbcode_text = ""
-	$Front/DescriptionContainer/SmallDescription.bbcode_text = ""
-	$Front/DescriptionContainer/LargeDescription.append_bbcode("[center]" + text1 + "[center]")
-	$Front/DescriptionContainer/SmallDescription.append_bbcode("[center]" + text2 + "[center]")
-	$Front/CardNumber.text = cardnumber
+	$Front/DescriptionContainer/LargeDescription.clear()
+	$Front/DescriptionContainer/SmallDescription.clear()
+	$Front/CardNumber.clear()
+	$Front/DescriptionContainer/LargeDescription.bbcode_text = text1
+	$Front/DescriptionContainer/SmallDescription.bbcode_text = text2
+	$Front/CardNumber.bbcode_text = cardnumber
