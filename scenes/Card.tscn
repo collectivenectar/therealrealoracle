@@ -19,6 +19,7 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 0.772549, 0.780392, 0.839216, 1 )
+border_blend = true
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -189,8 +190,8 @@ __meta__ = {
 
 [node name="Back" type="Control" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 500.0
+margin_bottom = 800.0
 rect_min_size = Vector2( 500, 800 )
 mouse_filter = 1
 __meta__ = {

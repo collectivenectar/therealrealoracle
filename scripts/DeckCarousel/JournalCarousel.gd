@@ -28,7 +28,7 @@ onready var click_down_position : Vector2
 onready var click_up_position : Vector2
 onready var dragging : bool
 onready var pressed : bool = false
-#instatiation of the blank card scene
+#instantiation of the blank card scene
 onready var card : PackedScene = preload("res://scenes/Card.tscn")
 #virtual carousel variables for inertia calculations
 var window_position : float = 0
@@ -36,10 +36,12 @@ var window_end_position : float = 0
 var carousel_inertia_initial : float = 0
 #state variable has 3 states or I'd use boolean
 var animation_state : String = "inactive"
+var is_done_animating : float
 #signal for when a user has clicked the 'add card' button for the middle card
 signal card_chosen(progress)
 
 func _ready():
+	is_done_animating = window_end_position - window_position
 	#for each of the (5) card placeholders
 	for i in get_child_count():
 		#add a blank card instance to each placeholder
@@ -56,7 +58,6 @@ func _ready():
 	global.draw()
 	#sets the scene by pushing the current window_position through _carousel_dragged_pos
 	_carousel_dragged_pos(window_position)
-	print(window_position)
 
 func _process(delta):
 	#only active when someone has dragged and released carousel with momentum
@@ -69,8 +70,7 @@ func _process(delta):
 		#takes new window_position and pushes through _carousel_dragged_pos()
 		_carousel_dragged_pos(window_position)
 		#if the window_position has reached the end position, kill animation
-		print(window_position)
-		if window_position == window_end_position:
+		if abs(window_end_position - window_position) < 0.001:
 			animation_state = "inactive"
 
 func _gui_input(event):

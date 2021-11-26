@@ -94,9 +94,9 @@ var livedeck : Array = [
 ]
 
 #UI COLOR MANAGEMENT SECTION
-onready var color_dominant : Color = Color(0.372549, 0.513725, 0.431372, 1.0)
-onready var color_compliment : Color = Color (0.772549, 0.780392, 0.839215)
-onready var color_accent : Color = Color(0.772549, 0.772549, 0.662745)
+onready var color_dominant : Color = Color(0.917, 0.847, 0.796)
+onready var color_compliment : Color = Color(0.678, 0.619, 0.556)
+onready var color_accent : Color = Color(0.678, 0.619, 0.556)
 
 #DECK ARRAY MANAGEMENT SECTION
 
