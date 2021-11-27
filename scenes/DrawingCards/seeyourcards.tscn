@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/DrawingCards/seeyourcards.gd" type="Script" id=1]
 [ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://app icons/ChevronLeftCircle.png" type="Texture" id=4]
 [ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://resources/Complimentary.tres" type="Theme" id=6]
+[ext_resource path="res://fonts/Kollektif-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://app icons/RightChevronCircle.png" type="Texture" id=8]
 [ext_resource path="res://app icons/Cancel.png" type="Texture" id=9]
 
@@ -36,6 +37,10 @@ font_data = ExtResource( 5 )
 [sub_resource type="DynamicFont" id=7]
 size = 41
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 68
+font_data = ExtResource( 7 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -276,6 +281,19 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="spreadposition" type="RichTextLabel" parent="."]
+margin_left = 140.0
+margin_top = 80.0
+margin_right = 940.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 800, 140 )
+custom_fonts/normal_font = SubResource( 8 )
+custom_colors/default_color = Color( 0.945098, 0.933333, 0.866667, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="backtomainmenu" to="." method="_on_backtomainmenu_pressed"]
 [connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]

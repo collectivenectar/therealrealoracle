@@ -57,16 +57,21 @@ func _ready():
 func _update_layout(progress):
 	# catches signal from carouseldisplayedcards.tscn to relay to cardlayoutprogress.tscn
 	layout._card_progress(progress)
+	global.current_card_in_spread += progress
+	print((global.current_card_in_spread - 2))
+	var current_spread = global.tarot_spread_info[global.spread_state_set_to]['spread name']
+	var spread_position = global.tarot_spread_info[global._layout_states.find(current_spread)]['position titles'][(global.current_card_in_spread - 2)]
+	$spreadposition.bbcode_text = "[center]" + spread_position + "[/center]"
 
 func _on_left_pressed():
 	#update layout when looking through cards in the spread
-	layout._card_progress(-1)
 	_virtual_carousel(-1)
+	_update_layout(-1)
 
 func _on_right_pressed():
 	#update layout when looking through cards in the spread
-	layout._card_progress(1)
 	_virtual_carousel(1)
+	_update_layout(1)
 
 func _end_reached(_position):
 	pass
