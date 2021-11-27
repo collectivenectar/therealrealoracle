@@ -69,7 +69,7 @@ func _process(delta):
 		window_position = lerp(window_position, window_end_position, 4.0*delta)
 		#takes new window_position and pushes through _carousel_dragged_pos()
 		_carousel_dragged_pos(window_position)
-		#if the window_position has reached the end position, kill animation
+		#if the window_position has reached the end position, kill process
 		if abs(window_end_position - window_position) < 0.001:
 			animation_state = "inactive"
 
@@ -148,19 +148,19 @@ func _carousel_dragged_pos(window_position):
 	#approximately 2.5 cards. There are 5 cards in the scene, this is just setting it up
 	#so the first card goes left of midscreen by exactly half the width of 5 cards
 	var parent_center : float = (rect_size.x / 2.0) - (card_width * 0.5) - (card_zone * 2)
-	#for each card, place it according to window position then add a card length
+	#for each card, place it according to window position then add a card length multiplier
 	#according to its order out of 5 cards
 	for i in 5: get_child(i).rect_position = Vector2(parent_center + (card_zone * (i)) + window_offset, 0)
-	#for each card, set it's text according to the window_position, correlating to the
-	#shuffled deck data array
+	#for each card, set its text according to the window_position, correlating to the
+	#deck data array - in this case, an unshuffled reference-only copy of the deck.
 	for i in 5:
+		#calculate the cards virtual position in the livedeck array by the same logic as before
 		var card_array_position : float = fposmod(int(window_position / card_zone) - (i - 2), global.deck_copy_converted.size())
+		#store each text string first
 		var largetext : String = "[center]" + global.livedeck[card_array_position]['description1'] + "[/center]"
-		#get_child(i).get_child(0).get_child(0).get_child(4).get_child(0).bbcode_text = largetext
 		var smalltext : String = "[center]" + global.livedeck[card_array_position]['description2'] + "[/center]"
-		#get_child(i).get_child(0).get_child(0).get_child(4).get_child(1).bbcode_text = smalltext
 		var cardnumber : String = global.livedeck[card_array_position]['name']
-		#get_child(i).get_child(0).get_child(0).get_child(2).text = cardnumber
+		#pass each through using that card instances local method
 		get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
 		
 #if the user hits the add card button, find out which card is currently in the middle
@@ -174,3 +174,5 @@ func _on_Button_pressed():
 				global.deck_copy_chosen_states[card_array_position] = "unavailable"
 				emit_signal("card_chosen", 1)
 				_carousel_dragged_pos(window_position)
+			else:
+				print("deck_copy_chosen_states array indicates that card is unavailable")

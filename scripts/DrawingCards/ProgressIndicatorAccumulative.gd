@@ -34,7 +34,7 @@ func prepare_indicators():
 	for i in (global.total_cards_in_scene - 1):
 		var copy : Panel = $cards/Panel.duplicate()
 		$cards.add_child(copy)
-		copy.set('custom_styles/panel', accentborder)
+		copy.set('custom_styles/panel', complimentaryborder)
 	for i in $cards.get_child_count():
 		var center_offset = (i - (($cards.get_child_count() - 0.5) / 2))
 		$cards.get_child(i).rect_position.x = screen_center + (center_offset * (card_size_x + card_spacing))
@@ -73,9 +73,9 @@ func _update_panels():
 	if indicator_spots.size() == $cards.get_child_count():
 		for i in indicator_spots.size():
 			if indicator_spots[i] == 0:
-				$cards.get_child(i).set('custom_styles/panel', accentborder)
-			elif indicator_spots[i] == 1:
 				$cards.get_child(i).set('custom_styles/panel', complimentaryborder)
+			elif indicator_spots[i] == 1:
+				$cards.get_child(i).set('custom_styles/panel', accentborder)
 	else:
 		print("array and panels count not equal")
 	

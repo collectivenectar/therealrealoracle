@@ -6,7 +6,7 @@
 [ext_resource path="res://fonts/Kollektif-Bold.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.870588, 0.858824, 0.956863, 1 )
+bg_color = Color( 0.945098, 0.933333, 0.866667, 1 )
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -70,8 +70,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0.945098, 0.929412, 0.894118, 1 )
-custom_colors/font_color = Color( 0.945098, 0.929412, 0.894118, 1 )
-custom_colors/font_color_hover = Color( 0.945098, 0.929412, 0.894118, 1 )
+custom_colors/font_color = Color( 0.819608, 0.698039, 0.639216, 1 )
+custom_colors/font_color_hover = Color( 0.917647, 0.847059, 0.796078, 1 )
 enabled_focus_mode = 0
 text = "celtic cross"
 flat = true
@@ -82,10 +82,10 @@ margin_right = 980.0
 margin_bottom = 473.0
 rect_min_size = Vector2( 0, 230 )
 custom_fonts/normal_font = SubResource( 3 )
-custom_colors/default_color = Color( 0.945098, 0.929412, 0.894118, 1 )
-custom_colors/selection_color = Color( 0.945098, 0.929412, 0.894118, 1 )
-custom_colors/font_color_selected = Color( 0.945098, 0.929412, 0.894118, 1 )
-custom_colors/font_color_shadow = Color( 0.945098, 0.929412, 0.894118, 1 )
+custom_colors/default_color = Color( 0.819608, 0.698039, 0.639216, 1 )
+custom_colors/selection_color = Color( 0.917647, 0.847059, 0.796078, 1 )
+custom_colors/font_color_selected = Color( 0.917647, 0.847059, 0.796078, 1 )
+custom_colors/font_color_shadow = Color( 0.917647, 0.847059, 0.796078, 1 )
 bbcode_enabled = true
 fit_content_height = true
 
