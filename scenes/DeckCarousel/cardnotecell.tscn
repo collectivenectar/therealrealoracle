@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/DeckCarousel/cardnotecell.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Add.png" type="Texture" id=2]
 [ext_resource path="res://app icons/Edit.png" type="Texture" id=3]
-[ext_resource path="res://styleboxes/cardnotecell.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/Complimentary.tres" type="Theme" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -25,7 +25,7 @@ margin_right = 680.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 280, 200 )
 mouse_filter = 1
-custom_styles/panel = ExtResource( 4 )
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,5 +77,6 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/EditNote" to="." method="_on_EditNote_button_up"]
 [connection signal="pressed" from="AddNote" to="." method="_on_AddNote_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

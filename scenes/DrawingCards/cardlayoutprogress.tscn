@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/DrawingCards/ProgressIndicatorAccumulative.gd" type="Script" id=1]
-[ext_resource path="res://styleboxes/progress_indicator_green.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/styleboxes/Color30-det8-bordw0-cornrad5.tres" type="StyleBox" id=2]
 
 [node name="ProgressContainer" type="Control"]
 anchor_right = 1.0

@@ -2,12 +2,16 @@ extends Control
 
 export var card_color1 : Color
 export var card_color2 : Color
+export var card_color3 : Color
 onready var newstyleback: StyleBoxFlat = $Back/Panel.get_stylebox("panel").duplicate()
 onready var newstylefront: StyleBoxFlat = $Front/Panel.get_stylebox("panel").duplicate()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	card_color1 = global.color_compliment
+	card_color2 = global.color_dominant
+	card_color3 = global.color_accent
 	$Back/Bottom.material.set_shader_param("card_color1", card_color1)
 	$Back/layer2.material.set_shader_param("card_color1", card_color1)
 	$Back/layer3.material.set_shader_param("card_color1", card_color1)
@@ -45,6 +49,10 @@ func _card_available(available, card_number):
 	else:
 		print(self.get_meta("card_number"))
 		
-func _set_text(text1, text2):
-	$Front/DescriptionContainer/LargeDescription.text = text1
-	$Front/DescriptionContainer/SmallDescription.text = text2
+func _set_text(text1, text2, cardnumber):
+	$Front/DescriptionContainer/LargeDescription.clear()
+	$Front/DescriptionContainer/SmallDescription.clear()
+	$Front/CardNumber.clear()
+	$Front/DescriptionContainer/LargeDescription.bbcode_text = text1
+	$Front/DescriptionContainer/SmallDescription.bbcode_text = text2
+	$Front/CardNumber.bbcode_text = cardnumber

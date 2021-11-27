@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://styleboxes/modalpopupsub.tres" type="StyleBox" id=1]
-[ext_resource path="res://styleboxes/modalpopup.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/styleboxes/deckcorepopupsmall.tres" type="StyleBox" id=1]
+[ext_resource path="res://resources/styleboxes/deckcorepopuplarge.tres" type="StyleBox" id=2]
 [ext_resource path="res://scripts/DeckIntentions/deckcorepopup.gd" type="Script" id=3]
 [ext_resource path="res://app icons/Camera.png" type="Texture" id=4]
-[ext_resource path="res://shaders/circlemask.tres" type="Material" id=5]
 [ext_resource path="res://app icons/BackArrow.png" type="Texture" id=6]
 [ext_resource path="res://app icons/Swap.png" type="Texture" id=7]
 [ext_resource path="res://app icons/Cancel.png" type="Texture" id=8]
@@ -62,7 +61,6 @@ margin_right = 450.0
 margin_bottom = 150.0
 
 [node name="generatenewseed" type="TextureButton" parent="CoreMenu/VBoxContainer/CenterContainer"]
-material = ExtResource( 5 )
 margin_left = 150.0
 margin_right = 300.0
 margin_bottom = 150.0

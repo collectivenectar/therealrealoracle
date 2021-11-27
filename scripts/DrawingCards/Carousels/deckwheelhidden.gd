@@ -38,7 +38,7 @@ func _ready():
 		var card_instance : Node = card.instance()
 		get_child(i).add_child(card_instance)
 		card_instance.set_meta("card_number", (i - 1))
-		connect("front_or_back", card_instance, "front_or_back_visible")
+		connect("front_or_back", card_instance, "_front_or_back_visible")
 		emit_signal("front_or_back", "back")
 	_carousel_dragged_pos(window_position)
 
@@ -46,10 +46,8 @@ func _process(delta):
 	if animation_state == "inertia":
 		window_position = lerp(window_position, window_end_position, 4.0*delta)
 		_carousel_dragged_pos(window_position)
-		print(animation_state)
 		if window_position == window_end_position:
 			animation_state = "inactive"
-			print(animation_state)
 
 func _gui_input(event):
 #	if event is InputEventScreenDrag:
@@ -66,7 +64,6 @@ func _gui_input(event):
 #			carousel_inertia_initial = 0
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			print(animation_state)
 			pressed = true
 			click_down_position = event.global_position
 			animation_state = "inactive"

@@ -18,11 +18,16 @@ func _ready():
 	connect("layout_spread_state", layout, "_set_card_layout")
 	connect("layout_update", layout, "_card_progress")
 	layout.connect("is_spread_full", self, "_if_spread_full")
-	emit_signal("layout_spread_state", global.spread_state_set_to)
+	$currentchoiceUI/currentchoicevbox/spreadpositionlabel.bbcode_text = "[center]" + global.tarot_spread_info[global._layout_states.find(global.spread_state_set_to) - 1]['position titles'][global.current_card_in_spread] + "[/center]"
+	#emit_signal("layout_spread_state", global.spread_state_set_to)
 	
 	
 func _update_layout(progress):
 	emit_signal("layout_update", progress)
+	global.current_card_in_spread += progress
+	var current_spread = global.tarot_spread_info[global.spread_state_set_to]['spread name']
+	var spread_position = global.tarot_spread_info[global._layout_states.find(current_spread)]['position titles'][global.current_card_in_spread]
+	$currentchoiceUI/currentchoicevbox/spreadpositionlabel.bbcode_text = "[center]" + spread_position + "[/center]"
 
 func _if_spread_full():
 	$popupcontainer.visible = true
