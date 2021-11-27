@@ -178,6 +178,7 @@ fit_content_height = true
 margin_top = 158.0
 margin_right = 400.0
 margin_bottom = 158.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
