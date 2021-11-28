@@ -10,17 +10,35 @@ var card_width : float
 var card_height : float
 var card_spacing : float
 var card_zone : float
-var finiteness : bool = true
+
+#input event handling variables for the carousel
+var carousel_inertia_initial : float = 0
+onready var click_down_position : Vector2
+onready var click_up_position : Vector2
+onready var dragging : bool
+onready var pressed : bool = false
+
+#carousel position and inertia related vars
+var carousel_sections : int
+var window_end_position : float = 0
+var animation_state : String = "inactive"
+onready var carousel_position : float = 0.0
+
+#signal for when a user has clicked the 'add card' button for the middle card
+signal card_chosen(progress)
 
 func _ready():
 	_carousel_sizing_setup()
 	_instance_cards()
+	_scene_type_check()
+	_carousel_card_position_manager(carousel_position)
 
 func _carousel_sizing_setup():
 	card_width = screen_size.x * card_screen_width_ratio
 	card_height = card_width / card_width_height_ratio
 	card_spacing = card_width * card_spacing_card_width_ratio
 	card_zone = card_width + card_spacing
+	self.rect_min_size = Vector2(screen_size.x, card_height)
 
 func _instance_cards():
 	for i in .get_child_count():
@@ -28,68 +46,40 @@ func _instance_cards():
 		.get_child(i).add_child(card_instance)
 		.get_child(i).rect_min_size = Vector2(card_width, card_height)
 		card_instance._set_sizing(card_width_height_ratio, card_width)
+		card_instance._front_or_back_visible(global.card_side_displayed)
 
+func _scene_type_check():
+	if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
+		global.draw()
+		print("choosing has been chosen")
+	elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
+		print("revealing has been chosen")
+	elif global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
+		pass
 
+func _carousel_card_position_manager(global_carousel_position):
+	#local_position normalizes the current carousel position from the global position to the
+	#local relative position in the viewport
+	var local_position : float = fmod(global_carousel_position, card_zone)
+	#zero card position offsets the whole thing by taking midpoint of screen and offsetting by
+	#approximately 2.5 card zone lengths. There are 5 cards in the scene, this is just setting it up
+	#so the first card goes left of midscreen by exactly half of the total visible cards
+	var zero_card_position : float = (rect_size.x / 2.0) - (card_width * 0.5) - (card_zone * 2)
+	#for each card, place it according to window position then add a card length multiplier
+	#according to its order out of 5 cards
+	for i in 5: get_child(i).rect_position = Vector2(zero_card_position + (card_zone * (i)) + local_position, 0)
+	#for each card, set its text according to the window_position, correlating to the
+	#deck data array - in this case, an unshuffled reference-only copy of the deck.
+	for i in 5:
+		#calculate the cards virtual position in the livedeck array by the same logic as before
+		var deck_array_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
+		#store each text string first
+		var largetext : String = "[center]" + global.livedeck[deck_array_position]['description1'] + "[/center]"
+		var smalltext : String = "[center]" + global.livedeck[deck_array_position]['description2'] + "[/center]"
+		var cardnumber : String = global.livedeck[deck_array_position]['name']
+		#pass each through using that card instances local method
+		get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
 
-# NEEDS CODE:
-
-# SEE _gui_input(event): for comments
-# SEE carousel_dragged_pos() for work on card images
-# SEE on_button_pressed() for when card is added to the spread.
-# needs to allow option to unselect before moving onwards to make
-# the experience better. There is already a click check built in,
-# i just need to connect the carousel movement to the ui
-
-#The card width to height ratio is 5:8, so I want to be able to expand
-#the screen and keep the ratio, card_h_separation, and have the $control
-#expand to fit the parent container
-
-#sizing variables, for setting up the device screen sizes vs card size
-#const card_h_separation : float = 60.0
-#const card_width_height_ratio : float = 0.625
-#const card_width_screen_width_ratio : float = 0.625
-#
-##more sizing variables initializing
-#var screen_width = 1080
-#var card_width : float
-#var card_zone : float
-#
-##input event handling variables for the carousel
-#onready var click_down_position : Vector2
-#onready var click_up_position : Vector2
-#onready var dragging : bool
-#onready var pressed : bool = false
-##instantiation of the blank card scene
-#onready var card : PackedScene = preload("res://scenes/Card.tscn")
-##virtual carousel variables for inertia calculations
-#var window_position : float = 0
-#var window_end_position : float = 0
-#var carousel_inertia_initial : float = 0
-##state variable has 3 states or I'd use boolean
-#var animation_state : String = "inactive"
-#var is_done_animating : float
-##signal for when a user has clicked the 'add card' button for the middle card
-#signal card_chosen(progress)
-#
-#func _ready():
-#	is_done_animating = window_end_position - window_position
-#	#for each of the (5) card placeholders
-#	for i in get_child_count():
-#		#add a blank card instance to each placeholder
-#		#set its scale property according to the user device screen dimensions
-#		var card_instance : Node = card.instance()
-#		get_child(i).add_child(card_instance)
-#		get_child(i).get_child(0).get_child(1).visible = false
-#		get_child(i).rect_scale.x = (card_width_screen_width_ratio * screen_width) / get_child(i).rect_size.x
-#		get_child(i).rect_scale.y = (card_width_screen_width_ratio * screen_width) / get_child(i).rect_size.x
-#	#card_width and zone are virtual variables for all components that involve the window_position
-#	card_width = screen_width * card_width_screen_width_ratio
-#	card_zone = card_width + card_h_separation
-#	#draw function will create a new array of randomized cards(like shuffling)
-#	global.draw()
-#	#sets the scene by pushing the current window_position through _carousel_dragged_pos
-#	_carousel_dragged_pos(window_position)
-#
 #func _process(delta):
 #	#only active when someone has dragged and released carousel with momentum
 #	#that exceeds minimum threshold
@@ -193,7 +183,7 @@ func _instance_cards():
 #		var cardnumber : String = global.livedeck[card_array_position]['name']
 #		#pass each through using that card instances local method
 #		get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
-#
+
 ##if the user hits the add card button, find out which card is currently in the middle
 ##get it's data, and set the availability array position value for that card to unavailable
 #func _on_Button_pressed():

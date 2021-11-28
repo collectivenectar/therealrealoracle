@@ -45,11 +45,12 @@ func _set_sizing(cardWidthHeightRatio, cardWidth):
 	var cardHeight = cardWidth / cardWidthHeightRatio
 	self.rect_min_size = Vector2(cardWidth, cardHeight)
 	$Front.rect_min_size = Vector2(cardWidth, cardHeight)
+	$Back.rect_min_size = Vector2(cardWidth, cardHeight)
 	var lg_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/LargeDescription.get("custom_fonts/normal_font").duplicate()
 	var md_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.get("custom_fonts/normal_font").duplicate()
 	var sm_font1 = $Front/VBoxContainer/HBoxContainer/CardNumber.get("custom_fonts/normal_font").duplicate()
 	var sm_font2 = $Front/VBoxContainer/HBoxContainer/RH.get("custom_fonts/normal_font").duplicate()
-	var lgFontCardRatio : float = 0.1
+	var lgFontCardRatio : float = 0.12
 	var mdFontCardRatio : float = 0.075
 	var smFontCardRatio : float = 0.05
 	lg_font.size = int(round(self.rect_min_size.x * lgFontCardRatio))

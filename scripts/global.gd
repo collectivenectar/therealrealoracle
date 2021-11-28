@@ -10,6 +10,7 @@ extends Node
 #manages saving files, tracking the current card in focus for the progress
 #indicator, as well as randomly shuffling the deck. 
 
+#THE DECK
 var livedeck : Array = [
 	{
 		'description1': "I REALLY WANT TO IMPRESS YOU",
@@ -112,6 +113,13 @@ var carousel_choice : Array = []
 var carousel_converted : Array = []
 #var to hold current spread state information(state is more like spread ID?)
 var spread_state_set_to : int
+#var to store front or back of card visible
+var card_side_displayed : String = "front"
+#var for scenes to run carousel as infinite or finite
+var carousel_finity : bool = true
+#for scene_type_check, set this var at scene intro to determine carousel cards
+var carousel_types : Array = ["CHOOSING", "REVEALING", "JOURNAL"]
+var carousel_type_currently_is : int = 0
 
 #PROGRESS INDICATOR SECTION
 
@@ -122,7 +130,7 @@ var spread_state_set_to : int
 var _layout_states : Array = ["Love for Two", "Love for just you",]
 #same as above
 var _layout_states_cards_in_each : Array = [3, 5,]
-#I believe this stores the name of the spread chosen?
+#spread info and actual stock descriptions
 var tarot_spread_info : Array = [
 	{
 		'spread name': 'Love for Two',
@@ -212,8 +220,7 @@ func _shuffle_deck():
 		deck_copy_chosen_states.append("available")
 	for i in deck_copy:
 		_compare_against_deck(i, "runtime")
-	
-		
+
 func _compare_against_deck(carousel_card, app_state):
 	if app_state == "runtime":
 		for dict in livedeck:
@@ -225,7 +232,7 @@ func _compare_against_deck(carousel_card, app_state):
 	if app_state == "savetime":
 		for i in carousel_choice:
 			carousel_converted.append(livedeck[i].name)
-	
+
 func draw():
 	if deck_copy.size() == 0:
 		_shuffle_deck()

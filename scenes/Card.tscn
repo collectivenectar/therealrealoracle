@@ -70,8 +70,6 @@ shader = ExtResource( 9 )
 shader_param/card_color1 = null
 
 [node name="Card" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_right = -580.0
 margin_bottom = -1120.0
 rect_min_size = Vector2( 500, 800 )
@@ -130,15 +128,15 @@ __meta__ = {
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/VBoxContainer"]
 margin_right = 500.0
-margin_bottom = 41.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.02
+size_flags_stretch_ratio = 0.03
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Front/VBoxContainer"]
-margin_top = 45.0
+margin_top = 63.0
 margin_right = 500.0
-margin_bottom = 69.0
+margin_bottom = 90.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 __meta__ = {
@@ -147,14 +145,14 @@ __meta__ = {
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/VBoxContainer/HBoxContainer"]
 margin_right = 91.0
-margin_bottom = 24.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.24
 
 [node name="CardNumber" type="RichTextLabel" parent="Front/VBoxContainer/HBoxContainer"]
 margin_left = 95.0
 margin_right = 143.0
-margin_bottom = 24.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 48, 24 )
 rect_clip_content = false
 mouse_filter = 1
@@ -162,6 +160,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.11
 custom_fonts/normal_font = SubResource( 3 )
 text = "00"
+fit_content_height = true
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -170,19 +169,20 @@ __meta__ = {
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/VBoxContainer/HBoxContainer"]
 margin_left = 147.0
 margin_right = 345.0
-margin_bottom = 24.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.7
 
 [node name="RH" type="RichTextLabel" parent="Front/VBoxContainer/HBoxContainer"]
 margin_left = 349.0
 margin_right = 422.0
-margin_bottom = 24.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 40, 24 )
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 4 )
 text = "RH"
+fit_content_height = true
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -191,16 +191,16 @@ __meta__ = {
 [node name="ReferenceRect3" type="ReferenceRect" parent="Front/VBoxContainer/HBoxContainer"]
 margin_left = 426.0
 margin_right = 500.0
-margin_bottom = 24.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/VBoxContainer"]
-margin_top = 2131.0
+margin_top = 2033.0
 margin_right = 500.0
 margin_bottom = 2860.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.35
+size_flags_stretch_ratio = 0.42
 
 [node name="DescriptionContainer" type="VBoxContainer" parent="Front"]
 anchor_right = 1.0
@@ -214,13 +214,13 @@ __meta__ = {
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/DescriptionContainer"]
 margin_right = 500.0
-margin_bottom = 79.0
+margin_bottom = 127.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.11
+size_flags_stretch_ratio = 0.19
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Front/DescriptionContainer"]
-margin_top = 79.0
+margin_top = 127.0
 margin_right = 500.0
 margin_bottom = 800.0
 size_flags_horizontal = 3
@@ -228,7 +228,7 @@ size_flags_vertical = 3
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/DescriptionContainer/HBoxContainer"]
 margin_right = 44.0
-margin_bottom = 721.0
+margin_bottom = 673.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.11
@@ -236,7 +236,7 @@ size_flags_stretch_ratio = 0.11
 [node name="VBoxContainer" type="VBoxContainer" parent="Front/DescriptionContainer/HBoxContainer"]
 margin_left = 48.0
 margin_right = 451.0
-margin_bottom = 721.0
+margin_bottom = 673.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -267,7 +267,7 @@ fit_content_height = true
 [node name="Control" type="Control" parent="Front/DescriptionContainer/HBoxContainer/VBoxContainer"]
 margin_top = 156.0
 margin_right = 403.0
-margin_bottom = 721.0
+margin_bottom = 673.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -276,7 +276,7 @@ size_flags_stretch_ratio = 1.32
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/DescriptionContainer/HBoxContainer"]
 margin_left = 455.0
 margin_right = 500.0
-margin_bottom = 721.0
+margin_bottom = 673.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.11
@@ -295,6 +295,8 @@ __meta__ = {
 margin_right = 500.0
 margin_bottom = 800.0
 mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -305,6 +307,8 @@ material = SubResource( 7 )
 margin_right = 500.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 500, 800 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -316,6 +320,8 @@ material = SubResource( 8 )
 margin_right = 400.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 500, 800 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
 
@@ -324,6 +330,8 @@ material = SubResource( 9 )
 margin_right = 500.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 500, 800 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 4 )
 expand = true
 
@@ -332,6 +340,8 @@ material = SubResource( 10 )
 margin_right = 500.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 500, 800 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 5 )
 expand = true
 
