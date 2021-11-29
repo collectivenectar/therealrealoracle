@@ -53,30 +53,41 @@ func _scene_type_check():
 	if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
 		global.draw()
 		last_card_in_carousel = global.deck_copy_converted.size()
+		#carousel position can't start at 0, since carousel is moved by swiping from
+		#right to left, and decreases carousel_position from max carousel value to 0
+		#for journal, might consider starting at midpoint, but will decide after completing
+		#design
 		carousel_position = last_card_in_carousel * card_zone
 	elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
 		last_card_in_carousel = global.total_cards_in_scene
+		carousel_position = last_card_in_carousel * card_zone
 	elif global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
 		last_card_in_carousel = global.livedeck.size()
+		carousel_position = last_card_in_carousel * card_zone
 
 func _carousel_card_position_manager(global_carousel_position):
 	#local_position normalizes the current carousel position from the global position to the
-	#local relative position in the viewport
+	#local relative value for movement taking place(it subtracts
+	#all whole multiples of card_zone from global_carousel_position)
 	var local_position : float = fmod(global_carousel_position, card_zone)
 	#zero card position offsets the whole thing by taking midpoint of screen and offsetting by
-	#approximately 2.5 card zone lengths. There are 5 cards in the scene, this is just setting it up
-	#so the first card goes left of midscreen by exactly half of the total visible cards
+	#approximately 2 card zone lengths plus adjustments. There are 5 cards in the scene, this is just setting it up
+	#so the first card goes left of midscreen by a little less than half of the total visible cards,
+	#(rect_size.x / 2.0) - (card_width * 0.5) is an important adjustment, so pay attention
+	#it would place the card at the left edge of screen otherwise
 	var zero_card_position : float = (rect_size.x / 2.0) - (card_width * 0.5) - (card_zone * 2)
 	#for each card, place it according to window position then add a card length multiplier
 	#according to its order out of 5 cards
 	for i in 5:
 		get_child(i).rect_position = Vector2(zero_card_position + (card_zone * (i)) + local_position, 0)
-#		if (global_carousel_position / card_zone) < 2:
-#			if (int(global_carousel_position / card_zone) - (i - 2)) <= 1:
-#				print(i)
-#		elif (global_carousel_position / card_zone) > (last_card_in_carousel - 2):
-#			if (int(global_carousel_position / card_zone) - (i - 2)) >= (last_card_in_carousel - 1):
-#				print(i)
+		#if the array position of that card reaches the bounds, make it invisible
+		#otherwise make it visible
+		if (int(global_carousel_position / card_zone) - (i - 2)) > last_card_in_carousel:
+			get_child(i).visible = false
+		elif (int(global_carousel_position / card_zone) - (i - 2)) < 0:
+			get_child(i).visible = false
+		else:
+			get_child(i).visible = true
 	#for each card, set its text according to the window_position, correlating to the
 	#deck data array - in this case, an unshuffled reference-only copy of the deck.
 	for i in 5:
