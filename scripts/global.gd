@@ -200,6 +200,14 @@ func save_user_data():
 	file.store_var(user_data, true)
 	file.close()
 
+func draw():
+	if deck_copy.size() == 0:
+		_shuffle_deck()
+	else:
+		clear_decks()
+		_shuffle_deck()
+
+
 func clear_decks():
 	#clear all deck storage related variables for a clean start
 	deck_copy.clear()
@@ -232,10 +240,3 @@ func _compare_against_deck(carousel_card, app_state):
 	if app_state == "savetime":
 		for i in carousel_choice:
 			carousel_converted.append(livedeck[i].name)
-
-func draw():
-	if deck_copy.size() == 0:
-		_shuffle_deck()
-	else:
-		clear_decks()
-		_shuffle_deck()

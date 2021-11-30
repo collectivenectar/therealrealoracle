@@ -26,7 +26,7 @@ onready var carousel_position : float = 0.0
 var last_card_in_carousel : int
 
 #signal for when a user has clicked the 'add card' button for the middle card
-signal card_chosen(progress)
+#signal card_chosen(progress)
 
 func _ready():
 	_carousel_sizing_setup()
@@ -57,7 +57,7 @@ func _scene_type_check():
 		#right to left, and decreases carousel_position from max carousel value to 0
 		#for journal, might consider starting at midpoint, but will decide after completing
 		#design
-		carousel_position = last_card_in_carousel * card_zone
+		carousel_position = last_card_in_carousel * card_zone - 1
 	elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
 		last_card_in_carousel = global.total_cards_in_scene
 		carousel_position = last_card_in_carousel * card_zone
@@ -117,15 +117,16 @@ func _process(delta):
 func _gui_input(event):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		#if just pressed mouse click
-		if event.button_index == BUTTON_LEFT and event.pressed:
+		if event.button_index == BUTTON_LEFT && event.pressed:
 			#set pressed to true, record start position, and set carousel momentum to 0
 			#in case carousel was in motion, and kill animation state if "inertia"
 			pressed = true
 			click_down_position = event.global_position
 			animation_state = "inactive"
 			carousel_inertia_initial = 0
+			print("inactive")
 		#otherwise if button just released
-		elif event.button_index == BUTTON_LEFT and !event.pressed:
+		elif event.button_index == BUTTON_LEFT && !event.pressed:
 			#store that end position, set pressed to false, and begin inertia calculation
 			#i.e. calculate the end position based on current position, speed, and card + separation
 			#width
@@ -135,6 +136,7 @@ func _gui_input(event):
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial*20.0*1.8939,card_zone)
 			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone))
 			animation_state = "released"
+			print("released")
 			#this is for filtering out insufficient momentum to create inertia
 			#set to filter for x or y changes, because I'm considering putting in
 			#an animation for the user dragging a card or selecting a card for addition
@@ -152,6 +154,7 @@ func _gui_input(event):
 			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone))
 			_carousel_card_position_manager(carousel_position)
 			carousel_inertia_initial = event.relative.x
+			print("dragging")
 		elif pressed == false:
 			pass
 
