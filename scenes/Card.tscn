@@ -119,7 +119,6 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Front"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 2060.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -128,17 +127,18 @@ __meta__ = {
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/VBoxContainer"]
 margin_right = 500.0
-margin_bottom = 59.0
+margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.03
+size_flags_stretch_ratio = 0.35
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Front/VBoxContainer"]
-margin_top = 63.0
+margin_top = 45.0
 margin_right = 500.0
-margin_bottom = 90.0
+margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
+size_flags_stretch_ratio = 0.11
 __meta__ = {
 "_editor_description_": "0"
 }
@@ -195,12 +195,12 @@ margin_bottom = 27.0
 size_flags_horizontal = 3
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/VBoxContainer"]
-margin_top = 2033.0
+margin_top = 76.0
 margin_right = 500.0
-margin_bottom = 2860.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.42
+size_flags_stretch_ratio = 6.17
 
 [node name="DescriptionContainer" type="VBoxContainer" parent="Front"]
 anchor_right = 1.0
