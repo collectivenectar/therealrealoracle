@@ -10,6 +10,7 @@ var card_width : float
 var card_height : float
 var card_spacing : float
 var card_zone : float
+var zero_card_position : float
 
 #input event handling variables for the carousel
 var carousel_inertia_initial : float = 0
@@ -75,7 +76,7 @@ func _carousel_card_position_manager(global_carousel_position):
 	#so the first card goes left of midscreen by a little less than half of the total visible cards,
 	#(rect_size.x / 2.0) - (card_width * 0.5) is an important adjustment, so pay attention
 	#it would place the card at the left edge of screen otherwise
-	var zero_card_position : float = (rect_size.x / 2.0) - (card_width * 0.5) - (card_zone * 2)
+	zero_card_position = (rect_size.x / 2.0) - (card_width * 0.5) - (card_zone * 2)
 	#for each card, place it according to window position then add a card length multiplier
 	#according to its order out of 5 cards
 	for i in 5:
@@ -113,20 +114,6 @@ func _process(delta):
 		#if the window_position has reached the end position, kill process
 		if abs(animation_end_position - carousel_position) < 0.001:
 			animation_state = "inactive"
-
-##if the user hits the add card button, find out which card is currently in the middle
-##get it's data, and set the availability array position value for that card to unavailable
-#func _on_Button_pressed():
-#	for i in 5:
-#		if get_child(i).rect_position.x >= 270 and get_child(i).rect_position.x <= 310:
-#			var card_array_position : float = fposmod(int(window_position / card_zone) - (i - 2), global.deck_copy_converted.size())
-#			if global.deck_copy_chosen_states[card_array_position] == "available":
-#				global.carousel_choice.append(card_array_position)
-#				global.deck_copy_chosen_states[card_array_position] = "unavailable"
-#				emit_signal("card_chosen", 1)
-#				_carousel_dragged_pos(window_position)
-#			else:
-#				print("deck_copy_chosen_states array indicates that card is unavailable")
 
 func _on_cardContainer_gui_input(event):
 	#moved this out of _gui_input(event) due to handling issues. This is for when
@@ -181,3 +168,19 @@ func _navigate_left_one():
 	animation_end_position = stepify(carousel_position, card_zone) + card_zone
 	animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 	animation_state = "released"
+
+func _center_card_query():
+	var result: float
+	var center_position = zero_card_position + (card_zone * 2) - 1
+	for i in 5:
+		if get_child(i).rect_position.x >= (center_position - 10) and get_child(i).rect_position.x <= (center_position + 10):
+			var card_array_position : float = fposmod(int(carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
+			if global.deck_copy_chosen_states[card_array_position] == "available":
+				result = card_array_position
+			elif global.deck_copy_chosen_states[card_array_position] == "unavailable":
+				result = 99.9
+			else:
+				print("_center_card_query error")
+	if result == null:
+		result = -99.9
+	return result
