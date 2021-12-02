@@ -52,7 +52,7 @@ func _instance_cards():
 func _scene_type_check():
 	if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
 		global.draw()
-		last_card_in_carousel = global.deck_copy_converted.size()
+		last_card_in_carousel = global.deck_copy_converted.size() - 1
 		#carousel position can't start at 0, since carousel is moved by swiping from
 		#right to left, and decreases carousel_position from max carousel value to 0
 		#for journal, might consider starting at midpoint, but will decide after completing
@@ -62,7 +62,7 @@ func _scene_type_check():
 		last_card_in_carousel = global.total_cards_in_scene
 		carousel_position = last_card_in_carousel * card_zone
 	elif global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
-		last_card_in_carousel = global.livedeck.size()
+		last_card_in_carousel = global.livedeck.size() - 1
 		carousel_position = last_card_in_carousel * card_zone
 
 func _carousel_card_position_manager(global_carousel_position):
@@ -82,7 +82,7 @@ func _carousel_card_position_manager(global_carousel_position):
 		get_child(i).rect_position = Vector2(zero_card_position + (card_zone * (i)) + local_position, 0)
 		#if the array position of that card reaches the bounds, make it invisible
 		#otherwise make it visible
-		if (int(global_carousel_position / card_zone) - (i - 2)) > last_card_in_carousel:
+		if (int((global_carousel_position)/ card_zone) - (i - 2)) > last_card_in_carousel:
 			get_child(i).visible = false
 		elif (int(global_carousel_position / card_zone) - (i - 2)) < 0:
 			get_child(i).visible = false
@@ -114,51 +114,6 @@ func _process(delta):
 		if abs(animation_end_position - carousel_position) < 0.001:
 			animation_state = "inactive"
 
-#func _gui_input(event):
-#	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
-#		#if just pressed mouse click
-#		if event.button_index == BUTTON_LEFT && event.pressed:
-#			#set pressed to true, record start position, and set carousel momentum to 0
-#			#in case carousel was in motion, and kill animation state if "inertia"
-#			pressed = true
-#			click_down_position = event.global_position
-#			animation_state = "inactive"
-#			carousel_inertia_initial = 0
-#			print("inactive")
-#		#otherwise if button just released
-#		elif event.button_index == BUTTON_LEFT && !event.pressed:
-#			#store that end position, set pressed to false, and begin inertia calculation
-#			#i.e. calculate the end position based on current position, speed, and card + separation
-#			#width
-#			#once the calculation is done, begin inertial state for animation to take off
-#			click_up_position = event.global_position
-#			pressed = false
-#			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial*20.0*1.8939,card_zone)
-#			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone))
-#			animation_state = "released"
-#			print("released")
-#
-#			#this is for filtering out insufficient momentum to create inertia
-#			#set to filter for x or y changes, because I'm considering putting in
-#			#an animation for the user dragging a card or selecting a card for addition
-#			#to the spread 
-#	#if the user is currently moving the mouse
-#	if event is InputEventMouseMotion:
-#		#if the user is moving the mouse AND pressing
-#		if pressed == true:
-#			#set the state to dragging, and add the events position change to window_position
-#			#pass that window_position to _carousel_dragged_pos(), and then be sure
-#			#to store the most recent event position change data for calculation
-#			#of inertia in case the user is about to release
-#			animation_state = "dragging"
-#			carousel_position += event.relative.x
-#			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone))
-#			_carousel_card_position_manager(carousel_position)
-#			carousel_inertia_initial = event.relative.x
-#			print("dragging")
-#		elif pressed == false:
-#			pass
-
 ##if the user hits the add card button, find out which card is currently in the middle
 ##get it's data, and set the availability array position value for that card to unavailable
 #func _on_Button_pressed():
@@ -184,23 +139,7 @@ func _on_cardContainer_gui_input(event):
 			click_down_position = event.global_position
 			animation_state = "inactive"
 			carousel_inertia_initial = 0
-		#otherwise if button just released
-#		elif event.button_index == BUTTON_LEFT && !event.pressed:
-#			#store that end position, set pressed to false, and begin inertia calculation
-#			#i.e. calculate the end position based on current position, speed, and card + separation
-#			#width
-#			#once the calculation is done, begin inertial state for animation to take off
-#			click_up_position = event.global_position
-#			pressed = false
-#			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial*20.0*1.8939,card_zone)
-#			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone))
-#			animation_state = "released"
-#			print("released")
-			
-			#this is for filtering out insufficient momentum to create inertia
-			#set to filter for x or y changes, because I'm considering putting in
-			#an animation for the user dragging a card or selecting a card for addition
-			#to the spread 
+
 	#if the user is currently moving the mouse
 	if event is InputEventMouseMotion:
 		#if the user is moving the mouse AND pressing
@@ -211,13 +150,18 @@ func _on_cardContainer_gui_input(event):
 			#of inertia in case the user is about to release
 			animation_state = "dragging"
 			carousel_position += event.relative.x
-			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone))
+			#minus one here might seem weird but without it the first card has visibility issues
+			#related to last_card_in_carousel
+			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone - 1))
 			_carousel_card_position_manager(carousel_position)
 			carousel_inertia_initial = event.relative.x
 		elif pressed == false:
 			pass
-			
+
 func _input(event):
+	#moved this out of _gui_input(event) due to handling issues. This is for when
+	#user has dragged or clicked, so this may produce issues when clicking up
+	#in other scenes? have to see.
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && !event.pressed:
 			#store that end position, set pressed to false, and begin inertia calculation
@@ -227,5 +171,5 @@ func _input(event):
 			click_up_position = event.global_position
 			pressed = false
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial*20.0*1.8939,card_zone)
-			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone))
+			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 			animation_state = "released"
