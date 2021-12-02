@@ -42,7 +42,7 @@ func _carousel_sizing_setup():
 	self.rect_min_size = Vector2(screen_size.x, card_height)
 
 func _instance_cards():
-	for i in .get_child_count():
+	for i in 5:
 		var card_instance = card.instance()
 		.get_child(i).add_child(card_instance)
 		.get_child(i).rect_min_size = Vector2(card_width, card_height)
@@ -103,7 +103,7 @@ func _carousel_card_position_manager(global_carousel_position):
 func _process(delta):
 	#only active when someone has dragged and released carousel with momentum
 	#that exceeds minimum threshold
-	if animation_state == "released":
+	if animation_state == "released" && !pressed:
 		#linear interpolation moves the carousel from the released position to a precalculated
 		#end position over time, and since the difference decreases over time, the apparent
 		#speed decreases as well, 4.0*delta is the weight.
@@ -128,8 +128,10 @@ func _process(delta):
 #			else:
 #				print("deck_copy_chosen_states array indicates that card is unavailable")
 
-
 func _on_cardContainer_gui_input(event):
+	#moved this out of _gui_input(event) due to handling issues. This is for when
+	#user has dragged or clicked, so this may produce issues when clicking up
+	#in other scenes? have to see.
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		#if just pressed mouse click
 		if event.button_index == BUTTON_LEFT && event.pressed:
@@ -138,9 +140,20 @@ func _on_cardContainer_gui_input(event):
 			pressed = true
 			click_down_position = event.global_position
 			animation_state = "inactive"
-			carousel_inertia_initial = 0
-
-	#if the user is currently moving the mouse
+			carousel_inertia_initial = 0.0
+			print("left-button-pressed")
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT && !event.pressed:
+			#store that end position, set pressed to false, and begin inertia calculation
+			#i.e. calculate the end position based on current position, speed, and card + separation
+			#width
+			#once the calculation is done, begin inertial state for animation to take off
+			pressed = false
+			click_up_position = event.global_position
+			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial * 20.0 * 1.8939, card_zone)
+			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
+			animation_state = "released"
+			print("left-button-press-up")
 	if event is InputEventMouseMotion:
 		#if the user is moving the mouse AND pressing
 		if pressed == true:
@@ -148,6 +161,7 @@ func _on_cardContainer_gui_input(event):
 			#pass that window_position to _carousel_dragged_pos(), and then be sure
 			#to store the most recent event position change data for calculation
 			#of inertia in case the user is about to release
+			carousel_inertia_initial = 0.0
 			animation_state = "dragging"
 			carousel_position += event.relative.x
 			#minus one here might seem weird but without it the first card has visibility issues
@@ -158,18 +172,12 @@ func _on_cardContainer_gui_input(event):
 		elif pressed == false:
 			pass
 
-func _input(event):
-	#moved this out of _gui_input(event) due to handling issues. This is for when
-	#user has dragged or clicked, so this may produce issues when clicking up
-	#in other scenes? have to see.
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && !event.pressed:
-			#store that end position, set pressed to false, and begin inertia calculation
-			#i.e. calculate the end position based on current position, speed, and card + separation
-			#width
-			#once the calculation is done, begin inertial state for animation to take off
-			click_up_position = event.global_position
-			pressed = false
-			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial*20.0*1.8939,card_zone)
-			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
-			animation_state = "released"
+func _navigate_right_one():
+	animation_end_position = stepify(carousel_position, card_zone) - card_zone
+	animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
+	animation_state = "released"
+	
+func _navigate_left_one():
+	animation_end_position = stepify(carousel_position, card_zone) + card_zone
+	animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
+	animation_state = "released"

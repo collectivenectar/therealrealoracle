@@ -128,6 +128,7 @@ __meta__ = {
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/VBoxContainer"]
 margin_right = 500.0
 margin_bottom = 41.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.35
@@ -146,6 +147,7 @@ __meta__ = {
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/VBoxContainer/HBoxContainer"]
 margin_right = 91.0
 margin_bottom = 27.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.24
 
@@ -170,6 +172,7 @@ __meta__ = {
 margin_left = 147.0
 margin_right = 345.0
 margin_bottom = 27.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.7
 
@@ -192,12 +195,14 @@ __meta__ = {
 margin_left = 426.0
 margin_right = 500.0
 margin_bottom = 27.0
+mouse_filter = 1
 size_flags_horizontal = 3
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/VBoxContainer"]
 margin_top = 76.0
 margin_right = 500.0
 margin_bottom = 800.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 6.17
@@ -215,6 +220,7 @@ __meta__ = {
 [node name="ReferenceRect" type="ReferenceRect" parent="Front/DescriptionContainer"]
 margin_right = 500.0
 margin_bottom = 127.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.19
@@ -229,6 +235,7 @@ size_flags_vertical = 3
 [node name="ReferenceRect2" type="ReferenceRect" parent="Front/DescriptionContainer/HBoxContainer"]
 margin_right = 44.0
 margin_bottom = 673.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.11
@@ -277,6 +284,7 @@ size_flags_stretch_ratio = 1.32
 margin_left = 455.0
 margin_right = 500.0
 margin_bottom = 673.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.11

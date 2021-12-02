@@ -115,8 +115,6 @@ var carousel_converted : Array = []
 var spread_state_set_to : int
 #var to store front or back of card visible
 var card_side_displayed : String = "front"
-#var for scenes to run carousel as infinite or finite
-var carousel_finity : bool = true
 #for scene_type_check, set this var at scene intro to determine carousel cards
 var carousel_types : Array = ["CHOOSING", "REVEALING", "JOURNAL"]
 var carousel_type_currently_is : int = 0
