@@ -17,11 +17,11 @@ var card_in_focus : int = 0
 var indicator_spots : Array = []
 
 signal is_spread_full
+signal navigation_UI_update(buttonsvisible)
 
 
 func _ready():
 	prepare_indicators()
-	
 
 func prepare_indicators():
 	screensize = 1080 #OS.get_screen_size() 

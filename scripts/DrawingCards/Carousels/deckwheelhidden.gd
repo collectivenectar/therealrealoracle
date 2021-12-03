@@ -33,7 +33,6 @@ signal front_or_back(visible_face)
 
 func _ready():
 	global.draw()
-	#res://lovedeckpng/lovedeckpng/01realreal.png
 	for i in 5:
 		var card_instance : Node = card.instance()
 		get_child(i).add_child(card_instance)

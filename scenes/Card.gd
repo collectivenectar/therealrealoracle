@@ -44,27 +44,31 @@ func _front_or_back_visible(visible_side):
 func _set_sizing(cardWidthHeightRatio, cardWidth):
 	var cardHeight = cardWidth / cardWidthHeightRatio
 	self.rect_min_size = Vector2(cardWidth, cardHeight)
-	$Front.rect_min_size = Vector2(cardWidth, cardHeight)
-	$Back.rect_min_size = Vector2(cardWidth, cardHeight)
-	var lg_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/LargeDescription.get("custom_fonts/normal_font").duplicate()
-	var md_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.get("custom_fonts/normal_font").duplicate()
-	var sm_font1 = $Front/VBoxContainer/HBoxContainer/CardNumber.get("custom_fonts/normal_font").duplicate()
-	var sm_font2 = $Front/VBoxContainer/HBoxContainer/RH.get("custom_fonts/normal_font").duplicate()
-	var lgFontCardRatio : float = 0.12
-	var mdFontCardRatio : float = 0.075
-	var smFontCardRatio : float = 0.05
-	lg_font.size = int(round(self.rect_min_size.x * lgFontCardRatio))
-	md_font.size = int(round(self.rect_min_size.x * mdFontCardRatio))
-	sm_font1.size = int(round(self.rect_min_size.x * smFontCardRatio))
-	sm_font2.size = int(round(self.rect_min_size.x * smFontCardRatio))
-	$Front/DescriptionContainer/HBoxContainer/VBoxContainer/LargeDescription.set("custom_fonts/normal_font", lg_font)
-	$Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.set("custom_fonts/normal_font", md_font)
-	$Front/VBoxContainer/HBoxContainer/CardNumber.set("custom_fonts/normal_font", sm_font1)
-	$Front/VBoxContainer/HBoxContainer/RH.set("custom_fonts/normal_font", sm_font2)
-	lg_font.update_changes()
-	md_font.update_changes()
-	sm_font1.update_changes()
-	sm_font2.update_changes()
+	if global.card_side_displayed == "front":
+		$Front.rect_min_size = Vector2(cardWidth, cardHeight)
+		var lg_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/LargeDescription.get("custom_fonts/normal_font").duplicate()
+		var md_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.get("custom_fonts/normal_font").duplicate()
+		var sm_font1 = $Front/VBoxContainer/HBoxContainer/CardNumber.get("custom_fonts/normal_font").duplicate()
+		var sm_font2 = $Front/VBoxContainer/HBoxContainer/RH.get("custom_fonts/normal_font").duplicate()
+		var lgFontCardRatio : float = 0.12
+		var mdFontCardRatio : float = 0.075
+		var smFontCardRatio : float = 0.05
+		lg_font.size = int(round(self.rect_min_size.x * lgFontCardRatio))
+		md_font.size = int(round(self.rect_min_size.x * mdFontCardRatio))
+		sm_font1.size = int(round(self.rect_min_size.x * smFontCardRatio))
+		sm_font2.size = int(round(self.rect_min_size.x * smFontCardRatio))
+		$Front/DescriptionContainer/HBoxContainer/VBoxContainer/LargeDescription.set("custom_fonts/normal_font", lg_font)
+		$Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.set("custom_fonts/normal_font", md_font)
+		$Front/VBoxContainer/HBoxContainer/CardNumber.set("custom_fonts/normal_font", sm_font1)
+		$Front/VBoxContainer/HBoxContainer/RH.set("custom_fonts/normal_font", sm_font2)
+		lg_font.update_changes()
+		md_font.update_changes()
+		sm_font1.update_changes()
+		sm_font2.update_changes()
+	elif global.card_side_displayed == "back":
+		$Back.rect_min_size = Vector2(cardWidth, cardHeight)
+		for child in ($Back.get_child_count() - 1):
+			$Back.get_child(child).rect_min_size = self.rect_min_size
 
 func _card_available(available, card_number):
 	if card_number == self.get_meta("card_number"):

@@ -2,6 +2,7 @@ extends Control
 
 onready var card : PackedScene = preload("res://scenes/Card.tscn")
 
+#dimensions for everything
 var screen_size : Vector2 = Vector2(1080, 1920)
 var card_screen_width_ratio : float = 0.7
 var card_spacing_card_width_ratio : float = 0.1
@@ -28,14 +29,16 @@ var last_card_in_carousel : int
 
 #signal for when a user has clicked the 'add card' button for the middle card
 #signal card_chosen(progress)
+var scene_type : String
 
 func _ready():
 	_carousel_sizing_setup()
-	_instance_cards()
 	_scene_type_check()
+	_instance_cards()
 	_carousel_card_position_manager(carousel_position)
 
 func _carousel_sizing_setup():
+	#set sizes according to a ratio between the OS.screen size and the card size
 	card_width = screen_size.x * card_screen_width_ratio
 	card_height = card_width / card_width_height_ratio
 	card_spacing = card_width * card_spacing_card_width_ratio
@@ -43,6 +46,8 @@ func _carousel_sizing_setup():
 	self.rect_min_size = Vector2(screen_size.x, card_height)
 
 func _instance_cards():
+	#bring the card.tscn packedscene in under each of the 5 card containers, and
+	#set them up with proper size, front or back visible, etc.
 	for i in 5:
 		var card_instance = card.instance()
 		.get_child(i).add_child(card_instance)
@@ -51,20 +56,26 @@ func _instance_cards():
 		card_instance._front_or_back_visible(global.card_side_displayed)
 
 func _scene_type_check():
-	if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
+	#before setting the start position of the carousel, determine parameters of
+	#the carousel scene - how many cards in the scene?
+	scene_type = global.carousel_types[global.carousel_type_currently_is]
+	if scene_type == "CHOOSING":
 		global.draw()
 		last_card_in_carousel = global.deck_copy_converted.size() - 1
 		#carousel position can't start at 0, since carousel is moved by swiping from
 		#right to left, and decreases carousel_position from max carousel value to 0
 		#for journal, might consider starting at midpoint, but will decide after completing
 		#design
-		carousel_position = last_card_in_carousel * card_zone - 1
-	elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
-		last_card_in_carousel = global.total_cards_in_scene
+		carousel_position = (last_card_in_carousel * card_zone) - 1
+		return "CHOOSING"
+	elif scene_type == "REVEALING":
+		last_card_in_carousel = global.total_cards_in_scene - 1
 		carousel_position = last_card_in_carousel * card_zone
-	elif global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
+		return "REVEALING"
+	elif scene_type == "JOURNAL":
 		last_card_in_carousel = global.livedeck.size() - 1
 		carousel_position = last_card_in_carousel * card_zone
+		return "JOURNAL"
 
 func _carousel_card_position_manager(global_carousel_position):
 	#local_position normalizes the current carousel position from the global position to the
@@ -93,13 +104,25 @@ func _carousel_card_position_manager(global_carousel_position):
 	#deck data array - in this case, an unshuffled reference-only copy of the deck.
 	for i in 5:
 		#calculate the cards virtual position in the livedeck array by the same logic as before
-		var deck_array_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
+		var carousel_card_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 		#store each text string first
-		var largetext : String = "[center]" + global.livedeck[deck_array_position]['description1'] + "[/center]"
-		var smalltext : String = "[center]" + global.livedeck[deck_array_position]['description2'] + "[/center]"
-		var cardnumber : String = global.livedeck[deck_array_position]['name']
-		#pass each through using that card instances local method
-		get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
+		if scene_type == "CHOOSING":
+			pass
+		elif scene_type == "REVEALING":
+			if carousel_card_position <= (global.total_cards_in_scene - 1):
+				get_child(i).visible = true
+				var card_info : Dictionary = global.livedeck[global.carousel_choice[carousel_card_position]]
+				var largetext : String = "[center]" + card_info['description1'] + "[/center]"
+				var smalltext : String = "[center]" + card_info['description2'] + "[/center]"
+				var cardnumber : String = card_info['name']
+				#pass each through using that card instances local method
+				get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
+		elif scene_type == "JOURNAL":
+			var largetext : String = "[center]" + global.livedeck[carousel_card_position]['description1'] + "[/center]"
+			var smalltext : String = "[center]" + global.livedeck[carousel_card_position]['description2'] + "[/center]"
+			var cardnumber : String = global.livedeck[carousel_card_position]['name']
+			#pass each through using that card instances local method
+			get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
 
 func _process(delta):
 	#only active when someone has dragged and released carousel with momentum
@@ -160,16 +183,23 @@ func _on_cardContainer_gui_input(event):
 			pass
 
 func _navigate_right_one():
+	#api for parent scenes to navigate carousel by one card right
 	animation_end_position = stepify(carousel_position, card_zone) - card_zone
 	animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 	animation_state = "released"
 	
 func _navigate_left_one():
+	#api for parent scenes to navigate carousel by one card left
 	animation_end_position = stepify(carousel_position, card_zone) + card_zone
 	animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 	animation_state = "released"
 
 func _center_card_query():
+	#api for requesting info about current centered card. Return -99.9 if not aligned,
+	#return 99.9 if unavailable, return float value of relative position in the stack of cards
+	#remember that this doesn't return the card info, but the position in the stack of cards.
+	#depending on the scene, this will still need to be used along with the temp array
+	#that's holding the scenes card information.
 	var result: float
 	var center_position = zero_card_position + (card_zone * 2) - 1
 	for i in 5:

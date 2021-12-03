@@ -20,6 +20,8 @@ func _on_loadthisreading_pressed():
 		pass
 	else:
 		global.draw()
+		global.carousel_type_currently_is = 1
+		global.card_side_displayed = "front"
 		global.spread_state_set_to = global.runtime_user_data["saved_readings"][readingnamestorage][0]
 		for card in global.runtime_user_data.saved_readings[readingnamestorage][1]:
 			for i in global.deck_copy_converted:

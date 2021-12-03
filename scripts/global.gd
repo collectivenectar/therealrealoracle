@@ -114,7 +114,7 @@ var carousel_converted : Array = []
 #var to hold current spread state information(state is more like spread ID?)
 var spread_state_set_to : int
 #var to store front or back of card visible
-var card_side_displayed : String = "front"
+var card_side_displayed : String = "back"
 #for scene_type_check, set this var at scene intro to determine carousel cards
 var carousel_types : Array = ["CHOOSING", "REVEALING", "JOURNAL"]
 var carousel_type_currently_is : int = 0
