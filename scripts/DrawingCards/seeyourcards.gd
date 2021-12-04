@@ -33,6 +33,7 @@ func _scene_setup():
 	$VBoxContainer/CenterContainer.add_child(layout)
 	#connect the signals between the parent scene and the layout scene
 	connect("layout_update", layout, "_card_progress")
+	layout.connect("navigation_UI_update", self, "_nav_buttons_visibility_toggle")
 	#update that layout by setting it to 0(the beginning_)
 	_update_layout(0)
 	$carouselContainer.add_child(carousel_instance)
@@ -64,18 +65,21 @@ func _on_right_pressed():
 	carousel_instance._navigate_right_one()
 	_update_layout(1)
 
-func _nav_buttons_visibility_toggle(buttonsvisible):
-	if buttonsvisible == 0:
+func _nav_buttons_visibility_toggle(buttonsvisiblepattern):
+	if buttonsvisiblepattern == 0:
+		$left.visible = false
+		$right.visible = false
+	elif buttonsvisiblepattern == 1:
 		$left.visible = false
 		$right.visible = true
-	elif buttonsvisible == 1:
-		$left.visible = true
-		$right.visible = true
-	elif buttonsvisible == 2:
+	elif buttonsvisiblepattern == 2:
 		$left.visible = true
 		$right.visible = false
+	elif buttonsvisiblepattern == 3:
+		$left.visible = true
+		$right.visible = true
 	else:
-		print("_nav_buttons_visibility_toggle buttonsvisible provided ", buttonsvisible)
+		print("_nav_buttons_visibility_toggle buttonsvisible provided ", buttonsvisiblepattern)
 
 func _tween_completed(_object, _key):
 	#when toggling alpha on the popup, check for if animation is done before toggling visibility.

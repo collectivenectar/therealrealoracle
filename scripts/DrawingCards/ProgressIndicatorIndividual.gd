@@ -17,7 +17,7 @@ var card_in_focus : int = 0
 var indicator_spots : Array = []
 
 signal is_spread_full
-signal navigation_UI_update(buttonsvisible)
+signal navigation_UI_update(buttonsvisiblepattern)
 
 
 func _ready():
@@ -48,14 +48,17 @@ func _card_progress(progress):
 		#If progress is 0, the scene has begun, and I just need to indicate which
 		#card the user is looking at.
 		indicator_spots[0] = 1
+		_send_focus(0)
 	elif progress == 1:
 		var last_focus = indicator_spots.find(1)
 		indicator_spots[last_focus + 1] = 1
 		indicator_spots[last_focus] = 0
+		_send_focus((last_focus + 1))
 	elif progress == -1:
 		var last_focus = indicator_spots.find(1)
 		indicator_spots[last_focus - 1] = 1
 		indicator_spots[last_focus] = 0
+		_send_focus((last_focus - 1))
 	_update_panels()
 
 func _update_panels():
@@ -67,6 +70,27 @@ func _update_panels():
 				$cards.get_child(i).set('custom_styles/panel', accentborder)
 	else:
 		print("array and panels count not equal")
-	
+
+func _send_focus(focus):
+	var spread_end_position = indicator_spots.size() - 1
+	var current_focus = focus
+	if spread_end_position == 0:
+		emit_signal("navigation_UI_update", 0)
+	elif spread_end_position == 1:
+		if current_focus == 0:
+			emit_signal("naviation_UI_update", 1)
+		elif current_focus == 1:
+			emit_signal("navigation_UI_update", 2)
+	elif spread_end_position >= 2:
+		if current_focus < spread_end_position && current_focus > 0:
+			emit_signal("navigation_UI_update", 3)
+		elif current_focus == 0:
+			emit_signal("navigation_UI_update", 1)
+		elif current_focus == spread_end_position:
+			emit_signal("navigation_UI_update", 2)
+	else:
+		print(spread_end_position, ", ", current_focus)
+		
+
 func move_indicator():
 	pass
