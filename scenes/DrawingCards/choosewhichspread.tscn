@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="Background" type="Panel" parent="."]
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 theme = ExtResource( 2 )
@@ -27,7 +27,7 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="ScrollContainer" parent="."]
-margin_right = 1092.0
+margin_right = 1080.0
 margin_bottom = 1920.0
 grow_vertical = 0
 rect_min_size = Vector2( 980, 1820 )

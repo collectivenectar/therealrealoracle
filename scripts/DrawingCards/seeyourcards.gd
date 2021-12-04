@@ -82,13 +82,6 @@ func _nav_buttons_visibility_toggle(buttonsvisiblepattern):
 	else:
 		print("_nav_buttons_visibility_toggle buttonsvisible provided ", buttonsvisiblepattern)
 
-func _tween_completed(_object, _key):
-	#when toggling alpha on the popup, check for if animation is done before toggling visibility.
-	if $closepopup.visible == false:
-		$CenterContainer.visible = false
-	else:
-		pass
-
 func _on_selectcentercard_pressed():
 	#if a card is touched in this scene, display a close up view of the card, as well as text descriptions and
 	#other functions related to exploring the card/deck/making notes on the deck etc
@@ -113,6 +106,14 @@ func _on_closepopup_pressed():
 	tween.interpolate_property($CenterContainer, "modulate:a8", null, 0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	tween.connect("tween_completed", self, "_tween_completed")
 	tween.start()
+
+func _tween_completed(_object, _key):
+	#when toggling alpha on the popup, check for if animation is done before toggling visibility.
+	if $closepopup.visible == false:
+		$CenterContainer.visible = false
+	else:
+		pass
+
 
 func _on_savethisreading_pressed():
 	#reveal the saving popup

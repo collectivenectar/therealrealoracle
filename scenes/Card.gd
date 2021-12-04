@@ -69,7 +69,6 @@ func _set_sizing(cardWidthHeightRatio, cardWidth):
 		$Back.rect_min_size = Vector2(cardWidth, cardHeight)
 		for child in ($Back.get_child_count() - 1):
 			$Back.get_child(child).rect_min_size = self.rect_min_size
-	print(self.rect_min_size.x, ", ", self.rect_min_size.y)
 
 func _card_available(available, card_number):
 	if card_number == self.get_meta("card_number"):

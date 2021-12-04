@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Save.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://app icons/Cards.png" type="Texture" id=7]
 [ext_resource path="res://app icons/Journal.png" type="Texture" id=8]
 [ext_resource path="res://shaders/Card.gdshader" type="Shader" id=9]
+[ext_resource path="res://app icons/ChevronDown.png" type="Texture" id=10]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -93,6 +94,7 @@ margin_top = 1620.0
 margin_right = 1060.0
 margin_bottom = 1720.0
 rect_min_size = Vector2( 100, 100 )
+icon = ExtResource( 10 )
 flat = true
 align = 2
 expand_icon = true

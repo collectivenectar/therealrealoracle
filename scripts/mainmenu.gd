@@ -16,12 +16,6 @@ var card_color1 = global.color_compliment
 
 func _ready():
 	$MenuUI/CenterContainer/MenuRack/DrawContainer/Draw.material.set_shader_param("card_color1", card_color1)
-
-func _on_draw_pressed() -> void :
-	get_tree().change_scene("res://scenes/DrawingCards/choosewhichspread.tscn")
-
-func _on_journal_pressed() -> void :
-	get_tree().change_scene("res://scenes/Journal/journal.tscn")
 	
 func modal_exit_anim():
 	tween.interpolate_property($deckcorepopup, "rect_position:y", 0.0, rect_size.y, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
@@ -93,6 +87,7 @@ func _on_Button_button_up():
 		menu_hidden = false
 
 func _on_Draw_pressed():
+	global.carousel_type_currently_is = 0
 	var drawingcardsinstance = drawingcards.instance()
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(drawingcardsinstance)
@@ -102,6 +97,7 @@ func _on_Draw_pressed():
 		$InstanceViewer.add_child(drawingcardsinstance)
 
 func _on_History_pressed():
+	global.carousel_type_currently_is = 1
 	var userhistoryinstance = userhistory.instance()
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(userhistoryinstance)
@@ -120,6 +116,7 @@ func _on_Guidebook_pressed():
 		$InstanceViewer.add_child(guidebookinstance)
 
 func _on_Deck_pressed():
+	global.carousel_type_currently_is = 2
 	var deckcarouselinstance = deckcarousel.instance()
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(deckcarouselinstance)

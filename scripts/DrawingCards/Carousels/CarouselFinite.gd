@@ -45,20 +45,11 @@ func _carousel_sizing_setup():
 	card_zone = card_width + card_spacing
 	self.rect_min_size = Vector2(screen_size.x, card_height)
 
-func _instance_cards():
-	#bring the card.tscn packedscene in under each of the 5 card containers, and
-	#set them up with proper size, front or back visible, etc.
-	for i in 5:
-		var card_instance = card.instance()
-		.get_child(i).add_child(card_instance)
-		.get_child(i).rect_min_size = Vector2(card_width, card_height)
-		card_instance._set_sizing(card_width_height_ratio, card_width)
-		card_instance._front_or_back_visible(global.card_side_displayed)
-
 func _scene_type_check():
 	#before setting the start position of the carousel, determine parameters of
 	#the carousel scene - how many cards in the scene?
 	scene_type = global.carousel_types[global.carousel_type_currently_is]
+	print(scene_type)
 	if scene_type == "CHOOSING":
 		global.draw()
 		last_card_in_carousel = global.deck_copy_converted.size() - 1
@@ -74,8 +65,21 @@ func _scene_type_check():
 		return "REVEALING"
 	elif scene_type == "JOURNAL":
 		last_card_in_carousel = global.livedeck.size() - 1
-		carousel_position = last_card_in_carousel * card_zone
+		carousel_position = last_card_in_carousel * card_zone - 1
+		global.card_side_displayed = "front"
+		print("front")
 		return "JOURNAL"
+
+func _instance_cards():
+	#bring the card.tscn packedscene in under each of the 5 card containers, and
+	#set them up with proper size, front or back visible, etc.
+	for i in 5:
+		var card_instance = card.instance()
+		.get_child(i).add_child(card_instance)
+		.get_child(i).rect_min_size = Vector2(card_width, card_height)
+		card_instance._set_sizing(card_width_height_ratio, card_width)
+		card_instance._front_or_back_visible(global.card_side_displayed)
+
 
 func _carousel_card_position_manager(global_carousel_position):
 	#local_position normalizes the current carousel position from the global position to the
@@ -103,12 +107,12 @@ func _carousel_card_position_manager(global_carousel_position):
 	#for each card, set its text according to the window_position, correlating to the
 	#deck data array - in this case, an unshuffled reference-only copy of the deck.
 	for i in 5:
-		#calculate the cards virtual position in the livedeck array by the same logic as before
-		var carousel_card_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 		#store each text string first
 		if scene_type == "CHOOSING":
 			pass
 		elif scene_type == "REVEALING":
+			#calculate the cards virtual position in the livedeck array by the same logic as before
+			var carousel_card_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 			if carousel_card_position <= (global.total_cards_in_scene - 1):
 				get_child(i).visible = true
 				var card_info : Dictionary = global.livedeck[global.carousel_choice[carousel_card_position]]
@@ -118,6 +122,8 @@ func _carousel_card_position_manager(global_carousel_position):
 				#pass each through using that card instances local method
 				get_child(i).get_child(0)._set_text(largetext, smalltext, cardnumber)
 		elif scene_type == "JOURNAL":
+			#calculate the cards virtual position in the livedeck array by the same logic as before
+			var carousel_card_position : float = fposmod(int(global_carousel_position / card_zone) - (i - 2), global.livedeck.size())
 			var largetext : String = "[center]" + global.livedeck[carousel_card_position]['description1'] + "[/center]"
 			var smalltext : String = "[center]" + global.livedeck[carousel_card_position]['description2'] + "[/center]"
 			var cardnumber : String = global.livedeck[carousel_card_position]['name']
@@ -151,7 +157,6 @@ func _on_cardContainer_gui_input(event):
 			click_down_position = event.global_position
 			animation_state = "inactive"
 			carousel_inertia_initial = 0.0
-			print("left-button-pressed")
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && !event.pressed:
 			#store that end position, set pressed to false, and begin inertia calculation
@@ -163,7 +168,6 @@ func _on_cardContainer_gui_input(event):
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial * 20.0 * 1.8939, card_zone)
 			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 			animation_state = "released"
-			print("left-button-press-up")
 	if event is InputEventMouseMotion:
 		#if the user is moving the mouse AND pressing
 		if pressed == true:
