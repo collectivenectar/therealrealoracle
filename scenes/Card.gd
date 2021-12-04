@@ -50,7 +50,7 @@ func _set_sizing(cardWidthHeightRatio, cardWidth):
 		var md_font = $Front/DescriptionContainer/HBoxContainer/VBoxContainer/SmallDescription.get("custom_fonts/normal_font").duplicate()
 		var sm_font1 = $Front/VBoxContainer/HBoxContainer/CardNumber.get("custom_fonts/normal_font").duplicate()
 		var sm_font2 = $Front/VBoxContainer/HBoxContainer/RH.get("custom_fonts/normal_font").duplicate()
-		var lgFontCardRatio : float = 0.12
+		var lgFontCardRatio : float = 0.10
 		var mdFontCardRatio : float = 0.075
 		var smFontCardRatio : float = 0.05
 		lg_font.size = int(round(self.rect_min_size.x * lgFontCardRatio))
@@ -69,6 +69,7 @@ func _set_sizing(cardWidthHeightRatio, cardWidth):
 		$Back.rect_min_size = Vector2(cardWidth, cardHeight)
 		for child in ($Back.get_child_count() - 1):
 			$Back.get_child(child).rect_min_size = self.rect_min_size
+	print(self.rect_min_size.x, ", ", self.rect_min_size.y)
 
 func _card_available(available, card_number):
 	if card_number == self.get_meta("card_number"):

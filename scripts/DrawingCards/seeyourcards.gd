@@ -17,7 +17,7 @@ onready var carousel_instance : Node = carousel_scene.instance()
 onready var layout_scene : PackedScene = preload("res://scenes/DrawingCards/ProgressIndicatorIndividual.tscn")
 onready var layout : Node = layout_scene.instance()
 onready var card : PackedScene = preload("res://scenes/card.tscn")
-onready var card_instance : Node = card.instance()
+#onready var card_instance : Node = card.instance()
 onready var tween : Node = get_node("Tween")
 
 var date_time : Dictionary
@@ -43,9 +43,10 @@ func _scene_setup():
 	#disable scrollbar visibility
 	$CenterContainer/ScrollContainer.get_v_scrollbar().add_stylebox_override('grabber', StyleBoxEmpty.new())
 	$CenterContainer/ScrollContainer.get_v_scrollbar().add_stylebox_override('scroll', StyleBoxEmpty.new())
-	var texturerect_card = card_instance.duplicate()
+	var texturerect_card = card.instance()
 	texturerect_card._front_or_back_visible("front")
 	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.add_child(texturerect_card)
+	texturerect_card._set_sizing(0.625, global.os_screen_size.x * 0.7)
 
 func _update_layout(progress):
 	# catches signal from carouseldisplayedcards.tscn to relay to cardlayoutprogress.tscn
@@ -92,16 +93,18 @@ func _on_selectcentercard_pressed():
 	#if a card is touched in this scene, display a close up view of the card, as well as text descriptions and
 	#other functions related to exploring the card/deck/making notes on the deck etc
 	var card_stack_position = carousel_instance._center_card_query()
-	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(global.livedeck[global.deck_copy_converted[global.carousel_choice[card_stack_position]]]['description1'], global.livedeck[global.deck_copy_converted[global.carousel_choice[card_stack_position]]]['description2'], global.livedeck[global.deck_copy_converted[global.carousel_choice[card_stack_position]]]['name'])
-	$CenterContainer/ScrollContainer/VBoxContainer/RichTextLabel.text = global.livedeck[global.deck_copy_converted[global.carousel_choice[card_stack_position]]]['description1']
+	var livedeck_card_ref = global.livedeck[global.carousel_choice[card_stack_position]]
+	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(livedeck_card_ref['description1'], livedeck_card_ref['description2'], livedeck_card_ref['name'])
+	$CenterContainer/ScrollContainer/VBoxContainer/RichTextLabel.text = livedeck_card_ref['description1']
 	#unfortunately due to layering, I need to move the children around to get proper visibility
 	#then move it back when the window is closed
 	$closepopup.visible = true
 	$CenterContainer.visible = true
 	move_child($closepopup, 12)
-	move_child($background, 9)
+	move_child($background, 7)
 	tween.interpolate_property($CenterContainer, "modulate:a8", null, 255, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	tween.start()
+	print(card_stack_position, ", ", livedeck_card_ref, ", ", global.carousel_choice[card_stack_position], global.carousel_choice)
 
 func _on_closepopup_pressed():
 	#see above comment

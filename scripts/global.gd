@@ -173,6 +173,9 @@ onready var runtime_user_data : Dictionary = {
 	"seeds": {},
 }
 
+#OS related and settings vars
+onready var os_screen_size : Vector2 = Vector2(1080, 1920)
+
 func _ready():
 	#create a new save file
 	var file : File = File.new()
