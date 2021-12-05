@@ -50,4 +50,10 @@ rect_min_size = Vector2( 500, 800 )
 mouse_filter = 1
 stretch_mode = 0
 
+[node name="centerCardButton" type="AspectRatioContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 1
+
 [connection signal="gui_input" from="." to="." method="_on_cardContainer_gui_input"]
+[connection signal="gui_input" from="centerCardButton" to="." method="_on_centerCardButton_gui_input"]

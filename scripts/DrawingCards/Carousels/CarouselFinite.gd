@@ -31,6 +31,8 @@ var last_card_in_carousel : int
 #signal card_chosen(progress)
 var scene_type : String
 
+signal card_chosen
+
 func _ready():
 	_carousel_sizing_setup()
 	_scene_type_check()
@@ -58,10 +60,12 @@ func _scene_type_check():
 		#for journal, might consider starting at midpoint, but will decide after completing
 		#design
 		carousel_position = (last_card_in_carousel * card_zone) - 1
+		global.card_side_displayed = "back"
 		return "CHOOSING"
 	elif scene_type == "REVEALING":
 		last_card_in_carousel = global.total_cards_in_scene - 1
 		carousel_position = last_card_in_carousel * card_zone
+		global.card_side_displayed = "front"
 		return "REVEALING"
 	elif scene_type == "JOURNAL":
 		last_card_in_carousel = global.livedeck.size() - 1
@@ -79,6 +83,8 @@ func _instance_cards():
 		.get_child(i).rect_min_size = Vector2(card_width, card_height)
 		card_instance._set_sizing(card_width_height_ratio, card_width)
 		card_instance._front_or_back_visible(global.card_side_displayed)
+	$centerCardButton.rect_min_size = Vector2(card_width, card_width / card_width_height_ratio)
+	$centerCardButton.rect_position = Vector2(rect_size.x / 2 - (card_width * 0.5), 0)
 
 
 func _carousel_card_position_manager(global_carousel_position):
@@ -154,7 +160,6 @@ func _on_cardContainer_gui_input(event):
 			#set pressed to true, record start position, and set carousel momentum to 0
 			#in case carousel was in motion, and kill animation state if "inertia"
 			pressed = true
-			click_down_position = event.global_position
 			animation_state = "inactive"
 			carousel_inertia_initial = 0.0
 	if event is InputEventMouseButton:
@@ -164,7 +169,6 @@ func _on_cardContainer_gui_input(event):
 			#width
 			#once the calculation is done, begin inertial state for animation to take off
 			pressed = false
-			click_up_position = event.global_position
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial * 20.0 * 1.8939, card_zone)
 			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 			animation_state = "released"
@@ -212,9 +216,32 @@ func _center_card_query():
 			if global.deck_copy_chosen_states[card_array_position] == "available":
 				result = card_array_position
 			elif global.deck_copy_chosen_states[card_array_position] == "unavailable":
-				result = 99.9
+				result = 99
 			else:
 				print("_center_card_query error")
 	if result == null:
-		result = -99.9
+		result = -99
 	return result
+	
+
+func _on_centerCardButton_gui_input(event):
+	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
+		if event.pressed:
+			click_down_position = Vector2(0, 0)
+			click_down_position = event.global_position
+		elif !event.pressed:
+			click_up_position = Vector2(0, 0)
+			click_up_position = event.global_position
+			if abs(click_up_position.x - click_down_position.x) < 50:
+				if abs(click_up_position.y - click_down_position.y) < 50:
+					var center_card_deck_position = _center_card_query()
+					print(center_card_deck_position)
+					if center_card_deck_position > global.livedeck.size():
+						print("unavailable")
+					elif center_card_deck_position < 0 :
+						print("null position")
+					else:
+						var deck_copy_position = global.deck_copy_converted[center_card_deck_position]
+						print(global.deck_copy_converted, "-----", deck_copy_position)
+						global.carousel_choice.append(deck_copy_position)
+						emit_signal("card_chosen", 1)

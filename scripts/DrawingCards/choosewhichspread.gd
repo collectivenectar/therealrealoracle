@@ -38,4 +38,6 @@ func on_spread_chosen(position_in_storage, total_cards, spread_key):
 	#spread info in global.variables, then change_scene to choose your cards.tscn
 	global.spread_state_set_to = position_in_storage
 	global.total_cards_in_scene = total_cards
+	global.carousel_type_currently_is = 0
+	global.card_side_displayed = "back"
 	get_tree().change_scene("res://scenes/DrawingCards/choose your cards.tscn")
