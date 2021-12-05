@@ -118,6 +118,7 @@ func _tween_completed(_object, _key):
 func _on_savethisreading_pressed():
 	#reveal the saving popup
 	date_time = OS.get_datetime()
+	print("save clicked")
 	$savereadingpopup.visible = true
 
 func _on_submittext_pressed():
