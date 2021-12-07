@@ -215,10 +215,11 @@ func _center_card_query():
 			var card_array_position : float = fposmod(int(carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 			if global.deck_copy_chosen_states[card_array_position] == "available":
 				result = card_array_position
+				global.deck_copy_chosen_states[card_array_position] = "unavailable"
 			elif global.deck_copy_chosen_states[card_array_position] == "unavailable":
 				result = 99
 			else:
-				print("_center_card_query error")
+				print("_center_card_query : card_array_position or chosen states problem")
 	if result == null:
 		result = -99
 	return result
@@ -235,13 +236,11 @@ func _on_centerCardButton_gui_input(event):
 			if abs(click_up_position.x - click_down_position.x) < 50:
 				if abs(click_up_position.y - click_down_position.y) < 50:
 					var center_card_deck_position = _center_card_query()
-					print(center_card_deck_position)
 					if center_card_deck_position > global.livedeck.size():
-						print("unavailable")
+						pass #this is where I would trigger an 'card unavailable' message?
 					elif center_card_deck_position < 0 :
-						print("null position")
+						print("center card query resulted in null position")
 					else:
 						var deck_copy_position = global.deck_copy_converted[center_card_deck_position]
-						print(global.deck_copy_converted, "-----", deck_copy_position)
 						global.carousel_choice.append(deck_copy_position)
 						emit_signal("card_chosen", 1)

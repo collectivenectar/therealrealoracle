@@ -37,4 +37,6 @@ func _if_spread_full():
 	
 func _on_TextureButton_pressed():
 	global.carousel_type_currently_is = 1
+	#below is for correcting how the inverted carousel_position values affects card order
+	global.carousel_choice.invert()
 	get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")
