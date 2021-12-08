@@ -3,7 +3,6 @@ extends Control
 onready var tween = get_node("Tween")
 onready var parent_storage : Node
 signal modal_exit
-var _picker = null
 
 func _ready():
 	var lenscovermargin : float = 100.0
@@ -12,60 +11,8 @@ func _ready():
 	$LensCover.margin_left = lenscovermargin / 2.0
 	$LensCover.margin_right = lenscovermargin / 2.0
 	$LensCover.rect_position = Vector2(0 + (lenscovermargin / 2.0), 0.0 + (lenscovermargin))
-	if Engine.has_singleton("PhotoPicker"):
-		_picker = Engine.get_singleton("PhotoPicker")
-		_picker.connect("image_picked", self, "_image_picked")
-		_picker.connect("permission_updated", self, "_permission_updated")
-		print("registering photo picker")
-	else:
-		print("no photo picker")
-
-func _image_picked(image):
-	var texture : ImageTexture = ImageTexture.new()
-	var icon : Node = parent_storage.get_child(0)
-	print(icon)
-	texture.create_from_image(image)
-	icon.texture = texture
-
-func _permission_updated(target, status):
-	match (target):
-		_picker.PERMISSION_TARGET_PHOTO_LIBRARY:
-			print("photo library")
-		_picker.PERMISSION_TARGET_CAMERA:
-			print("camera")
 	
-	match (status):
-		_picker.PERMISSION_STATUS_UNKNOWN:
-			print("unknown")
-		_picker.PERMISSION_STATUS_ALLOWED:
-			print("allowed")
-		_picker.PERMISSION_STATUS_DENIED:
-			print("denied")
 
-func _on_Button_button_down():
-	_picker.present(_picker.SOURCE_SAVED_PHOTOS_ALBUM);
-	_picker.present(_picker.SOURCE_CAMERA_REAR);
-	_picker.present(_picker.SOURCE_CAMERA_FRONT);
-
-	print(_picker.permission_status(_picker.PERMISSION_TARGET_CAMERA))
-	print(_picker.permission_status(_picker.PERMISSION_TARGET_PHOTO_LIBRARY))
-
-	_picker.request_permission(_picker.PERMISSION_TARGET_CAMERA)
-	_picker.request_permission(_picker.PERMISSION_TARGET_PHOTO_LIBRARY)
-
-
-func _on_generatenewseed_button_up():
-	_picker.present(_picker.SOURCE_SAVED_PHOTOS_ALBUM);
-	_picker.present(_picker.SOURCE_CAMERA_REAR);
-	_picker.present(_picker.SOURCE_CAMERA_FRONT);
-
-	print(_picker.permission_status(_picker.PERMISSION_TARGET_CAMERA))
-	print(_picker.permission_status(_picker.PERMISSION_TARGET_PHOTO_LIBRARY))
-
-	_picker.request_permission(_picker.PERMISSION_TARGET_CAMERA)
-	_picker.request_permission(_picker.PERMISSION_TARGET_PHOTO_LIBRARY)
-	
-	
 	# 1 Popup of prompt - 'If you want to generate a new seed, just snap a photo
 	# of something that represents your question, or your intention. This will be
 	# used to generate a fancy number - which will come in handy when you shuffle.

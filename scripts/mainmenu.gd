@@ -22,6 +22,7 @@ func modal_exit_anim():
 	tween.start()
 
 func _on_deckcorebutton_button_up():
+	print("touched")
 	deckcore.visible = false
 	$deckcorepopup.add_child(deckcore)
 	deckcore.connect("modal_exit", self, "modal_exit_anim")

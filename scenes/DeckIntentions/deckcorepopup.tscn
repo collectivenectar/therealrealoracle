@@ -19,7 +19,7 @@ __meta__ = {
 [node name="CameraFeed" type="TextureRect" parent="."]
 margin_right = 1080.0
 margin_bottom = 1920.0
-rect_min_size = Vector2( 1080, 1920 )
+rect_min_size = Vector2( 980, 1920 )
 texture = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,6 +39,7 @@ margin_left = 65.0
 margin_top = 300.0
 margin_right = 915.0
 margin_bottom = 900.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
