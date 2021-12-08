@@ -7,7 +7,6 @@ func _ready():
 	#dont forget to set up dimensions automatically
 	pass
 
-
 func _on_AddNote_pressed():
 	$AddNote.modulate.a = 0
 	tween.interpolate_property($Panel, "rect_position:x", null, 10, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.2)

@@ -71,7 +71,6 @@ func _scene_type_check():
 		last_card_in_carousel = global.livedeck.size() - 1
 		carousel_position = last_card_in_carousel * card_zone - 1
 		global.card_side_displayed = "front"
-		print("front")
 		return "JOURNAL"
 
 func _instance_cards():
