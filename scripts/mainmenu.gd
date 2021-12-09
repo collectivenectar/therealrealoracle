@@ -1,13 +1,13 @@
 extends Control
 
-onready var deckcorepopup = preload("res://scenes/DeckIntentions/deckcorepopup.tscn")
+#onready var deckcorepopup = preload("res://scenes/DeckIntentions/deckcorepopup.tscn")
 onready var userhistory : PackedScene = preload("res://scenes/UserHistory/UserHistory.tscn")
 onready var guidebook : PackedScene = preload("res://scenes/Guidebook/Guidebook.tscn")
 onready var drawingcards : PackedScene = preload("res://scenes/DrawingCards/choosewhichspread.tscn")
 onready var deckcarousel : PackedScene = preload("res://scenes/DeckCarousel/DeckCarousel.tscn")
 
-onready var deckcore = deckcorepopup.instance()
-onready var tween = get_node("Tween")
+#onready var deckcore = deckcorepopup.instance()
+#onready var tween = get_node("Tween")
 onready var menu_hidden = false
 onready var chevronsup = preload("res://app icons/ChevronUp.png")
 onready var chevronsdown = preload("res://app icons/ChevronDown.png") 
@@ -17,19 +17,18 @@ var card_color1 = global.color_compliment
 func _ready():
 	$MenuUI/CenterContainer/MenuRack/DrawContainer/Draw.material.set_shader_param("card_color1", card_color1)
 	
-func modal_exit_anim():
-	tween.interpolate_property($deckcorepopup, "rect_position:y", 0.0, rect_size.y, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
-	tween.start()
+#func modal_exit_anim():
+#	tween.interpolate_property($deckcorepopup, "rect_position:y", 0.0, rect_size.y, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
+#	tween.start()
 
-func _on_deckcorebutton_button_up():
-	print("touched")
-	deckcore.visible = false
-	$deckcorepopup.add_child(deckcore)
-	deckcore.connect("modal_exit", self, "modal_exit_anim")
-	deckcore.parent_storage = self
-	tween.interpolate_property($deckcorepopup, "rect_position:y", rect_size.y, 0.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
-	deckcore.visible = true
-	tween.start()
+#func _on_deckcorebutton_button_up():
+#	deckcore.visible = false
+#	$deckcorepopup.add_child(deckcore)
+#	deckcore.connect("modal_exit", self, "modal_exit_anim")
+#	deckcore.parent_storage = self
+#	tween.interpolate_property($deckcorepopup, "rect_position:y", rect_size.y, 0.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
+#	deckcore.visible = true
+#	tween.start()
 	#manages the access to the 'deck core' this system here needs to be
 	#access in many parts, so simplicity is key. a hash is stored, an image displayed
 	#only while the image is still the seed. After which only the hash is saved,
