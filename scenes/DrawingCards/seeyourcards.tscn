@@ -271,8 +271,8 @@ margin_top = 80.0
 margin_right = 940.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 800, 140 )
-custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 0.945098, 0.933333, 0.866667, 1 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

@@ -3,9 +3,10 @@ extends Control
 #onready var deckcorepopup = preload("res://scenes/DeckIntentions/deckcorepopup.tscn")
 onready var userhistory : PackedScene = preload("res://scenes/UserHistory/UserHistory.tscn")
 onready var guidebook : PackedScene = preload("res://scenes/Guidebook/Guidebook.tscn")
-onready var drawingcards : PackedScene = preload("res://scenes/DrawingCards/choosewhichspread.tscn")
+onready var choosingspreads : PackedScene = preload("res://scenes/DrawingCards/choosewhichspread.tscn")
 onready var deckcarousel : PackedScene = preload("res://scenes/DeckCarousel/DeckCarousel.tscn")
-
+onready var choosecards : PackedScene = preload("res://scenes/DrawingCards/choose your cards.tscn")
+onready var seecards : PackedScene = preload("res://scenes/DrawingCards/seeyourcards.tscn")
 #onready var deckcore = deckcorepopup.instance()
 #onready var tween = get_node("Tween")
 onready var menu_hidden = false
@@ -15,7 +16,7 @@ onready var chevronsdown = preload("res://app icons/ChevronDown.png")
 var card_color1 = global.color_compliment
 
 func _ready():
-	$MenuUI/CenterContainer/MenuRack/DrawContainer/Draw.material.set_shader_param("card_color1", card_color1)
+	pass
 	
 #func modal_exit_anim():
 #	tween.interpolate_property($deckcorepopup, "rect_position:y", 0.0, rect_size.y, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
@@ -88,13 +89,14 @@ func _on_Button_button_up():
 
 func _on_Draw_pressed():
 	global.carousel_type_currently_is = 0
-	var drawingcardsinstance = drawingcards.instance()
+	var choosingspreadsinstance = choosingspreads.instance()
+	choosingspreadsinstance.connect("spread_chosen", self, "_switch_to_choose_cards")
 	if $InstanceViewer.get_child_count() == 0:
-		$InstanceViewer.add_child(drawingcardsinstance)
+		$InstanceViewer.add_child(choosingspreadsinstance)
 	elif $InstanceViewer.get_child_count() >= 0:
 		for i in $InstanceViewer.get_child_count():
 			$InstanceViewer.get_child(i).queue_free()
-		$InstanceViewer.add_child(drawingcardsinstance)
+		$InstanceViewer.add_child(choosingspreadsinstance)
 
 func _on_History_pressed():
 	global.carousel_type_currently_is = 1
@@ -124,3 +126,22 @@ func _on_Deck_pressed():
 		for i in $InstanceViewer.get_child_count():
 			$InstanceViewer.get_child(i).queue_free()
 		$InstanceViewer.add_child(deckcarouselinstance)
+
+func _switch_to_choose_cards():
+	var chooseCardsInstance : Node = choosecards.instance()
+	chooseCardsInstance.connect("cards_chosen", self, "_switch_to_show_cards")
+	if $InstanceViewer.get_child_count() == 0:
+		$InstanceViewer.add_child(chooseCardsInstance)
+	elif $InstanceViewer.get_child_count() >= 0:
+		for i in $InstanceViewer.get_child_count():
+			$InstanceViewer.get_child(i).queue_free()
+		$InstanceViewer.add_child(chooseCardsInstance)
+
+func _switch_to_show_cards():
+	var seeCardsInstance : Node = seecards.instance()
+	if $InstanceViewer.get_child_count() == 0:
+		$InstanceViewer.add_child(seeCardsInstance)
+	elif $InstanceViewer.get_child_count() >= 0:
+		for i in $InstanceViewer.get_child_count():
+			$InstanceViewer.get_child(i).queue_free()
+		$InstanceViewer.add_child(seeCardsInstance)

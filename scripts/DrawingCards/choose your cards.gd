@@ -7,6 +7,7 @@ onready var layout_scene : PackedScene = preload("res://scenes/DrawingCards/Prog
 onready var layout : Node = layout_scene.instance()
 signal layout_update(progress)
 signal layout_spread_state(state)
+signal cards_chosen
 
 func _ready():
 	_setup()
@@ -39,4 +40,5 @@ func _on_TextureButton_pressed():
 	global.carousel_type_currently_is = 1
 	#below is for correcting how the inverted carousel_position values affects card order
 	global.carousel_choice.invert()
-	get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")
+	emit_signal("cards_chosen")
+	#get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")

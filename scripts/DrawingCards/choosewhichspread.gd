@@ -14,6 +14,7 @@ extends Control
 #visual representations of the card arrangements, hbox_conts are the parent containers
 #for the names of the spreads, the buttons, and the layouts as well
 onready var load_a_spread_container : PackedScene = preload("res://scenes/DrawingCards/loadaspreadcontainer.tscn")
+signal spread_chosen
 
 func _ready():
 	#for each spread type that comes stock, instance an hboxcontainer to hold that info
@@ -40,4 +41,5 @@ func on_spread_chosen(position_in_storage, total_cards, spread_key):
 	global.total_cards_in_scene = total_cards
 	global.carousel_type_currently_is = 0
 	global.card_side_displayed = "back"
-	get_tree().change_scene("res://scenes/DrawingCards/choose your cards.tscn")
+	emit_signal("spread_chosen")
+	#get_tree().change_scene("res://scenes/DrawingCards/choose your cards.tscn")
