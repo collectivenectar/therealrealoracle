@@ -1,23 +1,28 @@
 extends Control
 
-#onready var deckcorepopup = preload("res://scenes/DeckIntentions/deckcorepopup.tscn")
 onready var userhistory : PackedScene = preload("res://scenes/UserHistory/UserHistory.tscn")
 onready var guidebook : PackedScene = preload("res://scenes/Guidebook/Guidebook.tscn")
 onready var choosingspreads : PackedScene = preload("res://scenes/DrawingCards/choosewhichspread.tscn")
 onready var deckcarousel : PackedScene = preload("res://scenes/DeckCarousel/DeckCarousel.tscn")
 onready var choosecards : PackedScene = preload("res://scenes/DrawingCards/choose your cards.tscn")
 onready var seecards : PackedScene = preload("res://scenes/DrawingCards/seeyourcards.tscn")
-#onready var deckcore = deckcorepopup.instance()
-#onready var tween = get_node("Tween")
-onready var menu_hidden = false
-onready var chevronsup = preload("res://app icons/ChevronUp.png")
-onready var chevronsdown = preload("res://app icons/ChevronDown.png") 
 
+var chevronsup = preload("res://app icons/ChevronUp.png")
+var chevronsdown = preload("res://app icons/ChevronDown.png")
+var menu_hidden = false
 var card_color1 = global.color_compliment
+var instanceViewerChannel : int = 0
+var instanceViewerChannels : Array = ["DrawingCards", "UserHistory", "DeckCarousel", "DeckGuide"]
 
 func _ready():
-	pass
-	
+	global.carousel_type_currently_is = 0
+	var choosingspreadsinstance = choosingspreads.instance()
+	choosingspreadsinstance.connect("spread_chosen", self, "_switch_to_choose_cards")
+	$InstanceViewer.add_child(choosingspreadsinstance)
+
+# All other scenes are loaded through the main menu.tscn, in and out of "InstanceViewer" node.
+# This should simplify UI issues.
+
 #func modal_exit_anim():
 #	tween.interpolate_property($deckcorepopup, "rect_position:y", 0.0, rect_size.y, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.0)
 #	tween.start()
@@ -88,9 +93,13 @@ func _on_Button_button_up():
 		menu_hidden = false
 
 func _on_Draw_pressed():
+	if instanceViewerChannel == 0:
+		#here I run autosave or anything else
+		pass
 	global.carousel_type_currently_is = 0
 	var choosingspreadsinstance = choosingspreads.instance()
 	choosingspreadsinstance.connect("spread_chosen", self, "_switch_to_choose_cards")
+	instanceViewerChannel = 0
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(choosingspreadsinstance)
 	elif $InstanceViewer.get_child_count() >= 0:
@@ -99,6 +108,9 @@ func _on_Draw_pressed():
 		$InstanceViewer.add_child(choosingspreadsinstance)
 
 func _on_History_pressed():
+	if instanceViewerChannel == 0:
+		#here I run autosave or anything else
+		pass
 	global.carousel_type_currently_is = 1
 	var userhistoryinstance = userhistory.instance()
 	if $InstanceViewer.get_child_count() == 0:
@@ -109,6 +121,9 @@ func _on_History_pressed():
 		$InstanceViewer.add_child(userhistoryinstance)
 
 func _on_Guidebook_pressed():
+	if instanceViewerChannel == 0:
+		#here I run autosave or anything else
+		pass
 	var guidebookinstance = guidebook.instance()
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(guidebookinstance)
@@ -118,6 +133,9 @@ func _on_Guidebook_pressed():
 		$InstanceViewer.add_child(guidebookinstance)
 
 func _on_Deck_pressed():
+	if instanceViewerChannel == 0:
+		#here I run autosave or anything else
+		pass
 	global.carousel_type_currently_is = 2
 	var deckcarouselinstance = deckcarousel.instance()
 	if $InstanceViewer.get_child_count() == 0:

@@ -13,6 +13,10 @@ func _ready():
 	_setup()
 
 func _setup():
+	#This function needs updating, I need to find a way to handle reloading of this scene
+	#for app lifecycle and autosaving reasons. If reloading, I need to instance these
+	#and then load the relevant data into 'carousel' and 'layout', and due to the nature
+	#of 'layout' code, I might need to do a 'for' loop so the card panels work right
 	var carousel : Node = carousel_scene.instance()
 	$popupcontainer.visible = false
 	$VBoxContainer.add_child(carousel)
@@ -41,4 +45,3 @@ func _on_TextureButton_pressed():
 	#below is for correcting how the inverted carousel_position values affects card order
 	global.carousel_choice.invert()
 	emit_signal("cards_chosen")
-	#get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")

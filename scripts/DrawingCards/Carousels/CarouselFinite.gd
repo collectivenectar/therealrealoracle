@@ -33,6 +33,30 @@ var scene_type : String
 
 signal card_chosen
 
+#INFO I NEED FOR LIFECYCLE SAVING & AUTOSAVE PROCESSES:
+# If this is while the cards have not yet been chosen, then I'll need:
+
+# if carousel is currently moving, I'll use the current animation_end_position
+# if carousel is not currently moving, I'll use current carousel_position
+# I also need:
+#	 global.carousel_type_currently_is
+#	 global.total_cards_in_scene
+#	 global.deck_copy_converted
+#	 global.card_side_displayed
+#	 global.carousel_choice
+#	 global.deck_copy_chosen_states
+#	 global.current_focus
+# With this I should be able to re-enter this scene and have it work fine
+
+# If this is interrupted after the cards are chosen, then I only need:
+# If carousel is moving, animation_end_position
+# If not moving, current carousel_position
+#	Also, : 
+#	global.carousel_type_currently_is
+#	global.total_cards_in_scene
+#	global.card_side_displayed
+#	global.carousel_choice
+
 func _ready():
 	_carousel_sizing_setup()
 	_scene_type_check()

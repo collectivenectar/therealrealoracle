@@ -1,16 +1,16 @@
 extends Control
 
 # this is where users will likely spend most of their time. Consider this scene
-# the most important in terms of efficiency and UX. One other scene is instanced
-# in, the layout progress scene which is essentially the same as before, 
-# only on starting this scene card_layout_progress starts at 0?
-#if I run into trouble with the layout scene and showing progress, I have an idea
-#for how to maybe do this simply:
+# the most important in terms of efficiency and UX. 
 
-#create an array of arrays, with the first array being each card, and each sub
-#array being a container for that card information, i.e. the cards_info_storage
-#variable or something. Then any changes that need to be made are done to the array
-#and adding or removing cards is done through array.methods
+# Needs a redesign in some places to work with autosave and app lifecycle
+# Currently to reload the scene, I'd need:
+
+#	global.carousel_type_currently_is
+#	global.carousel_choice
+#	global.current_focus
+#	global.card_side_displayed
+#	global.total_cards_in_scene
 
 onready var carousel_scene : PackedScene = preload("res://scenes/DrawingCards/Carousels/CarouselFinite.tscn")
 onready var carousel_instance : Node = carousel_scene.instance()
@@ -135,9 +135,9 @@ func _on_submittext_pressed():
 	global.runtime_user_data.saved_readings[reading_name] = [spread_state, carousel_converted, total_cards_in_scene]
 	global.save_user_data()
 
-func _on_backtomainmenu_pressed():
-	#clear all data in the scene and make it ready for another reading
-	global.clear_decks()
-	global.current_card_in_spread = 0
-	global.total_cards_in_scene = 0
-	get_tree().change_scene("res://scenes/mainmenu.tscn")
+#func _on_backtomainmenu_pressed():
+#	#clear all data in the scene and make it ready for another reading
+#	global.clear_decks()
+#	global.current_card_in_spread = 0
+#	global.total_cards_in_scene = 0
+#	get_tree().change_scene("res://scenes/mainmenu.tscn")

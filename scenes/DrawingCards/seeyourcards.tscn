@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/DrawingCards/seeyourcards.gd" type="Script" id=1]
 [ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=2]
@@ -8,11 +8,6 @@
 [ext_resource path="res://resources/Complimentary.tres" type="Theme" id=6]
 [ext_resource path="res://fonts/Kollektif-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://app icons/RightChevronCircle.png" type="Texture" id=8]
-[ext_resource path="res://app icons/Cancel.png" type="Texture" id=9]
-
-[sub_resource type="DynamicFont" id=1]
-size = 34
-font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 29
@@ -63,25 +58,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="backtomainmenu" type="Button" parent="."]
-margin_left = 930.0
-margin_top = 50.0
-margin_right = 1030.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 100, 100 )
-custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="savethisreading" type="Button" parent="."]
 margin_left = 880.0
-margin_top = 1720.0
+margin_top = 100.0
 margin_right = 980.0
-margin_bottom = 1820.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = SubResource( 2 )
 icon = ExtResource( 3 )
@@ -278,7 +259,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="backtomainmenu" to="." method="_on_backtomainmenu_pressed"]
 [connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]
 [connection signal="pressed" from="left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="right" to="." method="_on_right_pressed"]
