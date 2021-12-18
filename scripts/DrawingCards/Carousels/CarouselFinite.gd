@@ -236,13 +236,17 @@ func _center_card_query():
 	for i in 5:
 		if get_child(i).rect_position.x >= (center_position - 10) and get_child(i).rect_position.x <= (center_position + 10):
 			var card_array_position : float = fposmod(int(carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
-			if global.deck_copy_chosen_states[card_array_position] == "available":
+			if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
+				print("choosing carousel")
+				if global.deck_copy_chosen_states[card_array_position] == "available":
+					result = card_array_position
+					global.deck_copy_chosen_states[card_array_position] = "unavailable"
+				elif global.deck_copy_chosen_states[card_array_position] == "unavailable":
+					result = 99
+				else:
+					print("_center_card_query : card_array_position or chosen states problem")
+			elif global.carousel_types[global.carousel_type_currently_is] != "CHOOSING":
 				result = card_array_position
-				global.deck_copy_chosen_states[card_array_position] = "unavailable"
-			elif global.deck_copy_chosen_states[card_array_position] == "unavailable":
-				result = 99
-			else:
-				print("_center_card_query : card_array_position or chosen states problem")
 	if result == null:
 		result = -99
 	return result
