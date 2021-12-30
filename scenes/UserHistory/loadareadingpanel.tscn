@@ -74,9 +74,9 @@ margin_bottom = 60.0
 rect_min_size = Vector2( 400, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.819608, 0.698039, 0.639216, 1 )
 custom_colors/selection_color = Color( 0.360784, 0.509804, 0.376471, 1 )
+custom_fonts/normal_font = SubResource( 1 )
 scroll_active = false
 
 [node name="spreadtype" type="RichTextLabel" parent="hboxcontainer/readinginfo/VBoxContainer"]
@@ -86,9 +86,9 @@ margin_bottom = 125.0
 rect_min_size = Vector2( 400, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 0.819608, 0.698039, 0.639216, 0 )
 custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 2 )
 scroll_active = false
 
 [node name="CenterContainer" type="CenterContainer" parent="hboxcontainer"]
@@ -109,8 +109,8 @@ margin_bottom = 193.0
 [node name="loadthisreading" type="Button" parent="hboxcontainer/CenterContainer/VSplitContainer"]
 margin_right = 125.0
 margin_bottom = 69.0
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.945098, 0.933333, 0.866667, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Open"
 flat = true
 __meta__ = {
@@ -121,8 +121,8 @@ __meta__ = {
 margin_top = 81.0
 margin_right = 125.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.945098, 0.933333, 0.866667, 1 )
+custom_fonts/font = SubResource( 4 )
 text = "delete"
 flat = true
 

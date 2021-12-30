@@ -10,6 +10,7 @@ extends Node
 #manages saving files, tracking the current card in focus for the progress
 #indicator, as well as randomly shuffling the deck. 
 
+#THE DECK
 var livedeck : Array = [
 	{
 		'description1': "I REALLY WANT TO IMPRESS YOU",
@@ -112,6 +113,11 @@ var carousel_choice : Array = []
 var carousel_converted : Array = []
 #var to hold current spread state information(state is more like spread ID?)
 var spread_state_set_to : int
+#var to store front or back of card visible
+var card_side_displayed : String = "back"
+#for scene_type_check, set this var at scene intro to determine carousel cards
+var carousel_types : Array = ["CHOOSING", "REVEALING", "JOURNAL"]
+var carousel_type_currently_is : int = 0
 
 #PROGRESS INDICATOR SECTION
 
@@ -122,7 +128,7 @@ var spread_state_set_to : int
 var _layout_states : Array = ["Love for Two", "Love for just you",]
 #same as above
 var _layout_states_cards_in_each : Array = [3, 5,]
-#I believe this stores the name of the spread chosen?
+#spread info and actual stock descriptions
 var tarot_spread_info : Array = [
 	{
 		'spread name': 'Love for Two',
@@ -167,7 +173,11 @@ onready var runtime_user_data : Dictionary = {
 	"seeds": {},
 }
 
+#OS related and settings vars
+onready var os_screen_size : Vector2 = Vector2(1080, 1920)
+
 func _ready():
+	OS.low_processor_usage_mode = true
 	#create a new save file
 	var file : File = File.new()
 	#if the file exists, open it, and pull the data into user_data var, then close the save_file
@@ -192,6 +202,14 @@ func save_user_data():
 	file.store_var(user_data, true)
 	file.close()
 
+func draw():
+	if deck_copy.size() == 0:
+		_shuffle_deck()
+	else:
+		clear_decks()
+		_shuffle_deck()
+
+
 func clear_decks():
 	#clear all deck storage related variables for a clean start
 	deck_copy.clear()
@@ -212,8 +230,7 @@ func _shuffle_deck():
 		deck_copy_chosen_states.append("available")
 	for i in deck_copy:
 		_compare_against_deck(i, "runtime")
-	
-		
+
 func _compare_against_deck(carousel_card, app_state):
 	if app_state == "runtime":
 		for dict in livedeck:
@@ -225,10 +242,3 @@ func _compare_against_deck(carousel_card, app_state):
 	if app_state == "savetime":
 		for i in carousel_choice:
 			carousel_converted.append(livedeck[i].name)
-	
-func draw():
-	if deck_copy.size() == 0:
-		_shuffle_deck()
-	else:
-		clear_decks()
-		_shuffle_deck()

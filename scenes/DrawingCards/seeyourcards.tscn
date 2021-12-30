@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/DrawingCards/seeyourcards.gd" type="Script" id=1]
 [ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=2]
@@ -8,11 +8,6 @@
 [ext_resource path="res://resources/Complimentary.tres" type="Theme" id=6]
 [ext_resource path="res://fonts/Kollektif-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://app icons/RightChevronCircle.png" type="Texture" id=8]
-[ext_resource path="res://app icons/Cancel.png" type="Texture" id=9]
-
-[sub_resource type="DynamicFont" id=1]
-size = 34
-font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 29
@@ -63,25 +58,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="backtomainmenu" type="Button" parent="."]
-margin_left = 930.0
-margin_top = 50.0
-margin_right = 1030.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 100, 100 )
-custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
-flat = true
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="savethisreading" type="Button" parent="."]
 margin_left = 880.0
-margin_top = 1720.0
+margin_top = 100.0
 margin_right = 980.0
-margin_bottom = 1820.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = SubResource( 2 )
 icon = ExtResource( 3 )
@@ -91,38 +72,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cardleft" type="Control" parent="."]
-margin_left = -250.0
-margin_top = 250.0
-margin_right = 250.0
-margin_bottom = 1050.0
-rect_min_size = Vector2( 500, 800 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="cardcenter" type="Control" parent="."]
-margin_left = 290.0
-margin_top = 250.0
-margin_right = 790.0
-margin_bottom = 1050.0
-rect_min_size = Vector2( 500, 800 )
-
-[node name="cardright" type="Control" parent="."]
-margin_left = 830.0
-margin_top = 250.0
-margin_right = 1330.0
-margin_bottom = 1050.0
-rect_min_size = Vector2( 500, 800 )
+[node name="carouselContainer" type="AspectRatioContainer" parent="."]
+margin_top = 200.0
+margin_right = 1080.0
+margin_bottom = 1409.6
+rect_min_size = Vector2( 1080, 1209.6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_top = 1080.0
+margin_top = 1380.0
 margin_right = 1080.0
-margin_bottom = 1530.0
-rect_min_size = Vector2( 1080, 450 )
+margin_bottom = 1730.0
+rect_min_size = Vector2( 1080, 350 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -144,9 +107,9 @@ __meta__ = {
 }
 
 [node name="right" type="TextureButton" parent="."]
-margin_left = 900.0
+margin_left = 910.0
 margin_top = 575.0
-margin_right = 1050.0
+margin_right = 1060.0
 margin_bottom = 725.0
 texture_normal = ExtResource( 8 )
 expand = true
@@ -155,11 +118,11 @@ __meta__ = {
 }
 
 [node name="selectcentercard" type="Button" parent="."]
-margin_left = 290.0
-margin_top = 251.95
-margin_right = 590.0
-margin_bottom = 731.95
-rect_min_size = Vector2( 500, 800 )
+margin_left = 162.0
+margin_top = 200.0
+margin_right = 918.0
+margin_bottom = 1409.6
+rect_min_size = Vector2( 500, 1209.6 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -171,42 +134,43 @@ margin_right = 1080.0
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
 mouse_filter = 1
-size_flags_horizontal = 5
-size_flags_vertical = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
-margin_left = 100.0
+margin_left = 162.0
 margin_top = 100.0
-margin_right = 980.0
+margin_right = 918.0
 margin_bottom = 1820.0
-rect_min_size = Vector2( 880, 1720 )
+rect_min_size = Vector2( 756, 1720 )
+size_flags_horizontal = 5
+size_flags_vertical = 5
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ScrollContainer"]
-margin_right = 880.0
+margin_right = 756.0
 margin_bottom = 1725.0
-rect_min_size = Vector2( 880, 1400 )
+rect_min_size = Vector2( 756, 1400 )
 custom_constants/separation = 25
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="Control" parent="CenterContainer/ScrollContainer/VBoxContainer"]
-margin_right = 880.0
+[node name="TextureRect" type="AspectRatioContainer" parent="CenterContainer/ScrollContainer/VBoxContainer"]
+margin_right = 756.0
 margin_bottom = 1400.0
-rect_min_size = Vector2( 600, 1400 )
+rect_min_size = Vector2( 756, 1400 )
+size_flags_vertical = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/ScrollContainer/VBoxContainer"]
 margin_top = 1425.0
-margin_right = 880.0
+margin_right = 756.0
 margin_bottom = 1725.0
-rect_min_size = Vector2( 880, 300 )
+rect_min_size = Vector2( 756, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 3 )
@@ -288,17 +252,17 @@ margin_top = 80.0
 margin_right = 940.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 800, 140 )
-custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 0.945098, 0.933333, 0.866667, 1 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="backtomainmenu" to="." method="_on_backtomainmenu_pressed"]
 [connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]
 [connection signal="pressed" from="left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="gui_input" from="selectcentercard" to="." method="_on_selectcentercard_gui_input"]
 [connection signal="pressed" from="selectcentercard" to="." method="_on_selectcentercard_pressed"]
 [connection signal="pressed" from="closepopup" to="." method="_on_closepopup_pressed"]
 [connection signal="pressed" from="savereadingpopup/submittext" to="." method="_on_submittext_pressed"]

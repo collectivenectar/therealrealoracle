@@ -1,22 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Save.png" type="Texture" id=2]
 [ext_resource path="res://app icons/Shuffle.png" type="Texture" id=3]
 [ext_resource path="res://resources/DominantBackground.tres" type="Theme" id=4]
 [ext_resource path="res://scripts/mainmenubar.gd" type="Script" id=5]
-[ext_resource path="res://fonts/AbrilFatface-Regular.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://app icons/Cards.png" type="Texture" id=7]
 [ext_resource path="res://app icons/Journal.png" type="Texture" id=8]
 [ext_resource path="res://shaders/Card.gdshader" type="Shader" id=9]
+[ext_resource path="res://app icons/ChevronDown.png" type="Texture" id=10]
 
-[sub_resource type="ImageTexture" id=1]
-
-[sub_resource type="DynamicFont" id=2]
-size = 61
-font_data = ExtResource( 6 )
-
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
 shader_param/card_color1 = null
 
@@ -41,48 +35,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeckCoreMenu" type="VBoxContainer" parent="."]
-margin_left = 2168.0
-margin_right = 3248.0
-margin_bottom = 1908.0
-rect_min_size = Vector2( 1080, 1920 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenteringCont" type="CenterContainer" parent="DeckCoreMenu"]
-margin_right = 1080.0
-margin_bottom = 1908.0
-rect_min_size = Vector2( 1080, 1908 )
-mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CoreButtonBkrnd" type="TextureRect" parent="DeckCoreMenu/CenteringCont"]
-margin_left = 290.0
-margin_top = 704.0
-margin_right = 790.0
-margin_bottom = 1204.0
-rect_min_size = Vector2( 500, 500 )
-rect_clip_content = true
-texture = SubResource( 1 )
-
-[node name="deckcorebutton" type="Button" parent="DeckCoreMenu/CenteringCont"]
-margin_left = 290.0
-margin_top = 704.0
-margin_right = 790.0
-margin_bottom = 1204.0
-rect_min_size = Vector2( 500, 500 )
-focus_mode = 0
-custom_fonts/font = SubResource( 2 )
-text = "Deck Core"
-flat = true
-
 [node name="InstanceViewer" type="Control" parent="."]
 margin_right = 1081.48
 margin_bottom = 1920.0
 rect_min_size = Vector2( 1080, 1920 )
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -93,6 +50,7 @@ margin_top = 1620.0
 margin_right = 1060.0
 margin_bottom = 1720.0
 rect_min_size = Vector2( 100, 100 )
+icon = ExtResource( 10 )
 flat = true
 align = 2
 expand_icon = true
@@ -128,7 +86,7 @@ margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 
 [node name="Draw" type="TextureButton" parent="MenuUI/CenterContainer/MenuRack/DrawContainer"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 margin_right = 200.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
@@ -176,17 +134,6 @@ rect_min_size = Vector2( 200, 200 )
 texture_normal = ExtResource( 8 )
 expand = true
 
-[node name="Tween" type="Tween" parent="."]
-
-[node name="deckcorepopup" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="button_up" from="DeckCoreMenu/CenteringCont/deckcorebutton" to="." method="_on_deckcorebutton_button_up"]
 [connection signal="button_up" from="HideMenu" to="." method="_on_Button_button_up"]
 [connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/DrawContainer/Draw" to="." method="_on_Draw_pressed"]
 [connection signal="pressed" from="MenuUI/CenterContainer/MenuRack/HistoryContainer/History" to="." method="_on_History_pressed"]

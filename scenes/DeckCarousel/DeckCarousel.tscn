@@ -53,9 +53,9 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_top = 200.0
+margin_top = 150.0
 margin_right = 1092.0
-margin_bottom = 1670.0
+margin_bottom = 1720.0
 rect_min_size = Vector2( 1080, 1470 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -91,7 +91,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CardDescriptionBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
+[node name="CardNotesBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
 margin_top = 1205.0
 margin_right = 1080.0
 margin_bottom = 1205.0

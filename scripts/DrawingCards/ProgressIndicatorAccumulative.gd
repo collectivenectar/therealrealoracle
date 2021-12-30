@@ -46,7 +46,11 @@ func _card_progress(progress):
 		#This spot is for when the scene loads, so I just need to confirm that I need
 		#to use this to indicate that a card has not been chosen yet. Maybe an animation
 		#to blink the spread slot that you are choosing for?
-		pass
+		if progress == -1:
+			pass
+			#this is for when undoing a card choice - hasn't been built but is needed
+		else:
+			pass
 	else:
 		if indicator_spots.has(1) == true:
 			if indicator_spots.count(0) == 0:
@@ -79,5 +83,7 @@ func _update_panels():
 	else:
 		print("array and panels count not equal")
 	
-func move_indicator():
+func undo_progress():
+	#put code here for when reversing a card choice
+	#_card_progress(-1)
 	pass

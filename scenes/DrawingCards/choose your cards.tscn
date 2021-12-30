@@ -23,6 +23,9 @@ font_data = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackgroundPanel" type="Panel" parent="."]
 margin_right = 1080.0
@@ -65,8 +68,8 @@ size_flags_vertical = 3
 margin_right = 800.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 800, 100 )
-custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.945098, 0.929412, 0.894118, 1 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]You are choosing a card for the: [/center]"
 text = "You are choosing a card for the: "
@@ -115,8 +118,8 @@ margin_top = 400.0
 margin_right = 780.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 580, 400 )
-custom_fonts/normal_font = SubResource( 3 )
 custom_constants/line_separation = 21
+custom_fonts/normal_font = SubResource( 3 )
 text = "Touch your heart and take a breath, we're about to see what cards you got!"
 __meta__ = {
 "_edit_use_anchors_": false
