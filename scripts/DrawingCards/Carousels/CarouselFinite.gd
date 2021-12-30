@@ -75,7 +75,6 @@ func _scene_type_check():
 	#before setting the start position of the carousel, determine parameters of
 	#the carousel scene - how many cards in the scene?
 	scene_type = global.carousel_types[global.carousel_type_currently_is]
-	print(scene_type)
 	if scene_type == "CHOOSING":
 		global.draw()
 		last_card_in_carousel = global.deck_copy_converted.size() - 1
@@ -237,7 +236,6 @@ func _center_card_query():
 		if get_child(i).rect_position.x >= (center_position - 10) and get_child(i).rect_position.x <= (center_position + 10):
 			var card_array_position : float = fposmod(int(carousel_position / card_zone) - (i - 2), global.deck_copy_converted.size())
 			if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
-				print("choosing carousel")
 				if global.deck_copy_chosen_states[card_array_position] == "available":
 					result = card_array_position
 					global.deck_copy_chosen_states[card_array_position] = "unavailable"

@@ -177,6 +177,7 @@ onready var runtime_user_data : Dictionary = {
 onready var os_screen_size : Vector2 = Vector2(1080, 1920)
 
 func _ready():
+	OS.low_processor_usage_mode = true
 	#create a new save file
 	var file : File = File.new()
 	#if the file exists, open it, and pull the data into user_data var, then close the save_file

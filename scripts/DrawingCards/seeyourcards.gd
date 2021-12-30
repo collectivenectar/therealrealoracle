@@ -83,21 +83,16 @@ func _nav_buttons_visibility_toggle(buttonsvisiblepattern):
 		print("_nav_buttons_visibility_toggle buttonsvisible provided ", buttonsvisiblepattern)
 
 func _on_selectcentercard_pressed():
-	#if a card is touched in this scene, display a close up view of the card, as well as text descriptions and
-	#other functions related to exploring the card/deck/making notes on the deck etc
 	var card_stack_position = carousel_instance._center_card_query()
 	var livedeck_card_ref = global.livedeck[global.carousel_choice[card_stack_position]]
 	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(livedeck_card_ref['description1'], livedeck_card_ref['description2'], livedeck_card_ref['name'])
 	$CenterContainer/ScrollContainer/VBoxContainer/RichTextLabel.text = livedeck_card_ref['description1']
-	#unfortunately due to layering, I need to move the children around to get proper visibility
-	#then move it back when the window is closed
 	$closepopup.visible = true
 	$CenterContainer.visible = true
 	move_child($closepopup, 12)
 	move_child($background, 7)
 	tween.interpolate_property($CenterContainer, "modulate:a8", null, 255, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
 	tween.start()
-	print(card_stack_position, ", ", livedeck_card_ref, ", ", global.carousel_choice[card_stack_position], global.carousel_choice)
 
 func _on_closepopup_pressed():
 	#see above comment
@@ -118,7 +113,6 @@ func _tween_completed(_object, _key):
 func _on_savethisreading_pressed():
 	#reveal the saving popup
 	date_time = OS.get_datetime()
-	print("save clicked")
 	$savereadingpopup.visible = true
 
 func _on_submittext_pressed():
@@ -141,3 +135,16 @@ func _on_submittext_pressed():
 #	global.current_card_in_spread = 0
 #	global.total_cards_in_scene = 0
 #	get_tree().change_scene("res://scenes/mainmenu.tscn")
+
+
+#func _on_selectcentercard_gui_input(event):
+#	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
+#		if event.pressed:
+#			click_down_position = Vector2(0, 0)
+#			click_down_position = event.global_position
+#		elif !event.pressed:
+#			click_up_position = Vector2(0, 0)
+#			click_up_position = event.global_position
+#			if abs(click_up_position.x - click_down_position.x) < 50:
+#				if abs(click_up_position.y - click_down_position.y) < 50:
+#

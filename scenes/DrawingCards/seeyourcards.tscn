@@ -262,6 +262,7 @@ __meta__ = {
 [connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]
 [connection signal="pressed" from="left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="gui_input" from="selectcentercard" to="." method="_on_selectcentercard_gui_input"]
 [connection signal="pressed" from="selectcentercard" to="." method="_on_selectcentercard_pressed"]
 [connection signal="pressed" from="closepopup" to="." method="_on_closepopup_pressed"]
 [connection signal="pressed" from="savereadingpopup/submittext" to="." method="_on_submittext_pressed"]
