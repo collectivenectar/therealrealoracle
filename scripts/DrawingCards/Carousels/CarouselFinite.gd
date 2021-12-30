@@ -171,6 +171,11 @@ func _process(delta):
 		#if the window_position has reached the end position, kill process
 		if abs(animation_end_position - carousel_position) < 0.001:
 			animation_state = "inactive"
+		elif abs(animation_end_position - carousel_position) > 3 && abs(animation_end_position - carousel_position) < 4:
+			if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
+				pass
+			else:
+				print(_center_card_query())
 
 func _on_cardContainer_gui_input(event):
 	#moved this out of _gui_input(event) due to handling issues. This is for when
@@ -244,6 +249,8 @@ func _center_card_query():
 				else:
 					print("_center_card_query : card_array_position or chosen states problem")
 			elif global.carousel_types[global.carousel_type_currently_is] != "CHOOSING":
+				result = card_array_position
+				card_array_position = fposmod(int(carousel_position / card_zone) - (i - 2), global.livedeck.size())
 				result = card_array_position
 	if result == null:
 		result = -99

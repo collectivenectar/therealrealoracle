@@ -19,7 +19,6 @@ func _ready():
 	var choosingspreadsinstance = choosingspreads.instance()
 	choosingspreadsinstance.connect("spread_chosen", self, "_switch_to_choose_cards")
 	$InstanceViewer.add_child(choosingspreadsinstance)
-	print(OS.low_processor_usage_mode)
 
 # All other scenes are loaded through the main menu.tscn, in and out of "InstanceViewer" node.
 # This should simplify UI issues.

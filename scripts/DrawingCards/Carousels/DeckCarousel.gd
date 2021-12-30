@@ -12,8 +12,8 @@ func _scene_prep():
 	var carousel_instance = carousel.instance()
 	$ScrollContainer/CardDeckVBox/CarouselCBox/CarouselContainer.add_child(carousel_instance)
 	var cardnotecellinstance : Node = cardnotecell.instance()
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.add_child(cardnotecellinstance)
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.rect_size.x = rect_size.x
+	$ScrollContainer/CardDeckVBox/CardNotesBox.add_child(cardnotecellinstance)
+	$ScrollContainer/CardDeckVBox/CardNotesBox.rect_size.x = rect_size.x
 	cardnotecellinstance.connect("celladded", self, "_cell_added")
 	$ScrollContainer.get_v_scrollbar().add_stylebox_override('grabber', StyleBoxEmpty.new())
 	$ScrollContainer.get_v_scrollbar().add_stylebox_override('scroll', StyleBoxEmpty.new())
@@ -22,18 +22,15 @@ func _scene_prep():
 	#loaded. In fact, it may be helpful to be sure that user notes are preloaded
 	#in some way to make it quick. I'll need to write something that:
 	#
-	#relays information from the carousel to the carddescriptionbox, creating
-	#an instance of cardnotecell for each user note, then copying the usernotes
-	#into the cardnotecell richtextbox. This will all need to be done so that the
-	#user notes end up above the 'add note' button.
-	#Thinking of making this modular : The carousel, the notes container, the notes
-	#all three have their own script, and all of theme are packedscenes, especially
-	#if I want to reuse this idea elsewhere.
+	#relays information from the carousel to DeckCarousel, which then sends that
+	#info to the instance of cardnotecellManager.
+	#cardnotecellManager then instances however many user note cells there are 
+	#for the current card, and changes the text to reflect stored data.
 
 func _cell_added():
 	var additional : Node = cardnotecell.instance()
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.get_child_count()
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.add_child(additional)
-	var end_position : int = $ScrollContainer/CardDeckVBox/CardDescriptionBox.get_child_count() - 1
-	$ScrollContainer/CardDeckVBox/CardDescriptionBox.move_child(additional, end_position)
+	$ScrollContainer/CardDeckVBox/CardNotesBox.get_child_count()
+	$ScrollContainer/CardDeckVBox/CardNotesBox.add_child(additional)
+	var end_position : int = $ScrollContainer/CardDeckVBox/CardNotesBox.get_child_count() - 1
+	$ScrollContainer/CardDeckVBox/CardNotesBox.move_child(additional, end_position)
 	additional.connect("celladded", self, "_cell_added")

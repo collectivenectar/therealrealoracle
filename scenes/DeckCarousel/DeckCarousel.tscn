@@ -91,7 +91,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CardDescriptionBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
+[node name="CardNotesBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
 margin_top = 1205.0
 margin_right = 1080.0
 margin_bottom = 1205.0
