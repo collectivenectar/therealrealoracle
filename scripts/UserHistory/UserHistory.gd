@@ -8,6 +8,9 @@ onready var tween : Node = get_node("Tween")
 var reading_name_temp : String
 var child_path_storage : Node
 var fade_toggle_filter : int = 0
+var parent_storage : Node
+
+signal session_loaded
 
 func _ready():
 	#set up the scrollboxcontainer so the sliders don't appear
@@ -30,13 +33,14 @@ func load_saves():
 		for i in global.runtime_user_data["saved_readings"].keys():
 			#for each saved item 'key' (spread name) in the saved_readings dictionary, do these things:
 			#create an instance of the loadareadingscene
-			var instance : Node = loadareading_scene.instance()
+			var load_panel_instance : Node = loadareading_scene.instance()
 			#add that instance to the vboxcontainer
-			$ScrollContainer/VBoxContainer.add_child(instance)
+			$ScrollContainer/VBoxContainer.add_child(load_panel_instance)
 			#pass args to _setup_panel - i (which is the key(spread name) in the users saved data),
 			#then [i][0] is the spread type? 1-5 currently, may be more when there are more stock spreads
-			instance._setup_panel(i, i)
-			instance.parent_storage(self)
+			load_panel_instance._setup_panel(i, i)
+			load_panel_instance.parent_storage(self)
+			load_panel_instance.connect("notify_parent_of_choice", self, "_trigger_switch_to_show_cards")
 			
 func _tween_completed(_object, _key):
 	if fade_toggle_filter == 0:
@@ -70,6 +74,8 @@ func _on_no_pressed():
 	tween.connect("tween_completed", self, "_tween_completed")
 	tween.start()
 
+func _trigger_switch_to_show_cards():
+	emit_signal("session_loaded")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

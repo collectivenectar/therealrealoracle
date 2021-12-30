@@ -3,6 +3,8 @@ extends Control
 var readingnamestorage : String
 var parent_storage_var : Node
 
+signal notify_parent_of_choice
+
 func _ready():
 	pass
 
@@ -32,7 +34,8 @@ func _on_loadthisreading_pressed():
 					pass
 		global.total_cards_in_scene = global.runtime_user_data["saved_readings"][readingnamestorage][2]
 		global.current_card_in_spread = 1
-		get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")
+		emit_signal("notify_parent_of_choice")
+#		get_tree().change_scene("res://scenes/DrawingCards/seeyourcards.tscn")
 
 func parent_storage(parent):
 	parent_storage_var = parent

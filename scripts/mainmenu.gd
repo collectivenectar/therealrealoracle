@@ -15,10 +15,7 @@ var instanceViewerChannel : int = 0
 var instanceViewerChannels : Array = ["DrawingCards", "UserHistory", "DeckCarousel", "DeckGuide"]
 
 func _ready():
-	global.carousel_type_currently_is = 0
-	var choosingspreadsinstance = choosingspreads.instance()
-	choosingspreadsinstance.connect("spread_chosen", self, "_switch_to_choose_cards")
-	$InstanceViewer.add_child(choosingspreadsinstance)
+	_on_Draw_pressed()
 
 # All other scenes are loaded through the main menu.tscn, in and out of "InstanceViewer" node.
 # This should simplify UI issues.
@@ -115,10 +112,13 @@ func _on_History_pressed():
 	var userhistoryinstance = userhistory.instance()
 	if $InstanceViewer.get_child_count() == 0:
 		$InstanceViewer.add_child(userhistoryinstance)
+		userhistoryinstance.parent_storage = self
 	elif $InstanceViewer.get_child_count() >= 0:
 		for i in $InstanceViewer.get_child_count():
 			$InstanceViewer.get_child(i).queue_free()
 		$InstanceViewer.add_child(userhistoryinstance)
+		userhistoryinstance.parent_storage = self
+	userhistoryinstance.connect("session_loaded", self, "_switch_to_show_cards")
 
 func _on_Guidebook_pressed():
 	if instanceViewerChannel == 0:
