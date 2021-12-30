@@ -248,8 +248,10 @@ func _center_card_query():
 					result = 99
 				else:
 					print("_center_card_query : card_array_position or chosen states problem")
-			elif global.carousel_types[global.carousel_type_currently_is] != "CHOOSING":
+			elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
+				card_array_position = fposmod(int(carousel_position / card_zone) - (i - 2), global.carousel_choice.size())
 				result = card_array_position
+			elif global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
 				card_array_position = fposmod(int(carousel_position / card_zone) - (i - 2), global.livedeck.size())
 				result = card_array_position
 	if result == null:

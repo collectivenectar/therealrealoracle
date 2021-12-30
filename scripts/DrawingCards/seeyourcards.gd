@@ -20,8 +20,6 @@ onready var card : PackedScene = preload("res://scenes/card.tscn")
 #onready var card_instance : Node = card.instance()
 onready var tween : Node = get_node("Tween")
 
-var date_time : Dictionary
-
 signal layout_update(progress)
 signal layout_spread_state(state)
 
@@ -112,7 +110,6 @@ func _tween_completed(_object, _key):
 
 func _on_savethisreading_pressed():
 	#reveal the saving popup
-	date_time = OS.get_datetime()
 	$savereadingpopup.visible = true
 
 func _on_submittext_pressed():
