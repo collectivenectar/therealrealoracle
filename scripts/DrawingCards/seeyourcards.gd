@@ -144,4 +144,4 @@ func _on_submittext_pressed():
 #			click_up_position = event.global_position
 #			if abs(click_up_position.x - click_down_position.x) < 50:
 #				if abs(click_up_position.y - click_down_position.y) < 50:
-#
+#					pass

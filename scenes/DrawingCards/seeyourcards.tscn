@@ -77,6 +77,7 @@ margin_top = 200.0
 margin_right = 1080.0
 margin_bottom = 1409.6
 rect_min_size = Vector2( 1080, 1209.6 )
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -113,17 +114,6 @@ margin_right = 1060.0
 margin_bottom = 725.0
 texture_normal = ExtResource( 8 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="selectcentercard" type="Button" parent="."]
-margin_left = 162.0
-margin_top = 200.0
-margin_right = 918.0
-margin_bottom = 1409.6
-rect_min_size = Vector2( 500, 1209.6 )
-flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -262,7 +252,5 @@ __meta__ = {
 [connection signal="pressed" from="savethisreading" to="." method="_on_savethisreading_pressed"]
 [connection signal="pressed" from="left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="right" to="." method="_on_right_pressed"]
-[connection signal="gui_input" from="selectcentercard" to="." method="_on_selectcentercard_gui_input"]
-[connection signal="pressed" from="selectcentercard" to="." method="_on_selectcentercard_pressed"]
 [connection signal="pressed" from="closepopup" to="." method="_on_closepopup_pressed"]
 [connection signal="pressed" from="savereadingpopup/submittext" to="." method="_on_submittext_pressed"]

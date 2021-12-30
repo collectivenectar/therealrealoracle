@@ -89,6 +89,7 @@ func _scene_type_check():
 		last_card_in_carousel = global.total_cards_in_scene - 1
 		carousel_position = last_card_in_carousel * card_zone
 		global.card_side_displayed = "front"
+		self.mouse_filter = MOUSE_FILTER_IGNORE
 		return "REVEALING"
 	elif scene_type == "JOURNAL":
 		last_card_in_carousel = global.livedeck.size() - 1
