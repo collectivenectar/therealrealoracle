@@ -44,6 +44,7 @@ __meta__ = {
 margin_right = 1030.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 1030, 100 )
+rect_clip_content = false
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

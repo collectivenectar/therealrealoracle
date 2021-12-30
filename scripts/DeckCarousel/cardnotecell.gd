@@ -2,6 +2,7 @@ extends Control
 
 onready var tween : Tween = get_node("Tween")
 signal celladded
+signal add_user_text
 
 func _ready():
 	#dont forget to set up dimensions automatically
@@ -27,11 +28,12 @@ func _on_Tween_tween_completed(object, key):
 		$Panel.rect_min_size.y = 300
 		self.rect_min_size.y = 300
 		$VBoxContainer.rect_min_size.y = 250
-		
 		emit_signal("celladded")
 
+func _push_user_changes(newText):
+	RichTextLabel.text = newText
 
 func _on_EditNote_button_up():
+	emit_signal("add_user_text")
 	#here the user can add their personal notes to each card, so there needs to
 	#be a connection to the userdata.
-	pass # Replace with function body.

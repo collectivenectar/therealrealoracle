@@ -90,10 +90,3 @@ rect_min_size = Vector2( 1040, 980 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CardNotesBox" type="VBoxContainer" parent="ScrollContainer/CardDeckVBox"]
-margin_top = 1205.0
-margin_right = 1080.0
-margin_bottom = 1205.0
-size_flags_horizontal = 3
-custom_constants/separation = 25
