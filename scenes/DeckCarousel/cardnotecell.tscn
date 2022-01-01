@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/DeckCarousel/cardnotecell.gd" type="Script" id=1]
 [ext_resource path="res://app icons/Add.png" type="Texture" id=2]
-[ext_resource path="res://app icons/Edit.png" type="Texture" id=3]
+[ext_resource path="res://fonts/OxygenMono-Regular.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://resources/Complimentary.tres" type="Theme" id=4]
+[ext_resource path="res://app icons/Check.png" type="Texture" id=5]
+[ext_resource path="res://scenes/DeckCarousel/ExpandingTextEdit.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -25,6 +37,7 @@ margin_right = 680.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 280, 200 )
 mouse_filter = 1
+size_flags_vertical = 3
 theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -36,34 +49,43 @@ margin_top = 25.0
 margin_right = 1055.0
 margin_bottom = 179.0
 rect_min_size = Vector2( 1030, 154 )
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 margin_right = 1030.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 1030, 100 )
-rect_clip_content = false
-mouse_filter = 1
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_readonly = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+custom_styles/read_only = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 2 )
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+wrap_enabled = true
+script = ExtResource( 6 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 104.0
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 154.0
 margin_right = 1030.0
-margin_bottom = 104.0
-alignment = 2
+margin_bottom = 154.0
 
-[node name="EditNote" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/CenterContainer"]
 visible = false
-margin_left = 980.0
-margin_right = 1030.0
+margin_left = 465.0
+margin_top = -50.0
+margin_right = 565.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 3 )
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 5 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+stretch_mode = 4
 
 [node name="AddNote" type="TextureButton" parent="."]
 margin_left = 440.0
@@ -78,6 +100,7 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="button_up" from="VBoxContainer/HBoxContainer/EditNote" to="." method="_on_EditNote_button_up"]
+[connection signal="gui_input" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_gui_input"]
+[connection signal="button_up" from="VBoxContainer/CenterContainer/TextureButton" to="." method="_on_TextureButton_button_up"]
 [connection signal="pressed" from="AddNote" to="." method="_on_AddNote_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
