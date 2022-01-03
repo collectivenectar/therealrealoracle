@@ -200,6 +200,7 @@ func _on_cardContainer_gui_input(event):
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial * 20.0 * 1.8939, card_zone)
 			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 			animation_state = "released"
+			#HERE can maybe begin checking for inertia == 0
 	if event is InputEventMouseMotion:
 		#if the user is moving the mouse AND pressing
 		if pressed == true:
@@ -215,6 +216,7 @@ func _on_cardContainer_gui_input(event):
 			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone - 1))
 			_carousel_card_position_manager(carousel_position)
 			carousel_inertia_initial = event.relative.x
+			#HERE needs to fade out cardnotecell and begin checking for inertia
 		elif pressed == false:
 			pass
 

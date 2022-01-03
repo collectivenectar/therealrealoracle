@@ -136,7 +136,7 @@ var tarot_spread_info : Array = [
 		'number of cards': 3,
 		'position titles': ["Your Compatibility", "Your Blockages", "Their Blockages"],
 		'position interpretations': ["Your compatibility is about you and them, Do you have any friendship? Is it just a romantic love?", "Your blockages may or may not prevent you from having a strong relationship with this person", "Their blockages may or may not prevent them from having a strong relationship with you"],
-		'user card notes': [["", ], ["", ], ["", ]],
+		'user position notes': [["", ], ["", ], ["", ]],
 		'user general notes': ["", "", ],
 	},
 	{
@@ -145,7 +145,7 @@ var tarot_spread_info : Array = [
 		'number of cards': 5,
 		'position titles': ["Your blockages to love", "Your current situation", "What you're leaving behind", "What's coming in for you", "How you can get ready for love"],
 		'position interpretations': ["Anything that's preventing you from loving yourself fully", "How are you feeling about love lately?", "Is there anything you've made progress with?", "What is around the corner?", "Practical action steps or things to focus on in the meantime"],
-		'user card notes': [["", ], ["", ], ["", ], ["", ], ["", ]],
+		'user position notes': [["", ], ["", ], ["", ], ["", ], ["", ]],
 		'user general notes': ["", "", ],
 	}
 ]
@@ -171,6 +171,7 @@ onready var runtime_user_data : Dictionary = {
 	"custom_spreads": {},
 	"journal_entries": {},
 	"seeds": {},
+	"deck_notes": [],
 }
 
 #OS related and settings vars
