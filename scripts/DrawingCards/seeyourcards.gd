@@ -58,11 +58,13 @@ func _on_left_pressed():
 	#update layout when looking through cards in the spread
 	carousel_instance._navigate_left_one()
 	_update_layout(-1)
+	carousel_instance.one_shot_tracker = true
 
 func _on_right_pressed():
 	#update layout when looking through cards in the spread
 	carousel_instance._navigate_right_one()
 	_update_layout(1)
+	carousel_instance.one_shot_tracker = true
 
 func _nav_buttons_visibility_toggle(buttonsvisiblepattern):
 	if buttonsvisiblepattern == 0:
@@ -132,16 +134,3 @@ func _on_submittext_pressed():
 #	global.current_card_in_spread = 0
 #	global.total_cards_in_scene = 0
 #	get_tree().change_scene("res://scenes/mainmenu.tscn")
-
-
-#func _on_selectcentercard_gui_input(event):
-#	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
-#		if event.pressed:
-#			click_down_position = Vector2(0, 0)
-#			click_down_position = event.global_position
-#		elif !event.pressed:
-#			click_up_position = Vector2(0, 0)
-#			click_up_position = event.global_position
-#			if abs(click_up_position.x - click_down_position.x) < 50:
-#				if abs(click_up_position.y - click_down_position.y) < 50:
-#					pass

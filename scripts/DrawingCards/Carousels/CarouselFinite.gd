@@ -19,6 +19,7 @@ onready var click_down_position : Vector2
 onready var click_up_position : Vector2
 onready var dragging : bool
 onready var pressed : bool = false
+onready var one_shot_tracker : bool = true
 
 #carousel position and inertia related vars
 var carousel_sections : int
@@ -172,11 +173,16 @@ func _process(delta):
 		#if the window_position has reached the end position, kill process
 		if abs(animation_end_position - carousel_position) < 0.001:
 			animation_state = "inactive"
-		elif abs(animation_end_position - carousel_position) > 3 && abs(animation_end_position - carousel_position) < 4:
+		elif one_shot_tracker == true && abs(animation_end_position - carousel_position) < 5:
 			if global.carousel_types[global.carousel_type_currently_is] == "CHOOSING":
 				pass
 			else:
-				print(_center_card_query())
+				if global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
+					print(global.livedeck[_center_card_query()])
+					one_shot_tracker = false
+				elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
+					print(global.livedeck[global.carousel_choice[_center_card_query()]])
+					one_shot_tracker = false
 
 func _on_cardContainer_gui_input(event):
 	#moved this out of _gui_input(event) due to handling issues. This is for when
@@ -200,6 +206,7 @@ func _on_cardContainer_gui_input(event):
 			animation_end_position = stepify(carousel_position, card_zone) + stepify(carousel_inertia_initial * 20.0 * 1.8939, card_zone)
 			animation_end_position = clamp(animation_end_position, 0, (last_card_in_carousel * card_zone - 1))
 			animation_state = "released"
+			one_shot_tracker = true
 			#HERE can maybe begin checking for inertia == 0
 	if event is InputEventMouseMotion:
 		#if the user is moving the mouse AND pressing
@@ -216,7 +223,7 @@ func _on_cardContainer_gui_input(event):
 			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone - 1))
 			_carousel_card_position_manager(carousel_position)
 			carousel_inertia_initial = event.relative.x
-			#HERE needs to fade out cardnotecell and begin checking for inertia
+			#HERE needs to fade out cardnotecell, checking for inertia in _process(delta)
 		elif pressed == false:
 			pass
 
