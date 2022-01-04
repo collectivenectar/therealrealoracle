@@ -50,3 +50,6 @@ func _on_TextureButton_button_up():
 		editing = false
 		$VBoxContainer/TextEdit.readonly = true
 		$VBoxContainer/CenterContainer/TextureButton.texture_normal = preload("res://app icons/Edit.png")
+
+func _update_textedit(newtext: String):
+	$VBoxContainer/TextEdit.text = newtext

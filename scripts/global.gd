@@ -171,7 +171,7 @@ onready var runtime_user_data : Dictionary = {
 	"custom_spreads": {},
 	"journal_entries": {},
 	"seeds": {},
-	"deck_notes": [],
+	"deck_notes": [{'01': "something I wrote myself"}, {"02": "A second note for testing"},],
 }
 
 #OS related and settings vars
@@ -179,6 +179,9 @@ onready var os_screen_size : Vector2 = Vector2(1080, 1920)
 
 func _ready():
 	OS.low_processor_usage_mode = true
+	on_start_load_user()
+
+func on_start_load_user():
 	#create a new save file
 	var file : File = File.new()
 	#if the file exists, open it, and pull the data into user_data var, then close the save_file
@@ -189,6 +192,7 @@ func _ready():
 #if the user_data file is empty, add whatever is in runtime_user_data to it
 	if user_data.empty():
 		user_data = runtime_user_data
+		print("user_data empty")
 	#if it's not empty, add user_data to runtime_user_data so it can be accessed during runtime
 	elif not user_data.empty():
 		runtime_user_data = user_data

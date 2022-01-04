@@ -16,9 +16,9 @@ onready var carousel_scene : PackedScene = preload("res://scenes/DrawingCards/Ca
 onready var carousel_instance : Node = carousel_scene.instance()
 onready var layout_scene : PackedScene = preload("res://scenes/DrawingCards/ProgressIndicatorIndividual.tscn")
 onready var layout : Node = layout_scene.instance()
-onready var card : PackedScene = preload("res://scenes/card.tscn")
-#onready var card_instance : Node = card.instance()
 onready var tween : Node = get_node("Tween")
+
+var card_note_cell_manager_node: Node
 
 signal layout_update(progress)
 signal layout_spread_state(state)
@@ -35,16 +35,8 @@ func _scene_setup():
 	#update that layout by setting it to 0(the beginning_)
 	_update_layout(0)
 	$carouselContainer.add_child(carousel_instance)
+	carousel_instance.connect("card_note_cell_push", self, "")
 	#set the virtual carousel to 0
-	#set centercontainer transparency to %100
-	$CenterContainer.modulate.a8 = 0
-	#disable scrollbar visibility
-	$CenterContainer/ScrollContainer.get_v_scrollbar().add_stylebox_override('grabber', StyleBoxEmpty.new())
-	$CenterContainer/ScrollContainer.get_v_scrollbar().add_stylebox_override('scroll', StyleBoxEmpty.new())
-	var texturerect_card = card.instance()
-	texturerect_card._front_or_back_visible("front")
-	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.add_child(texturerect_card)
-	texturerect_card._set_sizing(0.625, global.os_screen_size.x * 0.7)
 
 func _update_layout(progress):
 	# catches signal from carouseldisplayedcards.tscn to relay to cardlayoutprogress.tscn
@@ -82,34 +74,6 @@ func _nav_buttons_visibility_toggle(buttonsvisiblepattern):
 	else:
 		print("_nav_buttons_visibility_toggle buttonsvisible provided ", buttonsvisiblepattern)
 
-func _on_selectcentercard_pressed():
-	var card_stack_position = carousel_instance._center_card_query()
-	var livedeck_card_ref = global.livedeck[global.carousel_choice[card_stack_position]]
-	$CenterContainer/ScrollContainer/VBoxContainer/TextureRect.get_child(0)._set_text(livedeck_card_ref['description1'], livedeck_card_ref['description2'], livedeck_card_ref['name'])
-	$CenterContainer/ScrollContainer/VBoxContainer/RichTextLabel.text = livedeck_card_ref['description1']
-	$closepopup.visible = true
-	$CenterContainer.visible = true
-	move_child($closepopup, 12)
-	move_child($background, 7)
-	tween.interpolate_property($CenterContainer, "modulate:a8", null, 255, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
-	tween.start()
-
-func _on_closepopup_pressed():
-	#see above comment
-	$closepopup.visible = false
-	move_child($background, 0)
-	tween.interpolate_property($CenterContainer, "modulate:a8", null, 0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, 0)
-	tween.connect("tween_completed", self, "_tween_completed")
-	tween.start()
-
-func _tween_completed(_object, _key):
-	#when toggling alpha on the popup, check for if animation is done before toggling visibility.
-	if $closepopup.visible == false:
-		$CenterContainer.visible = false
-	else:
-		pass
-
-
 func _on_savethisreading_pressed():
 	#reveal the saving popup
 	$savereadingpopup.visible = true
@@ -127,6 +91,12 @@ func _on_submittext_pressed():
 	var total_cards_in_scene : int = global.total_cards_in_scene
 	global.runtime_user_data.saved_readings[reading_name] = [spread_state, carousel_converted, total_cards_in_scene]
 	global.save_user_data()
+
+func _on_carousel_moved():
+	card_note_cell_manager_node._clear_cells()
+
+func _on_carousel_slowed(center_card):
+	card_note_cell_manager_node._populate_user_notes(center_card)
 
 #func _on_backtomainmenu_pressed():
 #	#clear all data in the scene and make it ready for another reading

@@ -2,6 +2,10 @@ extends Container
 
 onready var cardNoteCell : PackedScene = preload("res://scenes/DeckCarousel/cardnotecell.tscn")
 
+#manager needs to clear, queue_free current cells, then recreate cells and populate if needed
+#so I need a clear function, a storage unit for user notes, a receiving function for the
+#parent to send new cell data into.
+
 func _ready():
 	#here I would need to set whatever sizing requirements based on OS, etc
 	#connect a signal from carousel to here for when carousel_position is being changed
@@ -25,4 +29,15 @@ func _rect_min_size_calc():
 	total_y_size -= 5
 	rect_min_size.y = total_y_size
 
+func _clear_cells():
+	for i in $VBoxContainer.get_child_count():
+		$VBoxContainer.get_child(i).queue_free()
+	#some sort of placeholder animation while carousel is moved?
+		
+func _populate_user_notes(notes:String):
+	if int(notes) < 10:
+		notes = "0" + notes
+		print(notes)
+	else:
+		print(notes)
 

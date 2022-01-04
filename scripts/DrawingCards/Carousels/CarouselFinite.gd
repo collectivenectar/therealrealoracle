@@ -33,6 +33,8 @@ var last_card_in_carousel : int
 var scene_type : String
 
 signal card_chosen
+signal card_note_cell_push(center_card)
+signal carousel_moving
 
 #INFO I NEED FOR LIFECYCLE SAVING & AUTOSAVE PROCESSES:
 # If this is while the cards have not yet been chosen, then I'll need:
@@ -178,10 +180,10 @@ func _process(delta):
 				pass
 			else:
 				if global.carousel_types[global.carousel_type_currently_is] == "JOURNAL":
-					print(global.livedeck[_center_card_query()])
+					emit_signal("card_note_cell_push",String(_center_card_query()))
 					one_shot_tracker = false
 				elif global.carousel_types[global.carousel_type_currently_is] == "REVEALING":
-					print(global.livedeck[global.carousel_choice[_center_card_query()]])
+					emit_signal("card_note_cell_push", String(_center_card_query()))
 					one_shot_tracker = false
 
 func _on_cardContainer_gui_input(event):
@@ -223,6 +225,7 @@ func _on_cardContainer_gui_input(event):
 			carousel_position = clamp(carousel_position, 0, (last_card_in_carousel * card_zone - 1))
 			_carousel_card_position_manager(carousel_position)
 			carousel_inertia_initial = event.relative.x
+			emit_signal("carousel_moving")
 			#HERE needs to fade out cardnotecell, checking for inertia in _process(delta)
 		elif pressed == false:
 			pass
