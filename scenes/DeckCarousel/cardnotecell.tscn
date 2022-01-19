@@ -25,7 +25,7 @@ anchor_bottom = 1.0
 margin_right = -20.0
 margin_bottom = -1720.0
 rect_min_size = Vector2( 1080, 200 )
-mouse_filter = 1
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -38,7 +38,7 @@ margin_left = 400.0
 margin_right = 680.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 280, 200 )
-mouse_filter = 1
+mouse_filter = 2
 size_flags_vertical = 3
 theme = ExtResource( 4 )
 __meta__ = {
@@ -51,6 +51,7 @@ margin_top = 25.0
 margin_right = 1055.0
 margin_bottom = 179.0
 rect_min_size = Vector2( 1030, 154 )
+mouse_filter = 2
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,6 +61,7 @@ __meta__ = {
 margin_right = 1030.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
 size_flags_vertical = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_readonly = Color( 0, 0, 0, 1 )
@@ -77,6 +79,7 @@ script = ExtResource( 6 )
 margin_top = 154.0
 margin_right = 1030.0
 margin_bottom = 154.0
+mouse_filter = 2
 
 [node name="TextureButton" type="TextureButton" parent="VBoxContainer/CenterContainer"]
 visible = false
@@ -85,6 +88,7 @@ margin_top = -50.0
 margin_right = 565.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 100, 100 )
+mouse_filter = 1
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 4
@@ -94,6 +98,7 @@ margin_left = 440.0
 margin_right = 640.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
+mouse_filter = 1
 texture_normal = ExtResource( 2 )
 expand = true
 __meta__ = {
@@ -102,7 +107,6 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="gui_input" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_gui_input"]
 [connection signal="button_up" from="VBoxContainer/CenterContainer/TextureButton" to="." method="_on_TextureButton_button_up"]
 [connection signal="pressed" from="AddNote" to="." method="_on_AddNote_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

@@ -12,6 +12,7 @@ func _ready():
 	var cardnotecellinstance : Node = cardNoteCell.instance()
 	$VBoxContainer.add_child(cardnotecellinstance)
 	cardnotecellinstance.connect("celladded", self, "_cell_added")
+	cardnotecellinstance.connect("update_parent_rect_size", self, "_rect_min_size_calc")
 
 func _cell_added():
 	var additional : Node = cardNoteCell.instance()
@@ -38,6 +39,8 @@ func _populate_user_notes(notes:String):
 	if int(notes) < 10:
 		notes = "0" + notes
 		print(notes)
+		_cell_added()
 	else:
 		print(notes)
+		_cell_added()
 

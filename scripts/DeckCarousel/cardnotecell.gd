@@ -4,6 +4,7 @@ onready var tween : Tween = get_node("Tween")
 var editing = false
 
 signal celladded
+signal update_parent_container_size
 
 func _ready():
 	#dont forget to set up dimensions automatically
@@ -16,6 +17,7 @@ func _on_AddNote_pressed():
 	#connect("tween_completed", self, "_tween_completed")
 	tween.start()
 	$VBoxContainer/TextEdit.set_readonly(false)
+	$VBoxContainer/TextEdit.grab_focus()
 
 func _on_Tween_tween_completed(object, key):
 	if object == get_node("Panel") and key == ":rect_position:x" :
@@ -38,6 +40,7 @@ func _text_changed(height):
 	$Panel.rect_min_size.y = height + 50 + $VBoxContainer/CenterContainer/TextureButton.rect_size.y
 	$Panel.rect_size.y = height + 50 + $VBoxContainer/CenterContainer/TextureButton.rect_size.y
 	update()
+	emit_signal("update_parent_container_size")
 
 
 func _on_TextureButton_button_up():
