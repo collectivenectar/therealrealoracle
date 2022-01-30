@@ -168,10 +168,14 @@ onready var user_data : Dictionary = {}
 #stores current (and hopefully recently saved) runtime data
 onready var runtime_user_data : Dictionary = {
 	"saved_readings": {},
-	"custom_spreads": {},
 	"journal_entries": {},
 	"seeds": {},
-	"deck_notes": [{'01': "something I wrote myself"}, {"02": "A second note for testing"},],
+	"deck_notes": [{'01': "something I wrote myself"}, {"02": "A second note for testing"},\
+	 {"03": "A third note for testing"}, {"04": "A fourth note for testing"}, \
+	 {"05": "A fifth note for testing"}, {"06": "A sixth note for testing"}, \
+	 {"07": "A seventh note for testing"}, {"08": "An eighth note for testing"}, \
+	 {"09": "A ninth note for testing"}, {"10": "A tenth note for testing"}, \
+	 {"11": "An eleventh note for testing"}, {"12": "A twelfth note for testing"}],
 }
 
 #OS related and settings vars
@@ -198,6 +202,7 @@ func on_start_load_user():
 		runtime_user_data = user_data
 		#uncomment the line below this one, and then comment the line above this one to delete current save file
 		#user_data = runtime_user_data
+		#save_user_data()
 
 func save_user_data():
 	#open the user_data file and store what's in runtime_user_data to it

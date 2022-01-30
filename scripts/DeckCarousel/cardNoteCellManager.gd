@@ -36,11 +36,18 @@ func _clear_cells():
 	#some sort of placeholder animation while carousel is moved?
 		
 func _populate_user_notes(notes:String):
+	#this function is currently just producing the current card ID(#) I'll be using it
+	#to call saved data notes later though.
 	if int(notes) < 10:
 		notes = "0" + notes
-		print(notes)
-		_cell_added()
+		for i in global.runtime_user_data.deck_notes:
+			if i.keys()[0] == notes:
+				print(i.keys()[0], global.runtime_user_data.deck_notes[0])
+			else:
+				print(i.keys()[0], typeof(i.keys()[0]))
 	else:
-		print(notes)
-		_cell_added()
-
+		for i in global.runtime_user_data.deck_notes:
+			if i.keys()[0] == notes:
+				print(i.keys()[0], global.runtime_user_data.deck_notes[0])
+			else:
+				print("no key")
