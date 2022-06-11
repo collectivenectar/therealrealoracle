@@ -9,6 +9,4 @@ If the project is well received, there may be many more planned features once mv
 
 I will begin posting demo videos and screenshots once the color palette has been settled on, the icons have been designed, and the UI is a bit more polished. 
 
-Update May 2022: After some CS study I'm doing some redesign. Still the same objective, but will likely be a smoother experience.
-
-Since Godot has an good android community, once mvp is launched for iOS I will port to Android as soon as I am able, I will have to learn as I go just as I am now.
+Update May 2022: After some CS study I'm doing some redesign. Still the same objective, but will likely be a smoother experience. Considering switching to react native for cross platform development for better native support. Thankfully I have most of the inner workings figured out and it's only a matter of pulling from what I've already done.
