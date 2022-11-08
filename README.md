@@ -1,12 +1,25 @@
 # therealrealoracle
-Digital Oracle Deck App for iOS, designed using Godot Engine
+Digital Oracle Deck App, designed using Godot Engine
 
-theRealReal Oracle Deck is an idea designed and collaboratively created by my partner and I. I helped write and edit many of the cards to include a more balanced perspective on relationships, and I am designing a digital iOS app version of this physical deck for those that are interested.
+This is a prototype for a responsive web application or cross platform mobile app for managing digital card decks.
 
-This 'digitized' version will also provide several features not typically seen in digital oracle deck apps, like an option for TRUE random number generation (not pseudo) for shuffling and drawing, as well as the ability to add personal notes to both the card descriptions, spread guides, and the deck guide itself.
+Here are a few screenshots of what's completed so far:
 
-If the project is well received, there may be many more planned features once mvp is launched that are intended to increase ease of use for personalization, sharing readings with clients or friends, and just plain awesome things that physical oracle decks can't do but help make this digital deck feel more intuitive to use and more responsive on a mobile screen.
 
-I will begin posting demo videos and screenshots once the color palette has been settled on, the icons have been designed, and the UI is a bit more polished. 
 
-Update May 2022: After some CS study I'm doing some redesign. Still the same objective, but will likely be a smoother experience. Considering switching to react native for cross platform development for better native support. Thankfully I have most of the inner workings figured out and it's only a matter of pulling from what I've already done.
+There are a few main features of the app that are currently finished in the Godot branch version:
+
+- View the digital card deck in an image carousel.
+- Draw cards from the deck using different presets, also known as 'spreads'
+- Save and review history, i.e. of past spreads.
+- Keep notes on both the card deck and on the individual records of spreads.
+
+And a few features not yet implemented but planned:
+
+- Deck 'Cores' i.e. Unique user-generated Random Number Generating Seeds and seed management tool
+- Fully functional card deck Journal - Combining spread history, deck specific notes and guidebooks, and RNG seeds into one UI.
+- Custom Spread/Layout Tool - Design your own card table layouts for cards, and name and describe each position in the spread if desired.
+
+
+I'm currently working on a React Native Version after running into some limitations with the UI related to text formatting, as the
+deck is mainly text-based, and it's just too much of a time sink building custom components in Godot with so many scroll container issues.
