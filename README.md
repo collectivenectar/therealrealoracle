@@ -3,8 +3,12 @@ Digital Oracle Deck App, designed using Godot Engine
 
 This is a prototype for a responsive web application or cross platform mobile app for managing digital card decks.
 
-Here are a few screenshots of what's completed so far:
+Here are a quick demo of one of the features so far:
 
+Live Demo of displaying the drawn cards
+
+
+<img src="https://github.com/collectivenectar/therealrealoracle/blob/main/Prototype-demo.gif" width="100">
 
 
 There are a few main features of the app that are currently finished in the Godot branch version:
